@@ -1,107 +1,122 @@
-# Problem 1
-
-# Investigating the Range as a Function of the Angle of Projection
-
-## Motivation
-Projectile motion is a classic physics problem that bridges simplicity and complexity. By studying how the range depends on the angle of projection, we uncover a mix of linear and quadratic relationships, governed by initial conditions like velocity, gravity, and height. This exploration connects to real-world scenarios—think of a basketball shot, a cannonball, or even a spacecraft launch!
-
-## 1. Theoretical Foundation
-Let’s derive the equations from Newton’s laws. For a projectile launched with initial velocity \( v_0 \) at an angle \( \theta \) from the horizontal, with no air resistance:
-
-- **Horizontal motion**: \( x(t) = v_0 \cos(\theta) t \)
-- **Vertical motion**: \( y(t) = v_0 \sin(\theta) t - \frac{1}{2} g t^2 \)
-
-Time of flight (\( T \)) is when \( y = 0 \) (assuming launch and landing at same height):
-\[ 0 = v_0 \sin(\theta) T - \frac{1}{2} g T^2 \]
-\[ T = \frac{2 v_0 \sin(\theta)}{g} \]
-
-Range (\( R \)) is the horizontal distance:
-\[ R = v_0 \cos(\theta) \cdot T = v_0 \cos(\theta) \cdot \frac{2 v_0 \sin(\theta)}{g} \]
-Using the identity \( \sin(2\theta) = 2 \sin(\theta) \cos(\theta) \):
-\[ R = \frac{v_0^2 \sin(2\theta)}{g} \]
-
-This is the family of solutions—range depends on \( \theta \), \( v_0 \), and \( g \).
-
-## 2. Analysis of the Range
-- **Angle Dependence**: \( R \) peaks at \( \theta = 45^\circ \) (since \( \sin(2\theta) = 1 \) at \( 90^\circ \)).
-- **Parameters**: Higher \( v_0 \) increases \( R \), while stronger \( g \) reduces it.
-
-## 3. Practical Applications
-- **Sports**: Optimizing a javelin throw.
-- **Engineering**: Artillery range calculations.
-- **Uneven Terrain**: Adjust \( y_0 \) (initial height) in the model.
-
-## 4. Implementation
-Let’s simulate this in Python with stunning visuals using `matplotlib` and `numpy`.
-
-### Python Code
-```python
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import style
+from mpl_toolkits.mplot3d import Axes3D
+from ipywidgets import interact, FloatSlider, IntSlider
+import ipywidgets as widgets
 
-# Set a sleek style
-style.use('seaborn-darkgrid')
+# ========================
+# 1. SETUP & CONSTANTS
+# ========================
+style.use('seaborn-v0_8-darkgrid')
+plt.rcParams['font.family'] = 'serif'
+plt.rcParams['axes.titlesize'] = 14
+plt.rcParams['axes.labelsize'] = 12
 
 # Constants
-g = 9.81  # m/s^2 (gravity)
+g_earth = 9.81  # m/s²
+g_moon = 1.62   # m/s²
 
-# Function to calculate range
-def projectile_range(v0, theta_deg, g=9.81):
+# ========================
+# 2. CORE FUNCTIONS
+# ========================
+def projectile_range(v0, theta_deg, g=g_earth):
+    """Calculate range of projectile."""
     theta_rad = np.radians(theta_deg)
     return (v0**2 * np.sin(2 * theta_rad)) / g
 
-# Simulation parameters
-angles = np.arange(0, 91, 1)  # 0 to 90 degrees
-v0_values = [10, 20, 30]      # Different initial velocities (m/s)
-g_values = [9.81, 1.62]       # Earth and Moon gravity (m/s^2)
-
-# Plot 1: Range vs Angle for different velocities
-plt.figure(figsize=(10, 6))
-for v0 in v0_values:
-    ranges = [projectile_range(v0, theta) for theta in angles]
-    plt.plot(angles, ranges, label=f'v0 = {v0} m/s', linewidth=2.5)
-plt.title('Range vs Angle of Projection (g = 9.81 m/s²)', fontsize=14, pad=10)
-plt.xlabel('Angle (degrees)', fontsize=12)
-plt.ylabel('Range (meters)', fontsize=12)
-plt.legend(fontsize=10)
-plt.grid(True, linestyle='--', alpha=0.7)
-plt.tight_layout()
-plt.show()
-
-# Plot 2: Range vs Angle for different gravities
-plt.figure(figsize=(10, 6))
-for g in g_values:
-    ranges = [projectile_range(20, theta, g) for theta in angles]
-    plt.plot(angles, ranges, label=f'g = {g} m/s²', linewidth=2.5)
-plt.title('Range vs Angle of Projection (v0 = 20 m/s)', fontsize=14, pad=10)
-plt.xlabel('Angle (degrees)', fontsize=12)
-plt.ylabel('Range (meters)', fontsize=12)
-plt.legend(fontsize=10)
-plt.grid(True, linestyle='--', alpha=0.7)
-plt.tight_layout()
-plt.show()
-
-# Plot 3: Trajectory visualization for selected angles
-def trajectory(v0, theta_deg, g=9.81):
+def trajectory(v0, theta_deg, g=g_earth, n_points=100):
+    """Generate (x,y) trajectory coordinates."""
     theta_rad = np.radians(theta_deg)
     t_flight = (2 * v0 * np.sin(theta_rad)) / g
-    t = np.linspace(0, t_flight, 100)
+    t = np.linspace(0, t_flight, n_points)
     x = v0 * np.cos(theta_rad) * t
     y = v0 * np.sin(theta_rad) * t - 0.5 * g * t**2
     return x, y
 
-plt.figure(figsize=(12, 7))
-angles_to_plot = [15, 45, 75]
-colors = ['#FF6F61', '#6B5B95', '#88B04B']
-for theta, color in zip(angles_to_plot, colors):
-    x, y = trajectory(20, theta)
-    plt.plot(x, y, label=f'{theta}°', color=color, linewidth=2.5)
-plt.title('Projectile Trajectories (v0 = 20 m/s, g = 9.81 m/s²)', fontsize=14, pad=10)
-plt.xlabel('Range (meters)', fontsize=12)
-plt.ylabel('Height (meters)', fontsize=12)
-plt.legend(fontsize=10)
-plt.grid(True, linestyle='--', alpha=0.7)
-plt.tight_layout()
-plt.show()
+# ========================
+# 3. INTERACTIVE PLOTS
+# ========================
+def interactive_plot():
+    """Launch interactive widget for trajectory exploration."""
+    style = {'description_width': '150px'}
+    
+    interact_manual(
+        plot_trajectory,
+        v0=FloatSlider(value=20, min=5, max=50, step=1, 
+                       description="Initial Velocity (m/s):", style=style),
+        theta=IntSlider(value=45, min=0, max=90, step=1, 
+                       description="Launch Angle (deg):", style=style),
+        g=FloatSlider(value=9.81, min=1.62, max=9.81, step=0.1,
+                      description="Gravity (m/s²):", style=style),
+        show_range=widgets.Checkbox(value=True, description="Show Max Range Angle")
+    )
 
+def plot_trajectory(v0=20, theta=45, g=9.81, show_range=True):
+    """Plot single trajectory with interactive controls."""
+    fig, ax = plt.subplots(figsize=(10, 6))
+    x, y = trajectory(v0, theta, g)
+    ax.plot(x, y, 'r-', lw=3, label=f'v₀={v0} m/s, θ={theta}°')
+    
+    ax.set_title(f"Projectile Trajectory (g={g} m/s²)")
+    ax.set_xlabel("Horizontal Distance (m)")
+    ax.set_ylabel("Vertical Height (m)")
+    ax.grid(True, alpha=0.3)
+    
+    if show_range:
+        max_range_angle = 45 if g == 9.81 else np.degrees(0.5 * np.arcsin(g/9.81 * np.sin(np.radians(90))))
+        ax.axvline(projectile_range(v0, max_range_angle, g), 
+                   color='gray', linestyle='--', alpha=0.5)
+        ax.annotate(f'Max range at {max_range_angle:.1f}°', 
+                    xy=(projectile_range(v0, max_range_angle, g), 0), 
+                    xytext=(10, 10), textcoords='offset points')
+    
+    ax.legend()
+    plt.tight_layout()
+    plt.show()
+
+# ========================
+# 4. 3D VISUALIZATION
+# ========================
+def plot_3d_surface():
+    """Create 3D surface of range vs v0 and theta."""
+    fig = plt.figure(figsize=(14, 8))
+    ax = fig.add_subplot(111, projection='3d')
+    
+    v0_values = np.linspace(10, 50, 50)
+    angles = np.linspace(0, 90, 50)
+    V0, THETA = np.meshgrid(v0_values, angles)
+    R = (V0**2 * np.sin(2 * np.radians(THETA))) / g_earth
+    
+    surf = ax.plot_surface(V0, THETA, R, cmap='viridis', 
+                          rstride=1, cstride=1, alpha=0.8)
+    
+    ax.set_title("Range as Function of Velocity and Angle", pad=20)
+    ax.set_xlabel("Initial Velocity (m/s)")
+    ax.set_ylabel("Launch Angle (deg)")
+    ax.set_zlabel("Range (m)")
+    
+    fig.colorbar(surf, shrink=0.5, aspect=10, label='Range (m)')
+    
+    # Highlight 45° line
+    ax.plot(v0_values, [45]*len(v0_values), 
+            [projectile_range(v, 45, g_earth) for v in v0_values],
+            'r-', lw=3, label='Optimal 45°')
+    
+    ax.legend()
+    plt.tight_layout()
+    plt.savefig('3d_surface.png', dpi=300)
+    plt.show()
+
+# ========================
+# 5. RUN ALL VISUALIZATIONS
+# ========================
+if __name__ == "__main__":
+    print("🚀 Launching interactive projectile analyzer...")
+    
+    # Generate static plots
+    plot_3d_surface()
+    
+    # Launch interactive widget (works in Jupyter)
+    print("✅ Static plots generated. Launching interactive widget...")
+    interactive_plot()

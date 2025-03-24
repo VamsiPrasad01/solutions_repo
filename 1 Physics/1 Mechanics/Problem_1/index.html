@@ -130,118 +130,350 @@
 <div class="section" itemprop="articleBody">
 <p>import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib import style
+from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
-from ipywidgets import interact, FloatSlider, IntSlider
-import ipywidgets as widgets</p>
-<h1 id="_1">========================</h1>
-<h1 id="1-setup-constants">1. SETUP &amp; CONSTANTS</h1>
-<h1 id="_2">========================</h1>
-<p>style.use('seaborn-v0_8-darkgrid')
-plt.rcParams['font.family'] = 'serif'
-plt.rcParams['axes.titlesize'] = 14
-plt.rcParams['axes.labelsize'] = 12</p>
-<h1 id="constants">Constants</h1>
-<p>g_earth = 9.81  # m/s²
-g_moon = 1.62   # m/s²</p>
-<h1 id="_3">========================</h1>
-<h1 id="2-core-functions">2. CORE FUNCTIONS</h1>
-<h1 id="_4">========================</h1>
-<p>def projectile_range(v0, theta_deg, g=g_earth):
-    """Calculate range of projectile."""
-    theta_rad = np.radians(theta_deg)
-    return (v0**2 * np.sin(2 * theta_rad)) / g</p>
-<p>def trajectory(v0, theta_deg, g=g_earth, n_points=100):
-    """Generate (x,y) trajectory coordinates."""
-    theta_rad = np.radians(theta_deg)
-    t_flight = (2 * v0 * np.sin(theta_rad)) / g
-    t = np.linspace(0, t_flight, n_points)
-    x = v0 * np.cos(theta_rad) * t
-    y = v0 * np.sin(theta_rad) * t - 0.5 * g * t**2
-    return x, y</p>
-<h1 id="_5">========================</h1>
-<h1 id="3-interactive-plots">3. INTERACTIVE PLOTS</h1>
-<h1 id="_6">========================</h1>
-<p>def interactive_plot():
-    """Launch interactive widget for trajectory exploration."""
-    style = {'description_width': '150px'}</p>
-<pre><code>interact_manual(
-    plot_trajectory,
-    v0=FloatSlider(value=20, min=5, max=50, step=1, 
-                   description="Initial Velocity (m/s):", style=style),
-    theta=IntSlider(value=45, min=0, max=90, step=1, 
-                   description="Launch Angle (deg):", style=style),
-    g=FloatSlider(value=9.81, min=1.62, max=9.81, step=0.1,
-                  description="Gravity (m/s²):", style=style),
-    show_range=widgets.Checkbox(value=True, description="Show Max Range Angle")
-)
+from matplotlib.animation import FuncAnimation
+from ipywidgets import interact, FloatSlider, IntSlider, Dropdown, ToggleButtons
+import ipywidgets as widgets
+from scipy.integrate import odeint
+from sklearn.ensemble import RandomForestRegressor
+from sympy import symbols, Eq, init_printing, latex
+import random
+from tqdm import tqdm
+import seaborn as sns
+from PIL import Image
+from matplotlib.offsetbox import OffsetImage, AnnotationBbox</p>
+<h1 id="_1">=============================================</h1>
+<h1 id="1-physics-engine-with-all-real-world-effects">1. PHYSICS ENGINE WITH ALL REAL-WORLD EFFECTS</h1>
+<h1 id="_2">=============================================</h1>
+<p>class ProjectileSimulator:
+    def <strong>init</strong>(self):
+        # Physical constants
+        self.g_earth = 9.80665  # m/s²
+        self.g_moon = 1.62      # m/s²
+        self.g_mars = 3.721     # m/s²
+        self.rho_earth = 1.225  # kg/m³ (air density)
+        self.Cd_sphere = 0.47   # Drag coefficient</p>
+<pre><code>    # Visual settings
+    self.colors = {
+        'earth': '#2E86AB',
+        'moon': '#A5A5A5',
+        'mars': '#E2725B',
+        'trajectory': '#FF9F1C',
+        'highlight': '#FF3366'
+    }
+
+    self.plt_style = 'seaborn-darkgrid'
+    plt.style.use(self.plt_style)
+
+def simulate_trajectory(self, v0, theta, g=9.81, h0=0, 
+                      drag=False, spin=0, wind=0, dt=0.001):
+    """Advanced physics simulation with multiple effects"""
+    theta_rad = np.radians(theta)
+    t = 0
+    x, y = 0, h0
+    vx = v0 * np.cos(theta_rad)
+    vy = v0 * np.sin(theta_rad)
+
+    # Store trajectory points
+    x_points, y_points, t_points = [x], [y], [t]
+
+    while y &gt;= 0:
+        if drag:
+            # Calculate drag force (quadratic model)
+            v = np.sqrt(vx**2 + vy**2)
+            Fd = 0.5 * self.rho_earth * self.Cd_sphere * 0.018 * v**2
+
+            # Calculate Magnus effect (simplified)
+            Fm = 0.25 * self.rho_earth * 0.018 * (spin*2*np.pi/60) * v
+
+            # Acceleration components
+            ax = -Fd/m * vx/v + Fm/m * vy/v + wind
+            ay = -g - Fd/m * vy/v - Fm/m * vx/v
+        else:
+            ax = wind
+            ay = -g
+
+        # Update velocity and position
+        vx += ax * dt
+        vy += ay * dt
+        x += vx * dt
+        y += vy * dt
+        t += dt
+
+        # Store points
+        x_points.append(x)
+        y_points.append(y)
+        t_points.append(t)
+
+    return np.array(x_points), np.array(y_points), np.array(t_points)
+
+def calculate_range(self, v0, theta, **kwargs):
+    """Calculate the horizontal range"""
+    x, y, _ = self.simulate_trajectory(v0, theta, **kwargs)
+    return x[-1] if len(x) &gt; 0 else 0
 </code></pre>
-<p>def plot_trajectory(v0=20, theta=45, g=9.81, show_range=True):
-    """Plot single trajectory with interactive controls."""
-    fig, ax = plt.subplots(figsize=(10, 6))
-    x, y = trajectory(v0, theta, g)
-    ax.plot(x, y, 'r-', lw=3, label=f'v₀={v0} m/s, θ={theta}°')</p>
-<pre><code>ax.set_title(f"Projectile Trajectory (g={g} m/s²)")
-ax.set_xlabel("Horizontal Distance (m)")
-ax.set_ylabel("Vertical Height (m)")
-ax.grid(True, alpha=0.3)
+<h1 id="_3">=============================================</h1>
+<h1 id="2-visualization-engine-with-special-effects">2. VISUALIZATION ENGINE WITH SPECIAL EFFECTS</h1>
+<h1 id="_4">=============================================</h1>
+<p>class ProjectileVisualizer:
+    def <strong>init</strong>(self):
+        self.sim = ProjectileSimulator()
+        self.fig = None
+        self.ax = None</p>
+<pre><code>    # Custom colormaps
+    self.cmap1 = cm.get_cmap('plasma')
+    self.cmap2 = cm.get_cmap('viridis')
 
-if show_range:
-    max_range_angle = 45 if g == 9.81 else np.degrees(0.5 * np.arcsin(g/9.81 * np.sin(np.radians(90))))
-    ax.axvline(projectile_range(v0, max_range_angle, g), 
-               color='gray', linestyle='--', alpha=0.5)
-    ax.annotate(f'Max range at {max_range_angle:.1f}°', 
-                xy=(projectile_range(v0, max_range_angle, g), 0), 
-                xytext=(10, 10), textcoords='offset points')
+    # Load celestial body images
+    self.planet_imgs = {
+        'earth': Image.open('earth_texture.jpg'),
+        'moon': Image.open('moon_texture.jpg'),
+        'mars': Image.open('mars_texture.jpg')
+    }
 
-ax.legend()
-plt.tight_layout()
-plt.show()
+def _add_planet_bg(self, planet):
+    """Add planetary background to plot"""
+    if planet in self.planet_imgs:
+        img = self.planet_imgs[planet]
+        imagebox = OffsetImage(img, zoom=0.2)
+        ab = AnnotationBbox(imagebox, (0.5, 0.5), frameon=False)
+        self.ax.add_artist(ab)
+
+def plot_trajectory(self, v0=20, theta=45, g=9.81, h0=0,
+                   drag=False, spin=0, wind=0, planet='earth'):
+    """Plot a single trajectory with special effects"""
+    self.fig, self.ax = plt.subplots(figsize=(12, 8))
+
+    # Get trajectory data
+    x, y, t = self.sim.simulate_trajectory(v0, theta, g, h0, drag, spin, wind)
+
+    # Create glowing trajectory effect
+    n_points = len(x)
+    for i in range(n_points):
+        alpha = i/n_points * 0.8 + 0.2
+        self.ax.plot(x[:i+1], y[:i+1], color=self.sim.colors['trajectory'], 
+                    alpha=alpha, lw=3)
+
+    # Add impact explosion effect
+    if n_points &gt; 0:
+        self.ax.scatter(x[-1], 0, s=500, c='red', 
+                      alpha=0.6, marker='*', edgecolors='gold', linewidths=2)
+
+    # Add planet background
+    self._add_planet_bg(planet)
+
+    # Customize plot
+    self.ax.set_title(f"Projectile Motion Simulation\n"
+                    f"v₀ = {v0} m/s, θ = {theta}°, g = {g} m/s²", 
+                    fontsize=16, pad=20)
+    self.ax.set_xlabel("Horizontal Distance (m)")
+    self.ax.set_ylabel("Height (m)")
+    self.ax.grid(True, alpha=0.3)
+
+    # Add colorbar for time
+    norm = plt.Normalize(t.min(), t.max())
+    sm = plt.cm.ScalarMappable(cmap=self.cmap1, norm=norm)
+    sm.set_array([])
+    cbar = plt.colorbar(sm, ax=self.ax)
+    cbar.set_label('Time (s)')
+
+    plt.tight_layout()
+    plt.show()
+
+def plot_3d_surface(self):
+    """Create 3D surface plot of range vs v0 and theta"""
+    fig = plt.figure(figsize=(16, 10))
+    ax = fig.add_subplot(111, projection='3d')
+
+    # Generate data
+    v0_values = np.linspace(10, 50, 30)
+    theta_values = np.linspace(0, 90, 30)
+    V0, THETA = np.meshgrid(v0_values, theta_values)
+
+    R = np.zeros_like(V0)
+    for i in tqdm(range(len(v0_values))):
+        for j in range(len(theta_values)):
+            R[j,i] = self.sim.calculate_range(V0[j,i], THETA[j,i])
+
+    # Plot surface with special effects
+    surf = ax.plot_surface(V0, THETA, R, cmap=self.cmap2,
+                          rstride=1, cstride=1, alpha=0.8,
+                          edgecolor='none', shade=True)
+
+    # Add contour projections
+    ax.contourf(V0, THETA, R, zdir='z', offset=R.min(), cmap=self.cmap2, alpha=0.3)
+
+    # Customize
+    ax.set_title("Range as Function of Velocity and Angle", fontsize=16, pad=20)
+    ax.set_xlabel("Initial Velocity (m/s)")
+    ax.set_ylabel("Launch Angle (deg)")
+    ax.set_zlabel("Range (m)")
+    ax.view_init(elev=30, azim=45)
+
+    # Add colorbar
+    fig.colorbar(surf, shrink=0.5, aspect=10, label='Range (m)')
+
+    plt.tight_layout()
+    plt.show()
 </code></pre>
-<h1 id="_7">========================</h1>
-<h1 id="4-3d-visualization">4. 3D VISUALIZATION</h1>
-<h1 id="_8">========================</h1>
-<p>def plot_3d_surface():
-    """Create 3D surface of range vs v0 and theta."""
-    fig = plt.figure(figsize=(14, 8))
-    ax = fig.add_subplot(111, projection='3d')</p>
-<pre><code>v0_values = np.linspace(10, 50, 50)
-angles = np.linspace(0, 90, 50)
-V0, THETA = np.meshgrid(v0_values, angles)
-R = (V0**2 * np.sin(2 * np.radians(THETA))) / g_earth
+<h1 id="_5">=============================================</h1>
+<h1 id="3-interactive-dashboard">3. INTERACTIVE DASHBOARD</h1>
+<h1 id="_6">=============================================</h1>
+<p>class InteractiveDashboard:
+    def <strong>init</strong>(self):
+        self.vis = ProjectileVisualizer()
+        self.setup_widgets()</p>
+<pre><code>def setup_widgets(self):
+    """Create interactive controls"""
+    self.v0_slider = FloatSlider(
+        value=20, min=5, max=100, step=1,
+        description='Initial Velocity (m/s):',
+        style={'description_width': 'initial'},
+        continuous_update=False
+    )
 
-surf = ax.plot_surface(V0, THETA, R, cmap='viridis', 
-                      rstride=1, cstride=1, alpha=0.8)
+    self.theta_slider = IntSlider(
+        value=45, min=0, max=90, step=1,
+        description='Launch Angle (deg):',
+        style={'description_width': 'initial'}
+    )
 
-ax.set_title("Range as Function of Velocity and Angle", pad=20)
-ax.set_xlabel("Initial Velocity (m/s)")
-ax.set_ylabel("Launch Angle (deg)")
-ax.set_zlabel("Range (m)")
+    self.g_dropdown = Dropdown(
+        options={'Earth (9.81 m/s²)': 9.81,
+                'Moon (1.62 m/s²)': 1.62,
+                'Mars (3.72 m/s²)': 3.72},
+        value=9.81,
+        description='Gravity:',
+        style={'description_width': 'initial'}
+    )
 
-fig.colorbar(surf, shrink=0.5, aspect=10, label='Range (m)')
+    self.drag_toggle = ToggleButtons(
+        options=['No Drag', 'With Drag'],
+        value='No Drag',
+        description='Air Resistance:',
+        style={'description_width': 'initial'}
+    )
 
-# Highlight 45° line
-ax.plot(v0_values, [45]*len(v0_values), 
-        [projectile_range(v, 45, g_earth) for v in v0_values],
-        'r-', lw=3, label='Optimal 45°')
+    self.spin_slider = FloatSlider(
+        value=0, min=-5000, max=5000, step=100,
+        description='Spin (rpm):',
+        style={'description_width': 'initial'},
+        disabled=True
+    )
 
-ax.legend()
-plt.tight_layout()
-plt.savefig('3d_surface.png', dpi=300)
-plt.show()
+    self.wind_slider = FloatSlider(
+        value=0, min=-10, max=10, step=0.5,
+        description='Wind Speed (m/s):',
+        style={'description_width': 'initial'},
+        disabled=True
+    )
+
+    # Link widgets
+    def update_drag_options(change):
+        self.spin_slider.disabled = change['new'] == 'No Drag'
+        self.wind_slider.disabled = change['new'] == 'No Drag'
+
+    self.drag_toggle.observe(update_drag_options, names='value')
+
+def launch(self):
+    """Start interactive dashboard"""
+    interact_manual(
+        self.vis.plot_trajectory,
+        v0=self.v0_slider,
+        theta=self.theta_slider,
+        g=self.g_dropdown,
+        drag=widgets.fixed(self.drag_toggle.value == 'With Drag'),
+        spin=self.spin_slider,
+        wind=self.wind_slider,
+        planet=widgets.fixed('earth')
+    )
 </code></pre>
-<h1 id="_9">========================</h1>
-<h1 id="5-run-all-visualizations">5. RUN ALL VISUALIZATIONS</h1>
-<h1 id="_10">========================</h1>
+<h1 id="_7">=============================================</h1>
+<h1 id="4-machine-learning-optimization">4. MACHINE LEARNING OPTIMIZATION</h1>
+<h1 id="_8">=============================================</h1>
+<p>class ProjectileOptimizer:
+    def <strong>init</strong>(self):
+        self.model = None
+        self.train_model()</p>
+<pre><code>def generate_training_data(self, n_samples=1000):
+    """Create dataset for ML model"""
+    X = []
+    y = []
+
+    for _ in range(n_samples):
+        v0 = random.uniform(5, 100)
+        h0 = random.uniform(0, 50)
+        g = random.uniform(1.62, 24.79)  # Moon to Jupiter gravity
+
+        # Find optimal angle numerically
+        angles = np.linspace(0, 90, 91)
+        ranges = [self.calculate_range(v0, a, g, h0) for a in angles]
+        opt_angle = angles[np.argmax(ranges)]
+
+        X.append([v0, h0, g])
+        y.append(opt_angle)
+
+    return np.array(X), np.array(y)
+
+def train_model(self):
+    """Train Random Forest regressor"""
+    X, y = self.generate_training_data()
+    self.model = RandomForestRegressor(n_estimators=100)
+    self.model.fit(X, y)
+
+def predict_optimal_angle(self, v0, h0, g):
+    """Predict optimal launch angle using ML"""
+    return self.model.predict([[v0, h0, g]])[0]
+</code></pre>
+<h1 id="_9">=============================================</h1>
+<h1 id="5-main-execution">5. MAIN EXECUTION</h1>
+<h1 id="_10">=============================================</h1>
 <p>if <strong>name</strong> == "<strong>main</strong>":
-    print("🚀 Launching interactive projectile analyzer...")</p>
-<pre><code># Generate static plots
-plot_3d_surface()
+    print("🚀 Launching Ultimate Projectile Motion Simulator")</p>
+<pre><code># Initialize components
+simulator = ProjectileSimulator()
+visualizer = ProjectileVisualizer()
+dashboard = InteractiveDashboard()
+optimizer = ProjectileOptimizer()
 
-# Launch interactive widget (works in Jupyter)
-print("✅ Static plots generated. Launching interactive widget...")
-interactive_plot()
+# Example: Predict optimal angle for Mars conditions
+v0_example = 30
+h0_example = 10
+g_mars = 3.721
+
+opt_angle = optimizer.predict_optimal_angle(v0_example, h0_example, g_mars)
+print(f"\n✨ ML Prediction: For v0={v0_example} m/s, h0={h0_example} m, g={g_mars} m/s²")
+print(f"   Optimal launch angle = {opt_angle:.1f}°")
+
+# Generate all visualizations
+print("\n🖼️ Generating visualizations...")
+visualizer.plot_trajectory(v0=25, theta=45, g=9.81, drag=True, spin=2000)
+visualizer.plot_3d_surface()
+
+# Launch interactive dashboard
+print("\n🎮 Launching interactive dashboard...")
+dashboard.launch()
+
+print("\n✅ Simulation complete! Explore the interactive widgets above.")
 </code></pre>
+<h1 id="_11">=============================================</h1>
+<h1 id="6-unit-tests-and-validation">6. UNIT TESTS AND VALIDATION</h1>
+<h1 id="_12">=============================================</h1>
+<p>def run_tests():
+    """Validate physics calculations"""
+    print("\n🔬 Running unit tests...")</p>
+<pre><code># Basic projectile motion
+x, y, t = simulator.simulate_trajectory(20, 45)
+assert abs(x[-1] - 40.77) &lt; 0.1, "Basic range calculation failed"
+
+# Zero gravity edge case
+x, y, t = simulator.simulate_trajectory(10, 45, g=1e-9)
+assert x[-1] &gt; 1e6, "Zero gravity behavior incorrect"
+
+print("✅ All tests passed!")
+</code></pre>
+<p>run_tests()</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">

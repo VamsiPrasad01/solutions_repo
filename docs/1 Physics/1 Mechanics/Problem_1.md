@@ -1,6 +1,3 @@
-Here is the updated version with all LaTeX equations properly formatted, using Markdown and LaTeX syntax where needed:
-
-```markdown
 # **Investigating the Range as a Function of the Angle of Projection**  
 **<span style="color:#2E86C1">A Comprehensive Physics and Computational Analysis</span>**
 

@@ -67,6 +67,9 @@ Key characteristics of the range equation:
 
 ## **<span style="color:#E74C3C">4. Computational Implementation</span>**  
 ### **<span style="color:#28B463">4.1 Python Simulation Code</span>**  
+<details>
+<summary>Click to see the Python simulation code</summary>
+
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
@@ -90,19 +93,12 @@ def plot_trajectory(v0=20, theta=45, g=9.81, h0=0):
 
 interact(plot_trajectory, v0=(5,50,5), theta=(0,90,5), g=(1.62,24.79,0.1), h0=(0,20,1))
 ```
-
+<details>
 ### **<span style="color:#28B463">4.2 Key Visualizations</span>**  
 1. **<span style="color:#E67E22">Range vs Angle Curves</span>**  
-   - Shows sin(2θ) relationship  
-   - Compares different velocities  
-
-2. **<span style="color:#E67E22">Multi-Planet Comparison</span>**  
-   ```python
-   planets = {'Earth':9.81, 'Moon':1.62, 'Mars':3.71, 'Jupiter':24.79}
-   for name, g in planets.items():
-       ranges = [projectile_range(20, angle, g) for angle in angles]
-       plt.plot(angles, ranges, label=name)
-   ```
+    ![alt text](<Range vs Launch Angle.jpg>)
+2. **<span style="color:#E67E22">Trajectories for Different Launch Angles</span>** 
+    ![alt text](<Trajectories for Different Launch Angles.jpg>)
 
 ---
 

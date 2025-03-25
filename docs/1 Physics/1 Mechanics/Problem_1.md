@@ -93,7 +93,8 @@ def plot_trajectory(v0=20, theta=45, g=9.81, h0=0):
 
 interact(plot_trajectory, v0=(5,50,5), theta=(0,90,5), g=(1.62,24.79,0.1), h0=(0,20,1))
 ```
-<details>
+</details>
+
 ### **<span style="color:#28B463">4.2 Key Visualizations</span>**  
 1. **<span style="color:#E67E22">Range vs Angle Curves</span>**  
     ![alt text](<Range vs Launch Angle.jpg>)

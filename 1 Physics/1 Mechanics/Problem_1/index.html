@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 1 - Physics and Mathematics</title>
+<title>Investigating the Range as a Function of the Angle of Projection - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 1";
+        var mkdocs_page_name = "Investigating the Range as a Function of the Angle of Projection";
         var mkdocs_page_input_path = "1 Physics/1 Mechanics/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -46,8 +46,48 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal current">1 Mechanics</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Investigating the Range as a Function of the Angle of Projection</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#1-theoretical-foundation">1. Theoretical Foundation</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#11-derivation-of-projectile-motion-equations">1.1 Derivation of Projectile Motion Equations</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#12-time-of-flight-and-range">1.2 Time of Flight and Range</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#13-family-of-solutions">1.3 Family of Solutions</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#2-range-analysis">2. Range Analysis</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#21-angle-dependence">2.1 Angle Dependence</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#22-parameter-sensitivity-analysis">2.2 Parameter Sensitivity Analysis</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#3-practical-applications">3. Practical Applications</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#31-real-world-modifications">3.1 Real-World Modifications</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#4-computational-implementation">4. Computational Implementation</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#41-python-simulation-code">4.1 Python Simulation Code</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#42-key-visualizations">4.2 Key Visualizations</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#5-deliverables">5. Deliverables</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#51-complete-analysis-package">5.1 Complete Analysis Package</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#52-limitations-and-extensions">5.2 Limitations and Extensions</a>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Investigating the Dynamics of a Forced Damped Pendulum</a>
@@ -120,7 +160,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">1 Mechanics</li>
-<li class="breadcrumb-item active">Problem 1</li>
+<li class="breadcrumb-item active">Investigating the Range as a Function of the Angle of Projection</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -128,81 +168,106 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<p>Here is the updated version with all LaTeX equations properly formatted, using Markdown and LaTeX syntax where needed:</p>
-<pre><code class="language-markdown"># **Investigating the Range as a Function of the Angle of Projection**  
-**&lt;span style="color:#2E86C1"&gt;A Comprehensive Physics and Computational Analysis&lt;/span&gt;**
-
----
-
-## **&lt;span style="color:#E74C3C"&gt;1. Theoretical Foundation&lt;/span&gt;**  
-### **&lt;span style="color:#28B463"&gt;1.1 Derivation of Projectile Motion Equations&lt;/span&gt;**  
-We begin with Newton's second law in 2D for a projectile with initial velocity **v₀** at angle **θ** under gravity **g**:
-
-**&lt;span style="color:#5DADE2"&gt;Horizontal Motion (x-axis):&lt;/span&gt;**  
-No acceleration → Uniform motion  
+<h1 id="investigating-the-range-as-a-function-of-the-angle-of-projection"><strong>Investigating the Range as a Function of the Angle of Projection</strong></h1>
+<p><strong><span style="color:#2E86C1">A Comprehensive Physics and Computational Analysis</span></strong></p>
+<hr/>
+<h2 id="1-theoretical-foundation"><strong><span style="color:#E74C3C">1. Theoretical Foundation</span></strong></h2>
+<h3 id="11-derivation-of-projectile-motion-equations"><strong><span style="color:#28B463">1.1 Derivation of Projectile Motion Equations</span></strong></h3>
+<p>We begin with Newton's second law in 2D for a projectile with initial velocity <strong>v₀</strong> at angle <strong>θ</strong> under gravity <strong>g</strong>:</p>
+<p><strong><span style="color:#5DADE2">Horizontal Motion (x-axis):</span></strong><br/>
+No acceleration → Uniform motion<br/>
 $$
 \frac{d^2x}{dt^2} = 0 \implies x(t) = v_{0x}t = \color{#E74C3C}{v_0\cos\theta} \cdot t
-$$
-
-**&lt;span style="color:#5DADE2"&gt;Vertical Motion (y-axis):&lt;/span&gt;**  
-Constant acceleration (-g)  
+$$</p>
+<p><strong><span style="color:#5DADE2">Vertical Motion (y-axis):</span></strong><br/>
+Constant acceleration (-g)<br/>
 $$ 
 \frac{d^2y}{dt^2} = -g \implies y(t) = \color{#E74C3C}{v_0\sin\theta}\cdot t - \frac{1}{2}\color{#E74C3C}{g}t^2 
-$$
-
-### **&lt;span style="color:#28B463"&gt;1.2 Time of Flight and Range&lt;/span&gt;**  
-Solving for when the projectile returns to ground (y=0):  
+$$</p>
+<h3 id="12-time-of-flight-and-range"><strong><span style="color:#28B463">1.2 Time of Flight and Range</span></strong></h3>
+<p>Solving for when the projectile returns to ground (y=0):<br/>
 $$ 
 T = \frac{2\color{#E74C3C}{v_0\sin\theta}}{\color{#E74C3C}{g}} 
-$$  
-Substituting into \( x(t) \) gives the **range equation**:  
+$$<br/>
+Substituting into <span class="arithmatex">\( x(t) \)</span> gives the <strong>range equation</strong>:<br/>
 $$ 
 R = \frac{\color{#E74C3C}{v_0^2}\sin(2\theta)}{\color{#E74C3C}{g}} \quad \text{(Maximum at θ=45°)} 
-$$
-
-### **&lt;span style="color:#28B463"&gt;1.3 Family of Solutions&lt;/span&gt;**  
-The general solution forms a parameterized family based on:  
-- **&lt;span style="color:#E67E22"&gt;Initial velocity (v₀)&lt;/span&gt;**  
-- **&lt;span style="color:#E67E22"&gt;Launch angle (θ)&lt;/span&gt;**  
-- **&lt;span style="color:#E67E22"&gt;Gravity (g)&lt;/span&gt;**  
-- **&lt;span style="color:#E67E22"&gt;Initial height (h₀)&lt;/span&gt;**
-
----
-
-## **&lt;span style="color:#E74C3C"&gt;2. Range Analysis&lt;/span&gt;**  
-### **&lt;span style="color:#28B463"&gt;2.1 Angle Dependence&lt;/span&gt;**  
-Key characteristics of the range equation:  
-- **Peak range** at θ=45° (when sin(2θ)=1)  
-- **Complementary angles** (e.g., 30° &amp; 60°) give equal ranges  
-- **Zero range** at θ=0° and θ=90°  
-
-### **&lt;span style="color:#28B463"&gt;2.2 Parameter Sensitivity Analysis&lt;/span&gt;**  
-| Parameter | Effect | Mathematical Relationship |  
-|-----------|--------|----------------------------|  
-| **&lt;span style="color:#E67E22"&gt;v₀&lt;/span&gt;** | Quadratic impact | \( R \propto v_0^2 \) |  
-| **&lt;span style="color:#E67E22"&gt;g&lt;/span&gt;** | Inverse relationship | \( R \propto \frac{1}{g} \) |  
-| **&lt;span style="color:#E67E22"&gt;h₀&lt;/span&gt;** | Increases range | Modified equation required |  
-
----
-
-## **&lt;span style="color:#E74C3C"&gt;3. Practical Applications&lt;/span&gt;**  
-### **&lt;span style="color:#28B463"&gt;3.1 Real-World Modifications&lt;/span&gt;**  
-| Scenario | Effect on Projectile |  
-|----------|----------------------|  
-| **&lt;span style="color:#E67E22"&gt;Uphill Launch&lt;/span&gt;** | Optimal angle &gt;45° |  
-| **&lt;span style="color:#E67E22"&gt;Downhill Launch&lt;/span&gt;** | Optimal angle &lt;45° |  
-| **&lt;span style="color:#E67E22"&gt;Air Resistance&lt;/span&gt;** | Reduces range by 30-50%, optimal angle ~40° |  
-| **&lt;span style="color:#E67E22"&gt;Spin (Magnus Effect)&lt;/span&gt;** | Creates curved trajectories |  
-
----
-
-## **&lt;span style="color:#E74C3C"&gt;4. Computational Implementation&lt;/span&gt;**  
-### **&lt;span style="color:#28B463"&gt;4.1 Python Simulation Code&lt;/span&gt;**  
-&lt;details&gt;
-&lt;summary&gt;Click to see the Python simulation code&lt;/summary&gt;
-
-```python
-import numpy as np
+$$</p>
+<h3 id="13-family-of-solutions"><strong><span style="color:#28B463">1.3 Family of Solutions</span></strong></h3>
+<p>The general solution forms a parameterized family based on:<br/>
+- <strong><span style="color:#E67E22">Initial velocity (v₀)</span></strong><br/>
+- <strong><span style="color:#E67E22">Launch angle (θ)</span></strong><br/>
+- <strong><span style="color:#E67E22">Gravity (g)</span></strong><br/>
+- <strong><span style="color:#E67E22">Initial height (h₀)</span></strong></p>
+<hr/>
+<h2 id="2-range-analysis"><strong><span style="color:#E74C3C">2. Range Analysis</span></strong></h2>
+<h3 id="21-angle-dependence"><strong><span style="color:#28B463">2.1 Angle Dependence</span></strong></h3>
+<p>Key characteristics of the range equation:<br/>
+- <strong>Peak range</strong> at θ=45° (when sin(2θ)=1)<br/>
+- <strong>Complementary angles</strong> (e.g., 30° &amp; 60°) give equal ranges<br/>
+- <strong>Zero range</strong> at θ=0° and θ=90°  </p>
+<h3 id="22-parameter-sensitivity-analysis"><strong><span style="color:#28B463">2.2 Parameter Sensitivity Analysis</span></strong></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Effect</th>
+<th>Mathematical Relationship</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><span style="color:#E67E22">v₀</span></strong></td>
+<td>Quadratic impact</td>
+<td><span class="arithmatex">\( R \propto v_0^2 \)</span></td>
+</tr>
+<tr>
+<td><strong><span style="color:#E67E22">g</span></strong></td>
+<td>Inverse relationship</td>
+<td><span class="arithmatex">\( R \propto \frac{1}{g} \)</span></td>
+</tr>
+<tr>
+<td><strong><span style="color:#E67E22">h₀</span></strong></td>
+<td>Increases range</td>
+<td>Modified equation required</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="3-practical-applications"><strong><span style="color:#E74C3C">3. Practical Applications</span></strong></h2>
+<h3 id="31-real-world-modifications"><strong><span style="color:#28B463">3.1 Real-World Modifications</span></strong></h3>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Effect on Projectile</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><span style="color:#E67E22">Uphill Launch</span></strong></td>
+<td>Optimal angle &gt;45°</td>
+</tr>
+<tr>
+<td><strong><span style="color:#E67E22">Downhill Launch</span></strong></td>
+<td>Optimal angle &lt;45°</td>
+</tr>
+<tr>
+<td><strong><span style="color:#E67E22">Air Resistance</span></strong></td>
+<td>Reduces range by 30-50%, optimal angle ~40°</td>
+</tr>
+<tr>
+<td><strong><span style="color:#E67E22">Spin (Magnus Effect)</span></strong></td>
+<td>Creates curved trajectories</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="4-computational-implementation"><strong><span style="color:#E74C3C">4. Computational Implementation</span></strong></h2>
+<h3 id="41-python-simulation-code"><strong><span style="color:#28B463">4.1 Python Simulation Code</span></strong></h3>
+<details>
+<summary>Click to see the Python simulation code</summary>
+<pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
 from ipywidgets import interact
 
@@ -224,7 +289,7 @@ def plot_trajectory(v0=20, theta=45, g=9.81, h0=0):
 
 interact(plot_trajectory, v0=(5,50,5), theta=(0,90,5), g=(1.62,24.79,0.1), h0=(0,20,1))
 </code></pre>
-
+</details>
 <h3 id="42-key-visualizations"><strong><span style="color:#28B463">4.2 Key Visualizations</span></strong></h3>
 <ol>
 <li><strong><span style="color:#E67E22">Range vs Angle Curves</span></strong><br/>

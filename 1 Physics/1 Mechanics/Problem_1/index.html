@@ -76,6 +76,16 @@
 <ul>
 <li class="toctree-l4"><a class="reference internal" href="#41-python-simulation-code">4.1 Python Simulation Code</a>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="#42-key-visualizations">4.2 Key Visualizations</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#5-deliverables">5. Deliverables</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#51-complete-analysis-package">5.1 Complete Analysis Package</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#52-limitations-and-extensions">5.2 Limitations and Extensions</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -279,46 +289,42 @@ def plot_trajectory(v0=20, theta=45, g=9.81, h0=0):
 
 interact(plot_trajectory, v0=(5,50,5), theta=(0,90,5), g=(1.62,24.79,0.1), h0=(0,20,1))
 </code></pre>
-<details>
-### **<span style="color:#28B463">4.2 Key Visualizations</span>**  
-1. **<span style="color:#E67E22">Range vs Angle Curves</span>**  
-    ![alt text](<range angle.jpg="" launch="" vs="">)
-2. **<span style="color:#E67E22">Trajectories for Different Launch Angles</span>** 
-    ![alt text](<trajectories angles.jpg="" different="" for="" launch="">)
-
----
-
-## **<span style="color:#E74C3C">5. Deliverables</span>**  
-### **<span style="color:#28B463">5.1 Complete Analysis Package</span>**  
-- **Jupyter Notebook** with:  
-  - Interactive trajectory simulator  
-  - Parameter sensitivity plots  
-  - Planetary environment comparisons  
-
-### **<span style="color:#28B463">5.2 Limitations and Extensions</span>**  
-**Current Limitations:**  
-- No air resistance  
-- Flat Earth assumption  
-- 2D-only simulation  
-
-**Advanced Extensions:**  
-1. **<span style="color:#E67E22">Drag Force Model</span>**  
-   \[
+</details>
+<h3 id="42-key-visualizations"><strong><span style="color:#28B463">4.2 Key Visualizations</span></strong></h3>
+<ol>
+<li><strong><span style="color:#E67E22">Range vs Angle Curves</span></strong><br/>
+<img alt="alt text" src="../Range%20vs%20Launch%20Angle.jpg"/></li>
+<li><strong><span style="color:#E67E22">Trajectories for Different Launch Angles</span></strong>
+<img alt="alt text" src="../Trajectories%20for%20Different%20Launch%20Angles.jpg"/></li>
+</ol>
+<hr/>
+<h2 id="5-deliverables"><strong><span style="color:#E74C3C">5. Deliverables</span></strong></h2>
+<h3 id="51-complete-analysis-package"><strong><span style="color:#28B463">5.1 Complete Analysis Package</span></strong></h3>
+<ul>
+<li><strong>Jupyter Notebook</strong> with:  </li>
+<li>Interactive trajectory simulator  </li>
+<li>Parameter sensitivity plots  </li>
+<li>Planetary environment comparisons  </li>
+</ul>
+<h3 id="52-limitations-and-extensions"><strong><span style="color:#28B463">5.2 Limitations and Extensions</span></strong></h3>
+<p><strong>Current Limitations:</strong><br/>
+- No air resistance<br/>
+- Flat Earth assumption<br/>
+- 2D-only simulation  </p>
+<p><strong>Advanced Extensions:</strong><br/>
+1. <strong><span style="color:#E67E22">Drag Force Model</span></strong><br/>
+   [
    F_{drag} = -\frac{1}{2}C_d\rho Av^2
-   \]
-2. **<span style="color:#E67E22">Wind Effects</span>**  
-   - Crosswind compensation  
-3. **<span style="color:#E67E22">3D Simulation</span>**  
-   - Coriolis effect for long-range projectiles  
-
----
-
-**<span style="color:#2E86C1">Conclusion:</span>**  
-This investigation bridges fundamental physics with practical applications through computational modeling. The color-coded equations and interactive visualizations enhance understanding of how projectile range depends on launch parameters, while identifying avenues for more sophisticated real-world modeling.  
-
-**<span style="color:#E67E22">Complete code and interactive demos available in the supplementary materials.</span>**
-              
-            </trajectories></range></details></details></div>
+   ]
+2. <strong><span style="color:#E67E22">Wind Effects</span></strong><br/>
+   - Crosswind compensation<br/>
+3. <strong><span style="color:#E67E22">3D Simulation</span></strong><br/>
+   - Coriolis effect for long-range projectiles  </p>
+<hr/>
+<p><strong><span style="color:#2E86C1">Conclusion:</span></strong><br/>
+This investigation bridges fundamental physics with practical applications through computational modeling. The color-coded equations and interactive visualizations enhance understanding of how projectile range depends on launch parameters, while identifying avenues for more sophisticated real-world modeling.  </p>
+<p><strong><span style="color:#E67E22">Complete code and interactive demos available in the supplementary materials.</span></strong></p>
+</div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
 <a class="btn btn-neutral float-left" href="../../.." title="Introduction"><span class="icon icon-circle-arrow-left"></span> Previous</a>

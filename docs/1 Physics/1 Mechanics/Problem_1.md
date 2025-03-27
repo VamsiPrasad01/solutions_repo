@@ -98,8 +98,12 @@ interact(plot_trajectory, v0=(5,50,5), theta=(0,90,5), g=(1.62,24.79,0.1), h0=(0
 ### **<span style="color:#28B463">4.2 Key Visualizations</span>**  
 1. **<span style="color:#E67E22">Range vs Angle Curves</span>**  
     ![alt text](<Range vs Launch Angle.jpg>)
+    The graph illustrates the relationship between the launch angle (θ) and the resulting range (R) of a projectile in the absence of air resistance. It shows a parabolic pattern, peaking at 45°, where the range is maximized. Complementary angles (like 30° and 60°) produce identical ranges, highlighting the symmetry of projectile motion. The absence of air resistance simplifies the motion, ensuring that only gravity influences the projectile's path.
+
+
 2. **<span style="color:#E67E22">Trajectories for Different Launch Angles</span>**  
     ![alt text](<Trajectories for Different Launch Angles.jpg>)
+    This diagram depicts the trajectories of a projectile launched at different angles—30°, 45°, 60°, and 75°. The optimal range occurs at a launch angle of 45°, where the balance between horizontal and vertical components of velocity is ideal. As the angle increases beyond 45°, the height increases, but the horizontal range decreases. This visualization demonstrates the compromise between height and distance in projectile motion.
 
 ---
 

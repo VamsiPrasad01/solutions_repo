@@ -154,7 +154,7 @@ This kind of visualization is useful in simulations involving **fluid dynamics**
 
 ---
 
-## **<span style="color:#2E86C1">Conclusion</span>**  
+## **<span style="color:#2E86C1">6.Conclusion</span>**  
 This simulation vividly illustrates how wave superposition from symmetric point sources leads to rich, predictable interference patterns. The square layout results in a periodic, symmetric wave field that reflects the coherence and geometry of the sources.
 
 ---

@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 3 - Physics and Mathematics</title>
+<title>Trajectories of a Freely Released Payload Near Earth - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 3";
+        var mkdocs_page_name = "Trajectories of a Freely Released Payload Near Earth";
         var mkdocs_page_input_path = "1 Physics/2 Gravity/Problem_3.md";
         var mkdocs_page_url = null;
       </script>
@@ -58,8 +58,36 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Escape Velocities and Cosmic Velocities</a>
 </li>
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 3</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Trajectories of a Freely Released Payload Near Earth</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#1-theoretical-foundation">1. Theoretical Foundation</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#11-problem-context">1.1 Problem Context</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#12-fundamental-equations">1.2 Fundamental Equations</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#13-types-of-orbital-trajectories">1.3 Types of Orbital Trajectories</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#2-realistic-initial-conditions-and-earth-model">2. Realistic Initial Conditions and Earth Model</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#3-python-based-orbital-simulator">3. Python-Based Orbital Simulator</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#4-trajectory-simulations-interpretations">4. Trajectory Simulations &amp; Interpretations</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#41-case-1-elliptical-orbit-stable-bound-orbit">4.1 Case 1: Elliptical Orbit (Stable Bound Orbit)</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#42-case-2-parabolic-escape-edge-of-escape">4.2 Case 2: Parabolic Escape (Edge of Escape)</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#43-case-3-hyperbolic-escape-excess-speed">4.3 Case 3: Hyperbolic Escape (Excess Speed)</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#5-extended-discussion-mission-scenarios">5. Extended Discussion: Mission Scenarios</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#6-summary-of-deliverables">6. Summary of Deliverables</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -120,7 +148,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">2 Gravity</li>
-<li class="breadcrumb-item active">Problem 3</li>
+<li class="breadcrumb-item active">Trajectories of a Freely Released Payload Near Earth</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -128,7 +156,208 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-3">Problem 3</h1>
+<h1 id="trajectories-of-a-freely-released-payload-near-earth"><strong>Trajectories of a Freely Released Payload Near Earth</strong></h1>
+<p><strong><span style="color:#2E86C1">An Advanced Computational Study of Payload Dynamics Under Gravity</span></strong></p>
+<hr/>
+<h2 id="1-theoretical-foundation"><strong><span style="color:#E74C3C">1. Theoretical Foundation</span></strong></h2>
+<h3 id="11-problem-context"><strong><span style="color:#28B463">1.1 Problem Context</span></strong></h3>
+<p>When a payload is released from a moving spacecraft or rocket near Earth, its subsequent motion is governed by Newtonian gravitation. Depending on the <strong>initial velocity</strong>, <strong>altitude</strong>, and <strong>release angle</strong>, the payload may:</p>
+<ul>
+<li>Enter a stable orbit (elliptical trajectory)</li>
+<li>Fall back to Earth (reentry path)</li>
+<li>Escape Earth's gravity entirely (hyperbolic escape)</li>
+</ul>
+<p>This analysis uses numerical methods to simulate and <strong>visualize</strong> these outcomes.</p>
+<hr/>
+<h3 id="12-fundamental-equations"><strong><span style="color:#28B463">1.2 Fundamental Equations</span></strong></h3>
+<p>The gravitational force from Earth acting on the payload is:
+$$
+\vec{F}_g = -\frac{GMm}{r^2}\hat{r}
+$$</p>
+<p>Where:<br/>
+- <span class="arithmatex">\( G = 6.674 \times 10^{-11} \ \text{Nm}^2/\text{kg}^2 \)</span><br/>
+- <span class="arithmatex">\( M = 5.972 \times 10^{24} \ \text{kg} \)</span> (Earth mass)<br/>
+- <span class="arithmatex">\( r \)</span> = distance from Earth’s center<br/>
+- <span class="arithmatex">\( \hat{r} \)</span> = unit vector pointing away from Earth's center</p>
+<p>The motion of the payload follows Newton’s second law in polar or Cartesian form. In vector form:</p>
+<div class="arithmatex">\[
+m\vec{a} = -\frac{GMm}{r^2} \hat{r}
+\]</div>
+<p>Resulting in the acceleration components:
+$$
+a_x = -\frac{GMx}{(x^2 + y^2)^{3/2}}, \quad a_y = -\frac{GMy}{(x^2 + y^2)^{3/2}}
+$$</p>
+<hr/>
+<h3 id="13-types-of-orbital-trajectories"><strong><span style="color:#28B463">1.3 Types of Orbital Trajectories</span></strong></h3>
+<p>The total <strong>specific mechanical energy</strong> (<span class="arithmatex">\( \epsilon \)</span>) of the payload determines the shape of the orbit:
+$$
+\epsilon = \frac{v^2}{2} - \frac{GM}{r}
+$$</p>
+<table>
+<thead>
+<tr>
+<th>Energy <span class="arithmatex">\( \epsilon \)</span></th>
+<th>Trajectory Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\( \epsilon &lt; 0 \)</span></td>
+<td><strong>Elliptical</strong></td>
+<td>Bound orbit, payload circles Earth</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\( \epsilon = 0 \)</span></td>
+<td><strong>Parabolic</strong></td>
+<td>Escape trajectory, critical velocity</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\( \epsilon &gt; 0 \)</span></td>
+<td><strong>Hyperbolic</strong></td>
+<td>Escapes Earth with excess energy</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="2-realistic-initial-conditions-and-earth-model"><strong><span style="color:#E74C3C">2. Realistic Initial Conditions and Earth Model</span></strong></h2>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Earth's radius</td>
+<td><span class="arithmatex">\( R_E = 6.371 \times 10^6 \, m \)</span></td>
+<td>Center to surface</td>
+</tr>
+<tr>
+<td>Gravitational constant</td>
+<td><span class="arithmatex">\( G \)</span> as above</td>
+<td>Fundamental force law</td>
+</tr>
+<tr>
+<td>Escape velocity</td>
+<td><span class="arithmatex">\( v_{esc} = \sqrt{\frac{2GM}{r}} \)</span></td>
+<td>~11.2 km/s at surface</td>
+</tr>
+<tr>
+<td>Initial altitude</td>
+<td>e.g., 300 km</td>
+<td>Typical LEO release height</td>
+</tr>
+<tr>
+<td>Velocity profile</td>
+<td>Tangential release</td>
+<td>As from a spacecraft orbit path</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="3-python-based-orbital-simulator"><strong><span style="color:#E74C3C">3. Python-Based Orbital Simulator</span></strong></h2>
+<details>
+<summary>Click to expand the Python code</summary>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+
+G = 6.67430e-11
+M = 5.972e24
+R_earth = 6.371e6
+
+def gravity(t, y):
+    x, vx, y_, vy = y
+    r = np.sqrt(x**2 + y_**2)
+    ax = -G * M * x / r**3
+    ay = -G * M * y_ / r**3
+    return [vx, ax, vy, ay]
+
+def simulate_orbit(x0, y0, vx0, vy0, duration=20000):
+    y_init = [x0, vx0, y0, vy0]
+    sol = solve_ivp(gravity, [0, duration], y_init, t_eval=np.linspace(0, duration, 10000))
+    return sol
+</code></pre>
+</details>
+<hr/>
+<h2 id="4-trajectory-simulations-interpretations"><strong><span style="color:#E74C3C">4. Trajectory Simulations &amp; Interpretations</span></strong></h2>
+<p>We simulate <strong>3 cases</strong> with different initial speeds:</p>
+<hr/>
+<h3 id="41-case-1-elliptical-orbit-stable-bound-orbit"><strong><span style="color:#28B463">4.1 Case 1: Elliptical Orbit (Stable Bound Orbit)</span></strong></h3>
+<ul>
+<li><strong>Initial Altitude:</strong> 300 km  </li>
+<li><strong>Tangential Speed:</strong> 7.7 km/s  </li>
+<li><strong>Energy:</strong> <span class="arithmatex">\( \epsilon &lt; 0 \)</span></li>
+</ul>
+<p>This results in a <strong>closed elliptical orbit</strong>, suitable for satellite deployment.</p>
+<p><img alt="alt text" src="../elliptical_orbit-1.png"/>
+<em>Elliptical trajectory: payload follows a curved, stable path around Earth with constant gravitational pull.</em></p>
+<hr/>
+<h3 id="42-case-2-parabolic-escape-edge-of-escape"><strong><span style="color:#28B463">4.2 Case 2: Parabolic Escape (Edge of Escape)</span></strong></h3>
+<ul>
+<li><strong>Initial Altitude:</strong> 300 km  </li>
+<li><strong>Tangential Speed:</strong> ~10.9 km/s  </li>
+<li><strong>Energy:</strong> <span class="arithmatex">\( \epsilon = 0 \)</span></li>
+</ul>
+<p>The payload escapes Earth's gravity at just the minimum required speed.
+<img alt="alt text" src="../parabolic_escape-1.png"/>
+<em>Parabolic trajectory: the payload moves infinitely far from Earth, slowing as it goes, but never returning.</em></p>
+<hr/>
+<h3 id="43-case-3-hyperbolic-escape-excess-speed"><strong><span style="color:#28B463">4.3 Case 3: Hyperbolic Escape (Excess Speed)</span></strong></h3>
+<ul>
+<li><strong>Initial Altitude:</strong> 300 km  </li>
+<li><strong>Tangential Speed:</strong> &gt;11.2 km/s  </li>
+<li><strong>Energy:</strong> <span class="arithmatex">\( \epsilon &gt; 0 \)</span></li>
+</ul>
+<p>The payload <strong>accelerates away</strong> from Earth, following an open hyperbola.</p>
+<p><img alt="alt text" src="../hyperbolic_flyby-1.png"/>
+<em>Hyperbolic trajectory: represents a high-energy interplanetary mission or failed deorbit.</em></p>
+<hr/>
+<h2 id="5-extended-discussion-mission-scenarios"><strong><span style="color:#E74C3C">5. Extended Discussion: Mission Scenarios</span></strong></h2>
+<table>
+<thead>
+<tr>
+<th>Application Area</th>
+<th>Preferred Trajectory</th>
+<th>Required Adjustments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Satellite Deployment</strong></td>
+<td>Elliptical</td>
+<td>Controlled orbital insertion via thrust vectoring</td>
+</tr>
+<tr>
+<td><strong>Reentry Missions</strong></td>
+<td>Sub-orbital / Elliptical</td>
+<td>Must decelerate for descent</td>
+</tr>
+<tr>
+<td><strong>Interplanetary Probe</strong></td>
+<td>Hyperbolic</td>
+<td>Needs escape speed and direction planning</td>
+</tr>
+<tr>
+<td><strong>Space Junk Mitigation</strong></td>
+<td>Reentry or capture</td>
+<td>Deorbit maneuvers from LEO orbits</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="6-summary-of-deliverables"><strong><span style="color:#E74C3C">6. Summary of Deliverables</span></strong></h2>
+<ul>
+<li>✅ <strong>3 Distinct Trajectory Simulations</strong> </li>
+<li>✅ <strong>Annotated Graphs</strong> showing Earth, orbit, and direction  </li>
+<li>✅ <strong>Numerical Python Model</strong> (solve_ivp + gravity physics)  </li>
+<li>✅ <strong>Comprehensive Explanation of Orbital Energy</strong> </li>
+<li>✅ <strong>Real-world Application Scenarios</strong> (satellites, missions, debris)</li>
+</ul>
+<hr/>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">

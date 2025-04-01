@@ -38,7 +38,9 @@
 
 ## **<span style="color:#E74C3C">3. Simulation and Visualization</span>**
 
-### **<span style="color:#28B463">3.1 Python Code Implementation</span>**
+### **<span style="color:#28B463">4.1 Python Simulation Code</span>**  
+<details>
+<summary>Click to see the Python simulation code</summary>
 
 ```python
 import numpy as np
@@ -81,6 +83,7 @@ plt.grid(True)
 plt.tight_layout()
 plt.show()
 ```
+</details>
 
 ---
 
@@ -102,6 +105,17 @@ plt.show()
 
 This bar chart compares the first and second cosmic velocities for Earth, Mars, and Jupiter. The first cosmic velocity represents the speed required for a stable orbit just above the planet's surface, while the second is the escape velocity. The chart visually highlights Jupiter’s strong gravity, resulting in much higher required velocities compared to Earth and Mars.
 
+A conceptual illustration depicting the first (v₁), second (v₂), and third (v₃) cosmic velocities with directional annotations from Earth.
+![alt text](<cosmic_velocities (1).gif>)
+
+This GIF shows:
+
+v₁: Orbit around Earth (gray circle)
+
+v₂: Escape trajectory (red line)
+
+v₃: Path escaping the Solar System (green line)
+
 
 ---
 
@@ -111,10 +125,6 @@ This bar chart compares the first and second cosmic velocities for Earth, Mars, 
 - ✅ Python simulation of cosmic velocities  
 - ✅ Graphical plots comparing celestial bodies  
 - ✅ Practical applications across missions
-
----
-
-Here’s the **color-coded conclusion** section to match the style of your previous document:
 
 ---
 

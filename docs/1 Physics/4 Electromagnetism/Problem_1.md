@@ -179,24 +179,6 @@ r4, v4 = simulate_trajectory(E1, B4, v0, r0, 'stronger_magnetic')
   4. Stronger \( \mathbf{B} = [0, 0, 2 \times 10^{-3}] \): Tighter circular motion (smaller Larmor radius).
 - **Outputs**: Saves 2D and 3D plots as `uniform_magnetic_2d.png`, `uniform_magnetic_3d.png`, etc.
 
-**Visual Placeholders**:
-- Uniform Magnetic Field: [Generate and upload `uniform_magnetic_2d.png`, `uniform_magnetic_3d.png`]
-- Combined Fields: [Generate and upload `combined_fields_2d.png`, `combined_fields_3d.png`]
-- Crossed Fields: [Generate and upload `crossed_fields_2d.png`, `crossed_fields_3d.png`]
-- Stronger Magnetic Field: [Generate and upload `stronger_magnetic_2d.png`, `stronger_magnetic_3d.png`]
-
-**Instructions to Generate Visuals**:
-1. Install dependencies:
-   ```bash
-   pip install numpy matplotlib
-   ```
-2. Save the code as `lorentz_force_simulation.py` and run:
-   ```bash
-   python lorentz_force_simulation.py
-   ```
-3. Outputs are saved in the working directory as PNG files.
-4. Upload to Imgur (imgur.com/upload) or Google Drive (drive.google.com) to obtain shareable links.
-
 ---
 
 ## **<span style="color:#E74C3C">4. Parameter Exploration</span>**

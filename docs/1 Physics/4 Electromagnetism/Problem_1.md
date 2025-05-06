@@ -185,10 +185,9 @@ r4, v4 = simulate_trajectory(E1, B4, v0, r0, 'stronger_magnetic')
 - **Outputs**: 2D and 3D plots saved as `uniform_magnetic_2d.png`, `uniform_magnetic_3d.png`, etc.
 
 **Visual Placeholders**:
-- Uniform Magnetic Field: [Generate and upload `uniform_magnetic_2d.png`, `uniform_magnetic_3d.png`]
-- Combined Fields: [Generate and upload `combined_fields_2d.png`, `combined_fields_3d.png`]
-- Crossed Fields: [Generate and upload `crossed_fields_2d.png`, `crossed_fields_3d.png`]
-- Stronger Magnetic Field: [Generate and upload `stronger_magnetic_2d.png`, `stronger_magnetic_3d.png`]
+- Uniform Magnetic Field: [![alt text](<Uniform Magnetic Image.png>)]
+- Combined Fields: [![alt text](<Combined Magnetic feild.png>)]
+- Stronger Magnetic Field: [![alt text](Stronger.jpg)]
 
 ---
 

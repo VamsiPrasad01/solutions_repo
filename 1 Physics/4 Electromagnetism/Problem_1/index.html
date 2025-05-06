@@ -322,14 +322,24 @@ r4, v4 = simulate_trajectory(E1, B4, v0, r0, 'stronger_magnetic')
 </details>
 <p><strong>Explanation</strong>:- 
 <strong>Parameters</strong>: Electron-like particle <span class="arithmatex">\([ q = 1.6 \times 10^{-19} \, \text{C}, \, m = 9.1 \times 10^{-31} \, \text{kg} ]\)</span>, time step <span class="arithmatex">\( dt = 10^{-12} \, \text{s} \)</span>.
-- <strong>Cases</strong>:
-  1. Uniform <span class="arithmatex">\( \mathbf{B} = [0, 0, 10^{-3}] \, \text{T} \)</span>: Circular motion.
-  2. Combined <span class="arithmatex">\( \mathbf{E} = [10^3, 0, 0] \, \text{V/m}, \, \mathbf{B} = [0, 0, 10^{-3}] \, \text{T} \)</span>: Helical motion.
-  3. Crossed <span class="arithmatex">\( \mathbf{E} = [0, 10^3, 0] \, \text{V/m}, \, \mathbf{B} = [0, 0, 10^{-3}] \, \text{T} \)</span>: Cycloidal motion.
-  4. Stronger <span class="arithmatex">\( \mathbf{B} = [0, 0, 2 \times 10^{-3}] \, \text{T} \)</span>: Tighter circular motion.</p>
-<ul>
-<li><strong>Outputs</strong>: 2D and 3D plots saved as <code>uniform_magnetic_2d.png</code>, <code>uniform_magnetic_3d.png</code>, etc.</li>
-</ul>
+- <strong>Cases</strong>:</p>
+<ol>
+<li>
+<p>Uniform <span class="arithmatex">\( \mathbf{B} = [0, 0, 10^{-3}] \, \text{T} \)</span>: Circular motion.</p>
+</li>
+<li>
+<p>Combined <span class="arithmatex">\( \mathbf{E} = [10^3, 0, 0] \, \text{V/m}, \, \mathbf{B} = [0, 0, 10^{-3}] \, \text{T} \)</span>: Helical motion.</p>
+</li>
+<li>
+<p>Crossed <span class="arithmatex">\( \mathbf{E} = [0, 10^3, 0] \, \text{V/m}, \, \mathbf{B} = [0, 0, 10^{-3}] \, \text{T} \)</span>: Cycloidal motion.</p>
+</li>
+<li>
+<p>Stronger <span class="arithmatex">\( \mathbf{B} = [0, 0, 2 \times 10^{-3}] \, \text{T} \)</span>: Tighter circular motion.</p>
+</li>
+<li>
+<p><strong>Outputs</strong>: 2D and 3D plots saved as <code>uniform_magnetic_2d.png</code>, <code>uniform_magnetic_3d.png</code>, etc.</p>
+</li>
+</ol>
 <p><strong>Visual Placeholders</strong>:
 - Uniform Magnetic Field: [Generate and upload <code>uniform_magnetic_2d.png</code>, <code>uniform_magnetic_3d.png</code>]
 - Combined Fields: [Generate and upload <code>combined_fields_2d.png</code>, <code>combined_fields_3d.png</code>]

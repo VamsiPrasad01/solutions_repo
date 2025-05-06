@@ -170,19 +170,17 @@ r4, v4 = simulate_trajectory(E1, B4, v0, r0, 'stronger_magnetic')
 ```
 </details>
 
-**Explanation**:- 
-**Parameters**: Electron-like particle \([ q = 1.6 \times 10^{-19} \, \text{C}, \, m = 9.1 \times 10^{-31} \, \text{kg} ]\), time step \( dt = 10^{-12} \, \text{s} \).
+**Explanation**:  
+**Parameters**: Electron-like particle \([q = 1.6 \times 10^{-19} \, \text{C}, \, m = 9.1 \times 10^{-31} \, \text{kg}]\), time step \( dt = 10^{-12} \, \text{s} \).
+
 - **Cases**:
+  1. **Uniform Field**: \( \mathbf{B} = [0, 0, 10^{-3}] \, \text{T} \) → Circular motion.
+  2. **Combined Fields**: \( \mathbf{E} = [10^3, 0, 0] \, \text{V/m}, \, \mathbf{B} = [0, 0, 10^{-3}] \, \text{T} \) → Helical motion.
+  3. **Crossed Fields**: \( \mathbf{E} = [0, 10^3, 0] \, \text{V/m}, \, \mathbf{B} = [0, 0, 10^{-3}] \, \text{T} \) → Cycloidal motion.
+  4. **Stronger Magnetic Field**: \( \mathbf{B} = [0, 0, 2 \times 10^{-3}] \, \text{T} \) → Tighter circular motion.
 
-  1. Uniform \( \mathbf{B} = [0, 0, 10^{-3}] \, \text{T} \): Circular motion.
+---
 
-  2. Combined \( \mathbf{E} = [10^3, 0, 0] \, \text{V/m}, \, \mathbf{B} = [0, 0, 10^{-3}] \, \text{T} \): Helical motion.
-
-  3. Crossed \( \mathbf{E} = [0, 10^3, 0] \, \text{V/m}, \, \mathbf{B} = [0, 0, 10^{-3}] \, \text{T} \): Cycloidal motion.
-
-  4. Stronger \( \mathbf{B} = [0, 0, 2 \times 10^{-3}] \, \text{T} \): Tighter circular motion.
-
-- **Outputs**: 2D and 3D plots saved as `uniform_magnetic_2d.png`, `uniform_magnetic_3d.png`, etc.
 **Visual Placeholders**:
 
 - **Uniform Magnetic Field**  

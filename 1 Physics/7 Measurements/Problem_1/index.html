@@ -188,17 +188,17 @@
 <li>24.52, 24.48, 24.55, 24.50, 24.53, 24.49, 24.51, 24.54, 24.50, 24.52</li>
 <li><strong>Calculations</strong>:</li>
 <li>Mean time for 10 oscillations (<span class="arithmatex">\( \bar{T}_{10} \)</span>):
-    [
+    <span class="arithmatex">\(
     \bar{T}_{10} = \frac{24.52 + 24.48 + 24.55 + 24.50 + 24.53 + 24.49 + 24.51 + 24.54 + 24.50 + 24.52}{10} = 24.514 \, \text{s}
-    ]</li>
+    \)</span></li>
 <li>Standard deviation (<span class="arithmatex">\( \sigma_{T_{10}} \)</span>):
-    [
+    <span class="arithmatex">\(
     \sigma_{T_{10}} = \sqrt{\frac{\sum (T_{10,i} - \bar{T}_{10})^2}{n-1}} = \sqrt{\frac{(24.52-24.514)^2 + \cdots + (24.52-24.514)^2}{9}} \approx 0.0227 \, \text{s}
-    ]</li>
+    \)</span></li>
 <li>Uncertainty in the mean time (<span class="arithmatex">\( \delta \bar{T}_{10} \)</span>):
-    [
-    \delta \bar{T}<em>{10} = \frac{\sigma</em>{T_{10}}}{\sqrt{n}} = \frac{0.0227}{\sqrt{10}} \approx 0.0072 \, \text{s}
-    ]</li>
+    <span class="arithmatex">\(
+    \delta \bar{T}_{10} = \frac{\sigma_{T_{10}}}{\sqrt{n}} = \frac{0.0227}{\sqrt{10}} \approx 0.0072 \, \text{s}
+    \)</span></li>
 </ul>
 <hr/>
 <h2 id="calculations"><strong><span style="color:#E74C3C">Calculations</span></strong></h2>
@@ -206,13 +206,13 @@
 <ul>
 <li><strong>Period for 10 oscillations</strong>: <span class="arithmatex">\( \bar{T}_{10} = 24.514 \, \text{s} \)</span>.</li>
 <li><strong>Single period</strong> (<span class="arithmatex">\( T \)</span>):
-  [
+  <span class="arithmatex">\(
   T = \frac{\bar{T}_{10}}{10} = \frac{24.514}{10} = 2.4514 \, \text{s}
-  ]</li>
+  \)</span></li>
 <li><strong>Uncertainty in single period</strong> (<span class="arithmatex">\( \delta T \)</span>):
-  [
+  <span class="arithmatex">\(
   \delta T = \frac{\delta \bar{T}_{10}}{10} = \frac{0.0072}{10} = 0.00072 \, \text{s}
-  ]</li>
+  \)</span></li>
 </ul>
 <h3 id="2-determine-g"><strong><span style="color:#28B463">2. Determine <span class="arithmatex">\( g \)</span></span></strong></h3>
 <p>The period of a simple pendulum is given by:</p>
@@ -226,12 +226,12 @@ g = \frac{4\pi^2 L}{T^2}
 <ul>
 <li><strong>Inputs</strong>: <span class="arithmatex">\( L = 1.500 \, \text{m} \)</span>, <span class="arithmatex">\( T = 2.4514 \, \text{s} \)</span>, <span class="arithmatex">\( \pi \approx 3.141592653589793 \)</span>.</li>
 <li><strong>Calculation</strong>:
-  [
+  <span class="arithmatex">\(
   T^2 = (2.4514)^2 \approx 6.009362
-  ]
-  [
+  \)</span>
+<span class="arithmatex">\(
   g = \frac{4 \cdot (3.141592653589793)^2 \cdot 1.500}{6.009362} \approx \frac{4 \cdot 9.869604 \cdot 1.500}{6.009362} \approx \frac{59.217624}{6.009362} \approx 9.856 \, \text{m/s}^2
-  ]</li>
+  \)</span></li>
 </ul>
 <h3 id="3-propagate-uncertainties"><strong><span style="color:#28B463">3. Propagate Uncertainties</span></strong></h3>
 <p>The uncertainty in <span class="arithmatex">\( g \)</span> is propagated using partial derivatives:</p>
@@ -243,13 +243,13 @@ g = \frac{4\pi^2 L}{T^2}
 <li>Length: <span class="arithmatex">\( \frac{\delta L}{L} = \frac{0.0005}{1.500} \approx 0.000333 \)</span>.</li>
 <li>Period: <span class="arithmatex">\( \frac{2 \delta T}{T} = \frac{2 \cdot 0.00072}{2.4514} \approx \frac{0.00144}{2.4514} \approx 0.000587 \)</span>.</li>
 <li><strong>Combined</strong>:
-  [
+  <span class="arithmatex">\(
   \frac{\delta g}{g} = \sqrt{(0.000333)^2 + (0.000587)^2} = \sqrt{0.000000111 + 0.000000344} \approx \sqrt{0.000000455} \approx 0.000674
-  ]</li>
+  \)</span></li>
 <li><strong>Absolute uncertainty</strong>:
-  [
+  <span class="arithmatex">\(
   \delta g = g \cdot \frac{\delta g}{g} \approx 9.856 \cdot 0.000674 \approx 0.00664 \, \text{m/s}^2
-  ]</li>
+  \)</span></li>
 </ul>
 <p>Thus, <span class="arithmatex">\( g = 9.856 \pm 0.007 \, \text{m/s}^2 \)</span> (rounded to three decimal places for consistency).</p>
 <hr/>

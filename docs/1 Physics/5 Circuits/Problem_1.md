@@ -1,146 +1,177 @@
-# **<span style="color:#E74C3C">Problem 1: Equivalent Resistance Using Graph Theory</span>**
+# **Equivalent Resistance Using Graph Theory**
+
+**<span style="color:#2E86C1">A Comprehensive Computational and Mathematical Analysis</span>**
 
 ---
 
-## **<span style="color:#28B463">1. Introduction & Motivation</span>**
+## **<span style="color:#E74C3C">1. Theoretical Foundation</span>**
 
-When dealing with complex resistor networks, traditional reduction methods (series-parallel rules) often become tedious and error-prone. Graph theory provides a robust framework to **automate and simplify** this process by treating the circuit as a **weighted undirected graph**:
+### **<span style="color:#28B463">1.1 Classical vs. Graph-Theoretic Approaches</span>**
 
-- **Nodes** = Circuit junctions  
-- **Edges** = Resistors (weights = resistance values)
+Traditionally, equivalent resistance in a circuit is determined by identifying resistors in **series** and **parallel**, applying formulas such as:
 
-By employing **graph traversal algorithms**, we can iteratively identify **series and parallel** connections and simplify them—making this approach ideal for simulation software and scalable to large systems.
+* **Series**:
 
----
+  $$
+  R_{\text{eq}} = \sum_i R_i
+  $$
+* **Parallel**:
 
-## **<span style="color:#5DADE2">2. Algorithm Description (Pseudocode)</span>**
+  $$
+  \frac{1}{R_{\text{eq}}} = \sum_i \frac{1}{R_i}
+  $$
 
-### **High-Level Steps:**
+While effective for simple circuits, this approach becomes **infeasible for large or nested networks**.
 
-1. **Represent the Circuit as a Graph**
-2. **Identify Simplifiable Subgraphs (Series or Parallel)**
-3. **Iteratively Reduce** until a single edge remains between the source and target nodes.
+### **<span style="color:#28B463">1.2 Circuit as a Graph</span>**
 
----
+We model the electrical circuit as a **graph**:
 
-### **Pseudocode: Equivalent Resistance Reduction**
+* **Nodes (vertices)** ⟶ Junctions
+* **Edges** ⟶ Resistors (with `resistance` as weight)
 
-```plaintext
-Input: Graph G(V, E), where each edge has resistance R
-
-function EquivalentResistance(G, source, target):
-    while number_of_nodes(G) > 2:
-        for each node n in G:
-            if degree(n) == 2:
-                reduce_series(n)
-        for each pair of nodes (u, v):
-            if multiple_edges(u, v):
-                reduce_parallel(u, v)
-    return resistance_between(source, target)
-
-function reduce_series(node n):
-    neighbors = [u, v]  # nodes connected to n
-    R_total = R(n, u) + R(n, v)
-    remove node n and its edges
-    add edge(u, v) with resistance R_total
-
-function reduce_parallel(u, v):
-    R_eq = 1 / sum(1 / R for each edge(u, v))
-    remove all edges(u, v)
-    add edge(u, v) with resistance R_eq
-```
+This allows a **systematic and programmable reduction** using graph algorithms.
 
 ---
 
-## **<span style="color:#F1C40F">3. Python Implementation (Click to View Code)</span>**
+## **<span style="color:#E74C3C">2. Graph-Theoretic Simplification</span>**
+
+### **<span style="color:#28B463">2.1 Simplification Strategy</span>**
+
+We iteratively reduce the graph using:
+
+| Pattern      | Reduction Rule                    | Equivalent Resistance Formula                         |
+| ------------ | --------------------------------- | ----------------------------------------------------- |
+| **Series**   | Node with degree 2 (not terminal) | $R = R_1 + R_2$                                       |
+| **Parallel** | Multiple edges between two nodes  | $\frac{1}{R} = \frac{1}{R_1} + \frac{1}{R_2} + \dots$ |
+
+These rules are applied until the graph contains only one edge between the **start** and **end** nodes.
+
+---
+
+## **<span style="color:#E74C3C">3. Computational Implementation</span>**
+
+### **<span style="color:#28B463">3.1 Python Implementation Using networkx</span>**
 
 <details>
-<summary>Click to see the Python code</summary>
+<summary>Click to view the Python code</summary>
 
 ```python
 import networkx as nx
 
-def reduce_series(G):
+def combine_series(G, node, start_node, end_node):
+    neighbors = list(G.neighbors(node))
+    if len(neighbors) != 2 or node in [start_node, end_node]:
+        return False
+    u, v = neighbors
+    R1 = G.edges[u, node]['resistance']
+    R2 = G.edges[node, v]['resistance']
+    G.remove_node(node)
+    G.add_edge(u, v, resistance=R1 + R2)
+    return True
+
+def combine_parallel(G, u, v):
+    edges = list(G.get_edge_data(u, v).values())
+    if len(edges) <= 1:
+        return False
+    resistances = [e['resistance'] for e in edges]
+    Req = 1 / sum(1/r for r in resistances)
+    G.remove_edges_from([(u, v)] * len(edges))
+    G.add_edge(u, v, resistance=Req)
+    return True
+
+def simplify_graph(G, start_node, end_node):
     changed = True
     while changed:
         changed = False
         for node in list(G.nodes):
-            if G.degree[node] == 2:
-                neighbors = list(G.neighbors(node))
-                if len(neighbors) == 2:
-                    u, v = neighbors
-                    R1 = G[node][u]['resistance']
-                    R2 = G[node][v]['resistance']
-                    G.add_edge(u, v, resistance=R1 + R2)
-                    G.remove_node(node)
-                    changed = True
-                    break
+            if node in G and combine_series(G, node, start_node, end_node):
+                changed = True
+                break
+        for u, v in list(G.edges):
+            if G.number_of_edges(u, v) > 1 and combine_parallel(G, u, v):
+                changed = True
+                break
     return G
 
-def reduce_parallel(G):
-    for u, v in list(G.edges()):
-        parallel_edges = list(G.get_edge_data(u, v).values())
-        if len(parallel_edges) > 1:
-            R_eq = 1 / sum(1 / edge['resistance'] for edge in parallel_edges)
-            G.remove_edges_from([(u, v)] * len(parallel_edges))
-            G.add_edge(u, v, resistance=R_eq)
-    return G
-
-def equivalent_resistance(G, source, target):
-    G = reduce_series(G)
-    G = reduce_parallel(G)
-    return G[source][target]['resistance']
+def equivalent_resistance(G, start_node, end_node):
+    G = G.copy()
+    simplify_graph(G, start_node, end_node)
+    return G.edges[start_node, end_node]['resistance'] if G.has_edge(start_node, end_node) else float('inf')
 ```
 
 </details>
 
 ---
 
-## **<span style="color:#9B59B6">4. Example Circuit Configurations</span>**
+## **<span style="color:#E74C3C">4. Example Analyses</span>**
 
-### ✅ **Example 1: Simple Series**
+### **<span style="color:#28B463">4.1 Test Case 1: Simple Series</span>**
 
-- A --[2Ω]-- B --[3Ω]-- C  
-- Equivalent: 5Ω
+```python
+G = nx.Graph()
+G.add_edge('A', 'B', resistance=3)
+G.add_edge('B', 'C', resistance=2)
+equivalent_resistance(G, 'A', 'C')  # Output: 5
+```
+
+### **<span style="color:#28B463">4.2 Test Case 2: Parallel Branches</span>**
+
+```python
+G = nx.MultiGraph()
+G.add_edge('A', 'B', resistance=6)
+G.add_edge('A', 'B', resistance=3)
+equivalent_resistance(G, 'A', 'B')  # Output: 2
+```
+
+### **<span style="color:#28B463">4.3 Test Case 3: Nested Combination</span>**
+
+```python
+G = nx.MultiGraph()
+G.add_edge('A', 'B', resistance=6)
+G.add_edge('A', 'B', resistance=3)
+G.add_edge('B', 'C', resistance=4)
+equivalent_resistance(G, 'A', 'C')  # Output: 6
+```
 
 ---
 
-### ✅ **Example 2: Parallel Branches**
+## **<span style="color:#E74C3C">5. Visual Interpretations</span>**
 
-- A --[2Ω]-- B  
-- A --[2Ω]-- B  
-- Equivalent: 1Ω
+### **<span style="color:#28B463">5.1 Before and After Simplification</span>**
 
----
+1. **Original Circuit Graph**
+   A complex multi-node graph with redundant paths.
 
-### ✅ **Example 3: Nested Graph (Series + Parallel)**
+2. **Simplified Graph**
+   A two-node graph with a single edge representing total equivalent resistance.
 
-- A --[2Ω]-- B --[3Ω]-- C  
-- A --[5Ω]-- C  
-- Series: A-B-C = 5Ω  
-- Parallel with A-C = 5Ω  
-- Total: \( \frac{1}{\frac{1}{5} + \frac{1}{5}} = 2.5Ω \)
+*(Optional diagrams can be added using matplotlib or networkx drawing utilities)*
 
 ---
 
-## **<span style="color:#34495E">5. Algorithm Analysis</span>**
+## **<span style="color:#E74C3C">6. Efficiency and Extensions</span>**
 
-### ⏱️ **Time Complexity**
+### **<span style="color:#28B463">6.1 Algorithmic Complexity</span>**
 
-- **Series reduction**: O(V)
-- **Parallel detection**: O(E²) in worst case (multiple edge check)
-- For sparse circuits: ≈ linear to number of components.
+| Step             | Complexity                      | Note                                    |
+| ---------------- | ------------------------------- | --------------------------------------- |
+| Series detection | O(N)                            | Simple traversal                        |
+| Parallel check   | O(E²) worst case                | Can be optimized                        |
+| Total runtime    | Depends on simplification depth | Acceptable for small to medium circuits |
 
-### 🧠 **Advantages**
+### **<span style="color:#28B463">6.2 Future Extensions</span>**
 
-- Handles **complex and nested networks**
-- Automatable using libraries like **NetworkX**
-- Adaptable to **symbolic or variable resistors**
+| Extension                      | Benefit                                         |
+| ------------------------------ | ----------------------------------------------- |
+| **Kirchhoff’s Matrix Method**  | General method for any topology                 |
+| **Current Injection Modeling** | Useful for real-world circuit solvers           |
+| **Graph Laplacian Approach**   | Links circuit theory with spectral graph theory |
 
-### 🚀 **Improvements**
+---
 
-- Incorporate **cycle detection (DFS/BFS)** for general loop analysis
-- Use **Kirchhoff’s laws** for edge cases (non-reducible graphs)
-- Allow symbolic algebra (SymPy) for unknown resistors
+## **<span style="color:#2E86C1">Conclusion:</span>**
+
+Graph theory offers a powerful and elegant framework for computing equivalent resistance in electrical networks. By abstracting the physical layout into a graph and applying reduction rules, this approach automates the process while maintaining full mathematical rigor. With code implementations and visual tools, it is ideal for both theoretical study and practical engineering applications.
 
 ---

@@ -111,6 +111,7 @@ Thus, \( g = 9.856 \pm 0.007 \, \text{m/s}^2 \) (rounded to three decimal places
 
 ### **<span style="color:#28B463">1. Tabulated Data</span>**
 
+
 | Parameter                     | Value                  | Uncertainty             |
 |-------------------------------|------------------------|-------------------------|
 | Pendulum Length (\( L \))     | 1.500 m               | ±0.0005 m              |
@@ -128,6 +129,7 @@ Thus, \( g = 9.856 \pm 0.007 \, \text{m/s}^2 \) (rounded to three decimal places
 | Mean Time (\( \bar{T}_{10} \)) | 24.514 s              | ±0.0072 s              |
 | Period (\( T \))              | 2.4514 s              | ±0.00072 s             |
 | Gravitational Acceleration (\( g \)) | 9.856 m/s²      | ±0.007 m/s²            |
+
 
 ### **<span style="color:#28B463">2. Analysis and Discussion</span>**
 

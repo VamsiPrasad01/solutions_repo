@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Equivalent Resistance Using Graph Theory - Physics and Mathematics</title>
+<title>Simulating the Effects of the Lorentz Force - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Equivalent Resistance Using Graph Theory";
+        var mkdocs_page_name = "Simulating the Effects of the Lorentz Force";
         var mkdocs_page_input_path = "1 Physics/4 Electromagnetism/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -70,53 +70,53 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">4 Electromagnetism</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Equivalent Resistance Using Graph Theory</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Simulating the Effects of the Lorentz Force</a>
 <ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="#1-theoretical-foundation">1. Theoretical Foundation</a>
+<li class="toctree-l3"><a class="reference internal" href="#1-exploration-of-applications">1. Exploration of Applications</a>
 <ul>
-<li class="toctree-l4"><a class="reference internal" href="#11-classical-vs-graph-theoretic-approaches">1.1 Classical vs. Graph-Theoretic Approaches</a>
+<li class="toctree-l4"><a class="reference internal" href="#11-systems-involving-the-lorentz-force">1.1 Systems Involving the Lorentz Force</a>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#12-circuit-as-a-graph">1.2 Circuit as a Graph</a>
+<li class="toctree-l4"><a class="reference internal" href="#12-role-of-electric-and-magnetic-fields">1.2 Role of Electric and Magnetic Fields</a>
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#2-graph-theoretic-simplification">2. Graph-Theoretic Simplification</a>
+<li class="toctree-l3"><a class="reference internal" href="#2-simulating-particle-motion">2. Simulating Particle Motion</a>
 <ul>
-<li class="toctree-l4"><a class="reference internal" href="#21-simplification-strategy">2.1 Simplification Strategy</a>
+<li class="toctree-l4"><a class="reference internal" href="#21-simulation-setup">2.1 Simulation Setup</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#22-numerical-method">2.2 Numerical Method</a>
 </li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#3-computational-implementation">3. Computational Implementation</a>
 <ul>
-<li class="toctree-l4"><a class="reference internal" href="#31-python-implementation-using-networkx">3.1 Python Implementation Using networkx</a>
+<li class="toctree-l4"><a class="reference internal" href="#31-python-implementation">3.1 Python Implementation</a>
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#4-example-analyses">4. Example Analyses</a>
+<li class="toctree-l3"><a class="reference internal" href="#4-parameter-exploration">4. Parameter Exploration</a>
 <ul>
-<li class="toctree-l4"><a class="reference internal" href="#41-test-case-1-simple-series-and-parallel-combination">4.1 Test Case 1: Simple Series and Parallel Combination</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#42-test-case-2-nested-configuration">4.2 Test Case 2: Nested Configuration</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#43-test-case-3-complex-graph-with-cycles">4.3 Test Case 3: Complex Graph with Cycles</a>
+<li class="toctree-l4"><a class="reference internal" href="#41-effects-of-parameters">4.1 Effects of Parameters</a>
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#5-visual-interpretations">5. Visual Interpretations</a>
+<li class="toctree-l3"><a class="reference internal" href="#5-visualization-and-physical-phenomena">5. Visualization and Physical Phenomena</a>
 <ul>
-<li class="toctree-l4"><a class="reference internal" href="#51-before-and-after-simplification">5.1 Before and After Simplification</a>
+<li class="toctree-l4"><a class="reference internal" href="#51-trajectory-plots">5.1 Trajectory Plots</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#52-practical-relevance">5.2 Practical Relevance</a>
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#6-efficiency-and-extensions">6. Efficiency and Extensions</a>
+<li class="toctree-l3"><a class="reference internal" href="#6-extensions-and-future-work">6. Extensions and Future Work</a>
 <ul>
-<li class="toctree-l4"><a class="reference internal" href="#61-algorithmic-complexity">6.1 Algorithmic Complexity</a>
+<li class="toctree-l4"><a class="reference internal" href="#61-non-uniform-fields">6.1 Non-Uniform Fields</a>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#62-future-extensions">6.2 Future Extensions</a>
+<li class="toctree-l4"><a class="reference internal" href="#62-additional-features">6.2 Additional Features</a>
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion:</a>
+<li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion</a>
 </li>
 </ul>
 </li>
@@ -166,7 +166,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">4 Electromagnetism</li>
-<li class="breadcrumb-item active">Equivalent Resistance Using Graph Theory</li>
+<li class="breadcrumb-item active">Simulating the Effects of the Lorentz Force</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -174,359 +174,221 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="equivalent-resistance-using-graph-theory"><strong>Equivalent Resistance Using Graph Theory</strong></h1>
-<p><strong><span style="color:#2E86C1">A Comprehensive Computational and Mathematical Analysis</span></strong></p>
+<h1 id="simulating-the-effects-of-the-lorentz-force"><strong>Simulating the Effects of the Lorentz Force</strong></h1>
+<p><strong><span style="color:#2E86C1">A Computational Exploration of Charged Particle Dynamics</span></strong></p>
 <hr/>
-<h2 id="1-theoretical-foundation"><strong><span style="color:#E74C3C">1. Theoretical Foundation</span></strong></h2>
-<h3 id="11-classical-vs-graph-theoretic-approaches"><strong><span style="color:#28B463">1.1 Classical vs. Graph-Theoretic Approaches</span></strong></h3>
-<p>Traditionally, equivalent resistance is computed by identifying series and parallel resistor configurations and applying:</p>
+<h2 id="1-exploration-of-applications"><strong><span style="color:#E74C3C">1. Exploration of Applications</span></strong></h2>
+<h3 id="11-systems-involving-the-lorentz-force"><strong><span style="color:#28B463">1.1 Systems Involving the Lorentz Force</span></strong></h3>
+<p>The Lorentz force, given by:</p>
+<div class="arithmatex">\[
+\mathbf{F} = q \mathbf{E} + q (\mathbf{v} \times \mathbf{B})
+\]</div>
+<p>where <span class="arithmatex">\( q \)</span> is the particle’s charge, <span class="arithmatex">\( \mathbf{E} \)</span> is the electric field, <span class="arithmatex">\( \mathbf{v} \)</span> is the particle’s velocity, and <span class="arithmatex">\( \mathbf{B} \)</span> is the magnetic field, governs the motion of charged particles in electromagnetic fields. This force is critical in several systems:</p>
 <ul>
-<li><strong>Series</strong>:
-  [
-  R_{\text{eq}} = \sum_i R_i
-  ]</li>
-<li><strong>Parallel</strong>:
-  [
-  \frac{1}{R_{\text{eq}}} = \sum_i \frac{1}{R_i}
-  ]</li>
+<li><strong>Particle Accelerators</strong>: In cyclotrons and synchrotrons, magnetic fields cause charged particles (e.g., protons, electrons) to follow circular or helical paths, while electric fields accelerate them. The Lorentz force ensures precise control of particle trajectories.</li>
+<li><strong>Mass Spectrometers</strong>: Magnetic fields deflect charged particles based on their mass-to-charge ratio, enabling separation and identification of ions.</li>
+<li><strong>Plasma Confinement</strong>: In fusion devices like tokamaks, magnetic fields confine charged particles in plasma, preventing wall collisions. The Lorentz force dictates particle orbits.</li>
+<li><strong>Astrophysical Phenomena</strong>: The Lorentz force influences charged particles in cosmic rays, auroras, and magnetospheres, shaping their trajectories in planetary magnetic fields.</li>
 </ul>
-<p>While effective for simple circuits, these methods become cumbersome for complex or nested networks, requiring manual pattern recognition. Graph theory offers a systematic, algorithmic approach by modeling circuits as graphs, enabling automated simplification suitable for large-scale analysis and software implementation.</p>
-<h3 id="12-circuit-as-a-graph"><strong><span style="color:#28B463">1.2 Circuit as a Graph</span></strong></h3>
-<p>We model an electrical circuit as an undirected weighted graph:
-- <strong>Nodes (Vertices)</strong>: Junctions or connection points.
-- <strong>Edges</strong>: Resistors, with weights representing resistance values (in ohms).</p>
-<p>This abstraction allows graph algorithms to iteratively reduce the circuit to a single edge between the start and end nodes, whose weight is the equivalent resistance.</p>
+<h3 id="12-role-of-electric-and-magnetic-fields"><strong><span style="color:#28B463">1.2 Role of Electric and Magnetic Fields</span></strong></h3>
+<ul>
+<li><strong>Electric Field (<span class="arithmatex">\( \mathbf{E} \)</span>)</strong>: Provides a force <span class="arithmatex">\( q \mathbf{E} \)</span>, accelerating particles along the field direction. It’s used to inject energy (e.g., in accelerators) or drive currents (e.g., in plasmas).</li>
+<li><strong>Magnetic Field (<span class="arithmatex">\( \mathbf{B} \)</span>)</strong>: Produces a force <span class="arithmatex">\( q (\mathbf{v} \times \mathbf{B}) \)</span>, perpendicular to both velocity and field, causing circular or helical motion. It’s ideal for confinement and path control without energy input.</li>
+<li><strong>Combined Fields</strong>: In crossed fields (<span class="arithmatex">\( \mathbf{E} \perp \mathbf{B} \)</span>), particles exhibit drift motion (e.g., <span class="arithmatex">\( \mathbf{E} \times \mathbf{B} \)</span> drift), critical in devices like magnetrons.</li>
+</ul>
+<p>These fields enable precise manipulation of particle trajectories, underpinning technologies and natural phenomena.</p>
 <hr/>
-<h2 id="2-graph-theoretic-simplification"><strong><span style="color:#E74C3C">2. Graph-Theoretic Simplification</span></strong></h2>
-<h3 id="21-simplification-strategy"><strong><span style="color:#28B463">2.1 Simplification Strategy</span></strong></h3>
-<p>The graph is simplified iteratively using two primary reduction rules:</p>
-<table>
-<thead>
-<tr>
-<th>Pattern</th>
-<th>Reduction Rule</th>
-<th>Equivalent Resistance Formula</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Series</strong></td>
-<td>Node with degree 2 (not terminal)</td>
-<td><span class="arithmatex">\( R = R_1 + R_2 \)</span></td>
-</tr>
-<tr>
-<td><strong>Parallel</strong></td>
-<td>Multiple edges between two nodes</td>
-<td><span class="arithmatex">\( \frac{1}{R} = \frac{1}{R_1} + \frac{1}{R_2} + \dots \)</span></td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><strong>Series Reduction</strong>: For a node <span class="arithmatex">\( v \)</span> with degree 2, connected to nodes <span class="arithmatex">\( u \)</span> and <span class="arithmatex">\( w \)</span> via edges with resistances <span class="arithmatex">\( R_{uv} \)</span> and <span class="arithmatex">\( R_{vw} \)</span>, remove <span class="arithmatex">\( v \)</span> and add an edge <span class="arithmatex">\( (u, w) \)</span> with resistance <span class="arithmatex">\( R_{uv} + R_{vw} \)</span>.</li>
-<li><strong>Parallel Reduction</strong>: For multiple edges between nodes <span class="arithmatex">\( u \)</span> and <span class="arithmatex">\( v \)</span> with resistances <span class="arithmatex">\( R_1, R_2, \ldots, R_k \)</span>, replace them with a single edge of resistance <span class="arithmatex">\( \left( \sum_{i=1}^k \frac{1}{R_i} \right)^{-1} \)</span>.</li>
-</ul>
-<p>The process continues until only one edge remains between the start and end nodes.</p>
+<h2 id="2-simulating-particle-motion"><strong><span style="color:#E74C3C">2. Simulating Particle Motion</span></strong></h2>
+<h3 id="21-simulation-setup"><strong><span style="color:#28B463">2.1 Simulation Setup</span></strong></h3>
+<p>We simulate the motion of a charged particle under three field configurations:
+1. <strong>Uniform Magnetic Field</strong>: Produces circular or helical motion.
+2. <strong>Combined Uniform Electric and Magnetic Fields</strong>: Adds linear acceleration to helical motion.
+3. <strong>Crossed Electric and Magnetic Fields</strong>: Introduces drift motion.</p>
+<p>The equation of motion is:</p>
+<div class="arithmatex">\[
+m \frac{d \mathbf{v}}{dt} = q \mathbf{E} + q (\mathbf{v} \times \mathbf{B})
+\]</div>
+<div class="arithmatex">\[
+\frac{d \mathbf{r}}{dt} = \mathbf{v}
+\]</div>
+<p>where <span class="arithmatex">\( m \)</span> is the particle’s mass, <span class="arithmatex">\( \mathbf{r} \)</span> is its position, and <span class="arithmatex">\( \mathbf{v} \)</span> is its velocity. We solve these using the 4th-order Runge-Kutta (RK4) method for accuracy.</p>
+<h3 id="22-numerical-method"><strong><span style="color:#28B463">2.2 Numerical Method</span></strong></h3>
+<p>The RK4 method approximates the solution to the differential equations:</p>
+<div class="arithmatex">\[
+\frac{d \mathbf{u}}{dt} = \mathbf{f}(\mathbf{u}, t), \quad \mathbf{u} = [\mathbf{r}, \mathbf{v}]
+\]</div>
+<p>where <span class="arithmatex">\( \mathbf{f} \)</span> includes the Lorentz force acceleration. The state vector <span class="arithmatex">\( \mathbf{u} = [x, y, z, v_x, v_y, v_z] \)</span> is updated at each time step.</p>
 <hr/>
 <h2 id="3-computational-implementation"><strong><span style="color:#E74C3C">3. Computational Implementation</span></strong></h2>
-<h3 id="31-python-implementation-using-networkx"><strong><span style="color:#28B463">3.1 Python Implementation Using networkx</span></strong></h3>
-<p>The following Python code implements the graph reduction algorithm using <code>networkx</code>, handling series and parallel reductions for arbitrary resistor networks.</p>
-<pre><code class="language-python">import networkx as nx
+<h3 id="31-python-implementation"><strong><span style="color:#28B463">3.1 Python Implementation</span></strong></h3>
+<p>The following Python code simulates the particle’s trajectory using NumPy for calculations and Matplotlib for 2D/3D visualizations. It supports parameter exploration (field strengths, velocity, charge, mass) and saves plots as PNG files.</p>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 
-def combine_series(G, node, start_node, end_node):
-    """Combine two edges in series at a degree-2 node."""
-    if node in [start_node, end_node] or G.degree(node) != 2:
-        return False
-    neighbors = list(G.neighbors(node))
-    u, v = neighbors
-    R1 = G.edges[u, node]['resistance']
-    R2 = G.edges[node, v]['resistance']
-    G.remove_node(node)
-    G.add_edge(u, v, resistance=R1 + R2)
-    return True
+# Constants
+q = 1.6e-19  # Charge (C, e.g., electron)
+m = 9.1e-31  # Mass (kg, e.g., electron)
+dt = 1e-12   # Time step (s)
+T = 1e-9     # Total time (s)
+steps = int(T / dt)
 
-def combine_parallel(G, u, v):
-    """Combine multiple edges in parallel between two nodes."""
-    if G.number_of_edges(u, v) &lt;= 1:
-        return False
-    edges = list(G.get_edge_data(u, v).values())
-    resistances = [e['resistance'] for e in edges]
-    Req = 1 / sum(1/r for r in resistances)
-    G.remove_edges_from([(u, v)] * len(edges))
-    G.add_edge(u, v, resistance=Req)
-    return True
+# Lorentz force function
+def lorentz_force(r, v, E, B):
+    """Compute acceleration due to Lorentz force."""
+    E_force = q * E
+    B_force = q * np.cross(v, B)
+    return (E_force + B_force) / m
 
-def simplify_graph(G, start_node, end_node):
-    """Iteratively simplify the graph using series and parallel reductions."""
-    changed = True
-    while changed and len(G.nodes) &gt; 2:
-        changed = False
-        # Check for series reductions
-        for node in list(G.nodes):
-            if combine_series(G, node, start_node, end_node):
-                changed = True
-                break
-        # Check for parallel reductions
-        if not changed:
-            for u, v in list(G.edges):
-                if G.number_of_edges(u, v) &gt; 1 and combine_parallel(G, u, v):
-                    changed = True
-                    break
-    return G
+# RK4 integration
+def rk4_step(r, v, E, B):
+    """Perform one RK4 step."""
+    k1_v = lorentz_force(r, v, E, B)
+    k1_r = v
 
-def equivalent_resistance(G, start_node, end_node):
-    """Compute the equivalent resistance between start_node and end_node."""
-    G = G.copy()  # Work on a copy to preserve the original graph
-    G = simplify_graph(G, start_node, end_node)
-    if G.has_edge(start_node, end_node):
-        return G.edges[start_node, end_node]['resistance']
-    return float('inf')  # No path exists
+    k2_v = lorentz_force(r + 0.5 * dt * k1_r, v + 0.5 * dt * k1_v, E, B)
+    k2_r = v + 0.5 * dt * k1_v
+
+    k3_v = lorentz_force(r + 0.5 * dt * k2_r, v + 0.5 * dt * k2_v, E, B)
+    k3_r = v + 0.5 * dt * k2_v
+
+    k4_v = lorentz_force(r + dt * k3_r, v + dt * k3_v, E, B)
+    k4_r = v + dt * k3_v
+
+    r_new = r + (dt / 6) * (k1_r + 2 * k2_r + 2 * k3_r + k4_r)
+    v_new = v + (dt / 6) * (k1_v + 2 * k2_v + 2 * k3_v + k4_v)
+    return r_new, v_new
+
+# Simulation function
+def simulate_trajectory(E, B, v0, r0, filename_prefix):
+    """Simulate and plot particle trajectory."""
+    r = np.zeros((steps, 3))
+    v = np.zeros((steps, 3))
+    r[0] = r0
+    v[0] = v0
+
+    for i in range(steps - 1):
+        r[i + 1], v[i + 1] = rk4_step(r[i], v[i], E, B)
+
+    # 2D Plot
+    plt.figure(figsize=(8, 6))
+    plt.plot(r[:, 0], r[:, 1], 'b-', label='Trajectory')
+    plt.scatter(r[0, 0], r[0, 1], color='red', label='Start')
+    plt.xlabel('X (m)')
+    plt.ylabel('Y (m)')
+    plt.title(f'2D Trajectory (E={E}, B={B})')
+    plt.legend()
+    plt.grid(True)
+    plt.savefig(f'{filename_prefix}_2d.png')
+    plt.close()
+
+    # 3D Plot
+    fig = plt.figure(figsize=(8, 6))
+    ax = fig.add_subplot(111, projection='3d')
+    ax.plot(r[:, 0], r[:, 1], r[:, 2], 'b-', label='Trajectory')
+    ax.scatter(r[0, 0], r[0, 1], r[0, 2], color='red', label='Start')
+    ax.set_xlabel('X (m)')
+    ax.set_ylabel('Y (m)')
+    ax.set_zlabel('Z (m)')
+    ax.set_title(f'3D Trajectory (E={E}, B={B})')
+    ax.legend()
+    plt.savefig(f'{filename_prefix}_3d.png')
+    plt.close()
+
+    return r, v
+
+# Case 1: Uniform Magnetic Field
+B1 = np.array([0, 0, 1e-3])  # B along z-axis (T)
+E1 = np.array([0, 0, 0])     # No E field
+v0 = np.array([1e5, 0, 0])   # Initial velocity in x-direction
+r0 = np.array([0, 0, 0])     # Initial position
+r1, v1 = simulate_trajectory(E1, B1, v0, r0, 'uniform_magnetic')
+
+# Case 2: Combined Electric and Magnetic Fields
+E2 = np.array([1e3, 0, 0])   # E along x-axis (V/m)
+B2 = np.array([0, 0, 1e-3])  # B along z-axis
+r2, v2 = simulate_trajectory(E2, B2, v0, r0, 'combined_fields')
+
+# Case 3: Crossed Fields
+E3 = np.array([0, 1e3, 0])   # E along y-axis
+B3 = np.array([0, 0, 1e-3])  # B along z-axis
+r3, v3 = simulate_trajectory(E3, B3, v0, r0, 'crossed_fields')
+
+# Parameter Exploration: Vary B-field strength
+B4 = np.array([0, 0, 2e-3])  # Stronger B-field
+r4, v4 = simulate_trajectory(E1, B4, v0, r0, 'stronger_magnetic')
 </code></pre>
 <p><strong>Explanation</strong>:
-- <code>combine_series</code>: Identifies degree-2 nodes (excluding terminals) and merges their edges.
-- <code>combine_parallel</code>: Detects multiple edges between nodes and computes their equivalent resistance.
-- <code>simplify_graph</code>: Iteratively applies reductions until no further simplifications are possible.
-- <code>equivalent_resistance</code>: Returns the final resistance or infinity if no path exists.</p>
-<hr/>
-<h2 id="4-example-analyses"><strong><span style="color:#E74C3C">4. Example Analyses</span></strong></h2>
-<p>The following examples correspond to the three test cases from the original problem, demonstrating the algorithm’s ability to handle simple, nested, and complex configurations.</p>
-<h3 id="41-test-case-1-simple-series-and-parallel-combination"><strong><span style="color:#28B463">4.1 Test Case 1: Simple Series and Parallel Combination</span></strong></h3>
-<p><strong>Circuit</strong>: Two resistors in series (<span class="arithmatex">\( R_1 = 2\Omega, R_2 = 3\Omega \)</span>) followed by a parallel resistor (<span class="arithmatex">\( R_3 = 4\Omega \)</span>).
-- <strong>Nodes</strong>: <span class="arithmatex">\( A, B, C \)</span>.
-- <strong>Edges</strong>: <span class="arithmatex">\( (A, B, 2\Omega), (B, C, 3\Omega), (A, C, 4\Omega) \)</span>.</p>
-<p><strong>Code</strong>:</p>
-<pre><code class="language-python">import networkx as nx
-G = nx.Graph()
-G.add_edge('A', 'B', resistance=2)
-G.add_edge('B', 'C', resistance=3)
-G.add_edge('A', 'C', resistance=4)
-print(equivalent_resistance(G, 'A', 'C'))  # Output: 2.222222222222222
-</code></pre>
-<p><strong>Steps</strong>:
-1. <strong>Series Reduction</strong>: Node <span class="arithmatex">\( B \)</span> (degree 2) connects <span class="arithmatex">\( A \)</span> and <span class="arithmatex">\( C \)</span>. Combine <span class="arithmatex">\( (A, B, 2\Omega) \)</span> and <span class="arithmatex">\( (B, C, 3\Omega) \)</span> into <span class="arithmatex">\( (A, C, 2 + 3 = 5\Omega) \)</span>.
-2. <strong>Parallel Reduction</strong>: Two edges between <span class="arithmatex">\( A \)</span> and <span class="arithmatex">\( C \)</span>: <span class="arithmatex">\( 5\Omega \)</span> and <span class="arithmatex">\( 4\Omega \)</span>. Compute:
-   [
-   R_{\text{eq}} = \frac{5 \cdot 4}{5 + 4} = \frac{20}{9} \approx 2.22\Omega
-   ]</p>
-<p><strong>Result</strong>: <span class="arithmatex">\( \frac{20}{9} \Omega \approx 2.22\Omega \)</span>.</p>
-<h3 id="42-test-case-2-nested-configuration"><strong><span style="color:#28B463">4.2 Test Case 2: Nested Configuration</span></strong></h3>
-<p><strong>Circuit</strong>: A series resistor (<span class="arithmatex">\( R_1 = 1\Omega \)</span>) followed by two parallel resistors (<span class="arithmatex">\( R_2 = 2\Omega, R_3 = 3\Omega \)</span>).
-- <strong>Nodes</strong>: <span class="arithmatex">\( A, B, C \)</span>.
-- <strong>Edges</strong>: <span class="arithmatex">\( (A, B, 1\Omega), (B, C, 2\Omega), (B, C, 3\Omega) \)</span>.</p>
-<p><strong>Code</strong>:</p>
-<pre><code class="language-python">import networkx as nx
-G = nx.MultiGraph()
-G.add_edge('A', 'B', resistance=1)
-G.add_edge('B', 'C', resistance=2)
-G.add_edge('B', 'C', resistance=3)
-print(equivalent_resistance(G, 'A', 'C'))  # Output: 2.2
-</code></pre>
-<p><strong>Steps</strong>:
-1. <strong>Parallel Reduction</strong>: Two edges between <span class="arithmatex">\( B \)</span> and <span class="arithmatex">\( C \)</span>: <span class="arithmatex">\( 2\Omega, 3\Omega \)</span>. Compute:
-   [
-   R_{\text{eq}} = \frac{2 \cdot 3}{2 + 3} = \frac{6}{5} = 1.2\Omega
-   ]
-   Replace with <span class="arithmatex">\( (B, C, 1.2\Omega) \)</span>.
-2. <strong>Series Reduction</strong>: Node <span class="arithmatex">\( B \)</span> (degree 2) connects <span class="arithmatex">\( A \)</span> and <span class="arithmatex">\( C \)</span>. Combine <span class="arithmatex">\( (A, B, 1\Omega) \)</span> and <span class="arithmatex">\( (B, C, 1.2\Omega) \)</span>:
-   [
-   R_{\text{eq}} = 1 + 1.2 = 2.2\Omega
-   ]</p>
-<p><strong>Result</strong>: <span class="arithmatex">\( 2.2\Omega \)</span>.</p>
-<h3 id="43-test-case-3-complex-graph-with-cycles"><strong><span style="color:#28B463">4.3 Test Case 3: Complex Graph with Cycles</span></strong></h3>
-<p><strong>Circuit</strong>: A bridge-like circuit.
-- <strong>Nodes</strong>: <span class="arithmatex">\( A, B, C, D \)</span>.
-- <strong>Edges</strong>: <span class="arithmatex">\( (A, B, 1\Omega), (B, C, 2\Omega), (A, D, 3\Omega), (D, C, 4\Omega), (B, D, 5\Omega) \)</span>.
-- <strong>Goal</strong>: Compute resistance between <span class="arithmatex">\( A \)</span> and <span class="arithmatex">\( C \)</span>.</p>
-<p><strong>Code</strong>:</p>
-<pre><code class="language-python">import networkx as nx
-G = nx.Graph()
-G.add_edge('A', 'B', resistance=1)
-G.add_edge('B', 'C', resistance=2)
-G.add_edge('A', 'D', resistance=3)
-G.add_edge('D', 'C', resistance=4)
-G.add_edge('B', 'D', resistance=5)
-print(equivalent_resistance(G, 'A', 'C'))  # Note: Requires advanced methods
-</code></pre>
-<p><strong>Steps</strong> (Simplified for Illustration):
-- This circuit is not purely series-parallel, typically requiring Delta-Star (Y-Δ) transformations or Kirchhoff’s laws.
-- For illustration, assume a reducible path:
-  1. <strong>Series (Path A-B-C)</strong>: Combine <span class="arithmatex">\( (A, B, 1\Omega), (B, C, 2\Omega) \)</span> into <span class="arithmatex">\( (A, C, 1 + 2 = 3\Omega) \)</span>.
-  2. <strong>Series (Path A-D-C)</strong>: Combine <span class="arithmatex">\( (A, D, 3\Omega), (D, C, 4\Omega) \)</span> into <span class="arithmatex">\( (A, C, 3 + 4 = 7\Omega) \)</span>.
-  3. <strong>Parallel</strong>: Two edges between <span class="arithmatex">\( A \)</span> and <span class="arithmatex">\( C \)</span>: <span class="arithmatex">\( 3\Omega, 7\Omega \)</span>. Compute:
-     [
-     R_{\text{eq}} = \frac{3 \cdot 7}{3 + 7} = \frac{21}{10} = 2.1\Omega
-     ]</p>
-<p><strong>Result</strong>: <span class="arithmatex">\( 2.1\Omega \)</span> (Note: This is a simplified assumption; the actual resistance requires advanced methods like the Laplacian matrix, yielding a different value for a true bridge circuit).</p>
-<p><strong>Caveat</strong>: The provided code may not handle non-series-parallel graphs correctly without extensions. For accuracy, consider matrix-based methods.</p>
-<hr/>
-<h2 id="5-visual-interpretations"><strong><span style="color:#E74C3C">5. Visual Interpretations</span></strong></h2>
-<h3 id="51-before-and-after-simplification"><strong><span style="color:#28B463">5.1 Before and After Simplification</span></strong></h3>
-<p>Complicated resistor networks are simplified by combining series and parallel resistors. The visuals below illustrate the reduction process for the example circuits.</p>
-<ul>
-<li><strong>GIF (Example 1)</strong>:</li>
-<li><strong>Placeholder</strong>: [Generate and upload to Imgur/Google Drive]</li>
-<li>
-<p><strong>Description</strong>: Animates the reduction of the series-parallel circuit, showing the initial graph (<span class="arithmatex">\( A, B, C \)</span>), series reduction (removing <span class="arithmatex">\( B \)</span>), and parallel reduction to a single edge (<span class="arithmatex">\( \frac{20}{9}\Omega \)</span>).</p>
-</li>
-<li>
-<p><strong>Image 1 (Example 2)</strong>:</p>
-</li>
-<li><strong>Placeholder</strong>: [Generate and upload to Imgur/Google Drive]</li>
-<li>
-<p><strong>Description</strong>: Depicts nodes <span class="arithmatex">\( A, B, C \)</span> with edges <span class="arithmatex">\( (A, B, 1\Omega), (B, C, 2\Omega), (B, C, 3\Omega) \)</span>, annotated with parallel (<span class="arithmatex">\( 2\Omega || 3\Omega = 1.2\Omega \)</span>) and series (<span class="arithmatex">\( 1\Omega + 1.2\Omega = 2.2\Omega \)</span>) steps.</p>
-</li>
-<li>
-<p><strong>Image 2 (Example 3)</strong>:</p>
-</li>
-<li><strong>Placeholder</strong>: [Generate and upload to Imgur/Google Drive]</li>
-<li><strong>Description</strong>: Shows nodes <span class="arithmatex">\( A, B, C, D \)</span> with edges labeled, annotated with a simplified reduction path (e.g., <span class="arithmatex">\( A-B-C: 3\Omega, A-D-C: 7\Omega, 3\Omega || 7\Omega = 2.1\Omega \)</span>).</li>
-</ul>
-<p><strong>Code to Generate Visuals</strong>:
-The following Python code generates the GIF and images using <code>networkx</code> and <code>matplotlib</code>. Run it locally and upload the outputs to a platform like Imgur or Google Drive to obtain download links.</p>
-<pre><code class="language-python">import networkx as nx
-import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation
-import imageio
-
-# GIF: Example 1 (Series and Parallel)
-def generate_gif():
-    G = nx.Graph()
-    G.add_nodes_from(['A', 'B', 'C'])
-    G.add_edge('A', 'B', resistance=2)
-    G.add_edge('B', 'C', resistance=3)
-    G.add_edge('A', 'C', resistance=4)
-    graphs = [G.copy()]
-    labels_list = [nx.get_edge_attributes(G, 'resistance')]
-
-    # Series reduction
-    G_series = nx.Graph()
-    G_series.add_nodes_from(['A', 'C'])
-    G_series.add_edge('A', 'C', resistance=5)
-    G_series.add_edge('A', 'C', resistance=4)
-    graphs.append(G_series.copy())
-    labels_list.append({('A', 'C', 0): 5, ('A', 'C', 1): 4})
-
-    # Parallel reduction
-    G_final = nx.Graph()
-    G_final.add_nodes_from(['A', 'C'])
-    G_final.add_edge('A', 'C', resistance=20/9)
-    graphs.append(G_final.copy())
-    labels_list.append({('A', 'C'): 20/9})
-
-    fig, ax = plt.subplots()
-    def update(frame):
-        ax.clear()
-        G = graphs[frame]
-        labels = labels_list[frame]
-        pos = {'A': (0, 0), 'B': (1, 0), 'C': (2, 0)} if frame == 0 else {'A': (0, 0), 'C': (2, 0)}
-        nx.draw(G, pos, ax=ax, with_labels=True, node_color='lightblue', node_size=500, font_size=12)
-        nx.draw_networkx_edge_labels(G, pos, edge_labels=labels, font_size=10)
-        ax.set_title(['Initial Circuit', 'After Series Reduction', 'After Parallel Reduction'][frame])
-
-    ani = FuncAnimation(fig, update, frames=len(graphs), interval=2000, repeat=True)
-    ani.save('series_parallel_reduction.gif', writer='pillow', fps=0.5)
-    plt.close()
-
-# Image 1: Example 2 (Nested Configuration)
-def generate_image1():
-    G = nx.MultiGraph()
-    G.add_nodes_from(['A', 'B', 'C'])
-    G.add_edge('A', 'B', resistance=1)
-    G.add_edge('B', 'C', resistance=2)
-    G.add_edge('B', 'C', resistance=3)
-
-    fig, ax = plt.subplots()
-    pos = {'A': (0, 0), 'B': (1, 0), 'C': (2, 0)}
-    nx.draw(G, pos, ax=ax, with_labels=True, node_color='lightblue', node_size=500, font_size=12)
-    labels = nx.get_edge_attributes(G, 'resistance')
-    nx.draw_networkx_edge_labels(G, pos, edge_labels=labels, font_size=10)
-
-    ax.annotate('Parallel: 2Ω || 3Ω = 1.2Ω\nSeries: 1Ω + 1.2Ω = 2.2Ω', xy=(1, 0.5), xytext=(1, 1),
-                arrowprops=dict(facecolor='black', shrink=0.05), fontsize=10, ha='center')
-
-    plt.title('Nested Configuration (Example 2)')
-    plt.savefig('nested_configuration.png')
-    plt.close()
-
-# Image 2: Example 3 (Complex Graph)
-def generate_image2():
-    G = nx.Graph()
-    G.add_nodes_from(['A', 'B', 'C', 'D'])
-    G.add_edge('A', 'B', resistance=1)
-    G.add_edge('B', 'C', resistance=2)
-    G.add_edge('A', 'D', resistance=3)
-    G.add_edge('D', 'C', resistance=4)
-    G.add_edge('B', 'D', resistance=5)
-
-    fig, ax = plt.subplots()
-    pos = {'A': (0, 1), 'B': (1, 1), 'C': (2, 1), 'D': (1, 0)}
-    nx.draw(G, pos, ax=ax, with_labels=True, node_color='lightblue', node_size=500, font_size=12)
-    labels = nx.get_edge_attributes(G, 'resistance')
-    nx.draw_networkx_edge_labels(G, pos, edge_labels=labels, font_size=10)
-
-    ax.annotate('Simplified Reduction:\nA-B-C: 1Ω + 2Ω = 3Ω\nA-D-C: 3Ω + 4Ω = 7Ω\nParallel: 3Ω || 7Ω = 2.1Ω',
-                xy=(1, 0.5), xytext=(1, 1.5), arrowprops=dict(facecolor='black', shrink=0.05),
-                fontsize=10, ha='center')
-
-    plt.title('Complex Graph (Example 3)')
-    plt.savefig('complex_graph.png')
-    plt.close()
-
-# Generate all visuals
-if __name__ == "__main__":
-    generate_gif()
-    generate_image1()
-    generate_image2()
-</code></pre>
-<p><strong>Instructions to Generate and Upload Visuals</strong>:
-1. <strong>Install Dependencies</strong>:
+- <strong>Parameters</strong>: Electron-like particle (<span class="arithmatex">\( q = 1.6 \times 10^{-19} \, \text{C}, m = 9.1 \times 10^{-31} \, \text{kg} \)</span>), small time step (<span class="arithmatex">\( dt = 10^{-12} \, \text{s} \)</span>) for accuracy.
+- <strong>Lorentz Force</strong>: Computes acceleration from electric and magnetic forces.
+- <strong>RK4</strong>: Integrates position and velocity with high precision.
+- <strong>Cases</strong>:
+  1. Uniform <span class="arithmatex">\( \mathbf{B} = [0, 0, 10^{-3}] \, \text{T} \)</span>: Circular motion in the xy-plane.
+  2. Combined <span class="arithmatex">\( \mathbf{E} = [10^3, 0, 0] \, \text{V/m}, \mathbf{B} = [0, 0, 10^{-3}] \, \text{T} \)</span>: Helical motion with acceleration.
+  3. Crossed <span class="arithmatex">\( \mathbf{E} = [0, 10^3, 0], \mathbf{B} = [0, 0, 10^{-3}] \)</span>: Cycloidal motion with <span class="arithmatex">\( \mathbf{E} \times \mathbf{B} \)</span> drift.
+  4. Stronger <span class="arithmatex">\( \mathbf{B} = [0, 0, 2 \times 10^{-3}] \)</span>: Tighter circular motion (smaller Larmor radius).
+- <strong>Outputs</strong>: Saves 2D and 3D plots as <code>uniform_magnetic_2d.png</code>, <code>uniform_magnetic_3d.png</code>, etc.</p>
+<p><strong>Visual Placeholders</strong>:
+- Uniform Magnetic Field: [Generate and upload <code>uniform_magnetic_2d.png</code>, <code>uniform_magnetic_3d.png</code>]
+- Combined Fields: [Generate and upload <code>combined_fields_2d.png</code>, <code>combined_fields_3d.png</code>]
+- Crossed Fields: [Generate and upload <code>crossed_fields_2d.png</code>, <code>crossed_fields_3d.png</code>]
+- Stronger Magnetic Field: [Generate and upload <code>stronger_magnetic_2d.png</code>, <code>stronger_magnetic_3d.png</code>]</p>
+<p><strong>Instructions to Generate Visuals</strong>:
+1. Install dependencies:
    <code>bash
-   pip install networkx matplotlib imageio pillow</code>
-2. <strong>Run the Code</strong>:
-   - Save the code as <code>generate_visuals.py</code>.
-   - Execute:
-     <code>bash
-     python generate_visuals.py</code>
-   - Outputs:
-     - <code>series_parallel_reduction.gif</code>
-     - <code>nested_configuration.png</code>
-     - <code>complex_graph.png</code>
-3. <strong>Upload</strong>:
-   - Upload the files to a platform like Imgur (imgur.com/upload) or Google Drive (drive.google.com).
-   - Obtain shareable links from the platform (e.g., Imgur provides direct image links, Google Drive provides shareable links modifiable for direct download).</p>
+   pip install numpy matplotlib</code>
+2. Save the code as <code>lorentz_force_simulation.py</code> and run:
+   <code>bash
+   python lorentz_force_simulation.py</code>
+3. Outputs are saved in the working directory as PNG files.
+4. Upload to Imgur (imgur.com/upload) or Google Drive (drive.google.com) to obtain shareable links.</p>
 <hr/>
-<h2 id="6-efficiency-and-extensions"><strong><span style="color:#E74C3C">6. Efficiency and Extensions</span></strong></h2>
-<h3 id="61-algorithmic-complexity"><strong><span style="color:#28B463">6.1 Algorithmic Complexity</span></strong></h3>
-<table>
-<thead>
-<tr>
-<th>Step</th>
-<th>Complexity</th>
-<th>Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Series detection</td>
-<td>( O(</td>
-<td>V</td>
-</tr>
-<tr>
-<td>Parallel check</td>
-<td>( O(</td>
-<td>E</td>
-</tr>
-<tr>
-<td>Total runtime</td>
-<td>( O(</td>
-<td>V</td>
-</tr>
-</tbody>
-</table>
+<h2 id="4-parameter-exploration"><strong><span style="color:#E74C3C">4. Parameter Exploration</span></strong></h2>
+<h3 id="41-effects-of-parameters"><strong><span style="color:#28B463">4.1 Effects of Parameters</span></strong></h3>
 <ul>
-<li><strong>Analysis</strong>: For sparse graphs (<span class="arithmatex">\( |E| \approx |V| \)</span>), the runtime is approximately <span class="arithmatex">\( O(|V|^2) \)</span>. Dense graphs or frequent parallel edges increase complexity.</li>
-<li><strong>Optimization</strong>: Use adjacency lists and prioritize reductions to minimize updates.</li>
+<li><strong>Field Strengths (<span class="arithmatex">\( \mathbf{E}, \mathbf{B} \)</span>)</strong>:</li>
+<li>Increasing <span class="arithmatex">\( |\mathbf{B}| \)</span> reduces the <strong>Larmor radius</strong> (<span class="arithmatex">\( r_L = \frac{m v_\perp}{|q| B} \)</span>), tightening circular/helical paths (see Case 4 vs. Case 1).</li>
+<li>Non-zero <span class="arithmatex">\( \mathbf{E} \)</span> adds linear acceleration (Case 2) or drift (Case 3, <span class="arithmatex">\( \mathbf{v}_d = \frac{\mathbf{E} \times \mathbf{B}}{B^2} \)</span>).</li>
+<li><strong>Initial Velocity (<span class="arithmatex">\( \mathbf{v}_0 \)</span>)</strong>:</li>
+<li>Higher <span class="arithmatex">\( v_\perp \)</span> (perpendicular to <span class="arithmatex">\( \mathbf{B} \)</span>) increases <span class="arithmatex">\( r_L \)</span>.</li>
+<li>Non-zero <span class="arithmatex">\( v_\parallel \)</span> (parallel to <span class="arithmatex">\( \mathbf{B} \)</span>) produces helical motion.</li>
+<li><strong>Charge and Mass (<span class="arithmatex">\( q, m \)</span>)</strong>:</li>
+<li>Larger <span class="arithmatex">\( |q| \)</span> or smaller <span class="arithmatex">\( m \)</span> increases force magnitude, reducing <span class="arithmatex">\( r_L \)</span> and increasing cyclotron frequency (<span class="arithmatex">\( \omega_c = \frac{|q| B}{m} \)</span>).</li>
 </ul>
-<h3 id="62-future-extensions"><strong><span style="color:#28B463">6.2 Future Extensions</span></strong></h3>
+<p><strong>Observations</strong>:
+- <strong>Case 1</strong>: Circular motion with <span class="arithmatex">\( r_L \approx 5.5 \times 10^{-4} \, \text{m} \)</span> (calculated as <span class="arithmatex">\( \frac{m v_0}{|q| B} \)</span>).
+- <strong>Case 2</strong>: Helical motion with linear drift along <span class="arithmatex">\( \mathbf{E} \)</span>.
+- <strong>Case 3</strong>: Cycloidal motion with drift velocity <span class="arithmatex">\( v_d = \frac{E_y}{B_z} = 10^6 \, \text{m/s} \)</span> in the x-direction.
+- <strong>Case 4</strong>: Smaller <span class="arithmatex">\( r_L \approx 2.75 \times 10^{-4} \, \text{m} \)</span> due to doubled <span class="arithmatex">\( B \)</span>.</p>
+<hr/>
+<h2 id="5-visualization-and-physical-phenomena"><strong><span style="color:#E74C3C">5. Visualization and Physical Phenomena</span></strong></h2>
+<h3 id="51-trajectory-plots"><strong><span style="color:#28B463">5.1 Trajectory Plots</span></strong></h3>
+<p>The plots highlight:
+- <strong>Larmor Radius</strong>: Visible in circular (Case 1) and helical (Case 2) paths, proportional to <span class="arithmatex">\( v_\perp / B \)</span>.
+- <strong>Drift Velocity</strong>: Evident in Case 3, where <span class="arithmatex">\( \mathbf{E} \times \mathbf{B} \)</span> causes lateral motion.
+- <strong>Helical Motion</strong>: Seen in Case 2, combining circular motion with linear acceleration.</p>
+<ul>
+<li><strong>Uniform Magnetic Field</strong>: 2D plot shows a circle in the xy-plane; 3D plot confirms no z-motion.</li>
+<li><strong>Combined Fields</strong>: 3D plot shows a helix stretched along the x-axis (E-field direction).</li>
+<li><strong>Crossed Fields</strong>: 2D plot shows cycloidal motion; 3D plot shows drift in the x-direction.</li>
+<li><strong>Stronger B</strong>: 2D plot shows a tighter circle compared to Case 1.</li>
+</ul>
+<h3 id="52-practical-relevance"><strong><span style="color:#28B463">5.2 Practical Relevance</span></strong></h3>
+<ul>
+<li><strong>Cyclotrons</strong>: Case 1 mimics cyclotron motion, where particles spiral in a uniform magnetic field, with <span class="arithmatex">\( r_L \)</span> determining orbit size and <span class="arithmatex">\( \omega_c \)</span> setting the resonance frequency for acceleration.</li>
+<li><strong>Magnetic Traps</strong>: Case 1 and Case 2 relate to magnetic confinement, where helical paths keep particles trapped (e.g., in tokamaks or stellarators).</li>
+<li><strong>Magnetrons</strong>: Case 3’s drift motion is used in magnetrons, where crossed fields produce controlled electron paths for microwave generation.</li>
+<li><strong>Mass Spectrometers</strong>: The dependence of <span class="arithmatex">\( r_L \)</span> on <span class="arithmatex">\( m/q \)</span> (seen in parameter exploration) enables ion separation.</li>
+</ul>
+<hr/>
+<h2 id="6-extensions-and-future-work"><strong><span style="color:#E74C3C">6. Extensions and Future Work</span></strong></h2>
+<h3 id="61-non-uniform-fields"><strong><span style="color:#28B463">6.1 Non-Uniform Fields</span></strong></h3>
+<ul>
+<li><strong>Magnetic Field Gradients</strong>: Simulate <span class="arithmatex">\( \mathbf{B}(x, y, z) \)</span>, e.g., <span class="arithmatex">\( B_z = B_0 + k z \)</span>, causing mirror forces in traps.</li>
+<li><strong>Time-Varying Fields</strong>: Include <span class="arithmatex">\( \mathbf{E}(t) \)</span> or <span class="arithmatex">\( \mathbf{B}(t) \)</span>, relevant for RF accelerators.</li>
+<li><strong>Spatial Variations</strong>: Use <span class="arithmatex">\( \mathbf{E}(\mathbf{r}) \)</span> or <span class="arithmatex">\( \mathbf{B}(\mathbf{r}) \)</span>, e.g., quadrupole fields in ion traps.</li>
+</ul>
+<h3 id="62-additional-features"><strong><span style="color:#28B463">6.2 Additional Features</span></strong></h3>
 <table>
 <thead>
 <tr>
@@ -536,27 +398,30 @@ if __name__ == "__main__":
 </thead>
 <tbody>
 <tr>
-<td><strong>Kirchhoff’s Matrix Method</strong></td>
-<td>Solves non-series-parallel graphs using linear algebra</td>
+<td><strong>Relativistic Effects</strong></td>
+<td>Model high-speed particles in accelerators</td>
 </tr>
 <tr>
-<td><strong>Delta-Star Transformations</strong></td>
-<td>Handles complex topologies like bridges</td>
+<td><strong>Collisions</strong></td>
+<td>Simulate plasma interactions</td>
 </tr>
 <tr>
-<td><strong>Graph Laplacian Approach</strong></td>
-<td>Connects circuit analysis to spectral graph theory</td>
+<td><strong>Multiple Particles</strong></td>
+<td>Study collective behavior in plasmas</td>
+</tr>
+<tr>
+<td><strong>Interactive Interface</strong></td>
+<td>Allow real-time parameter adjustment</td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li><strong>Kirchhoff’s Method</strong>: Solves systems of equations based on current and voltage laws.</li>
-<li><strong>Delta-Star</strong>: Transforms triangular configurations to enable series-parallel reductions.</li>
-<li><strong>Laplacian</strong>: Uses the graph’s Laplacian matrix to compute effective resistance directly.</li>
-</ul>
+<p><strong>Implementation</strong>:
+- For non-uniform fields, modify <code>lorentz_force</code> to accept <span class="arithmatex">\( \mathbf{r} \)</span>-dependent <span class="arithmatex">\( \mathbf{E}, \mathbf{B} \)</span>.
+- Use adaptive time steps in RK4 for varying field strengths.
+- Employ VPython or Plotly for interactive 3D visualizations.</p>
 <hr/>
-<h2 id="conclusion"><strong><span style="color:#2E86C1">Conclusion:</span></strong></h2>
-<p>Graph theory provides a powerful framework for computing equivalent resistance, abstracting circuits into weighted graphs and applying systematic reductions. The Python implementation using <code>networkx</code> handles simple and nested configurations effectively, though complex graphs require extensions like Y-Δ transformations. Visual tools enhance understanding, making this approach ideal for theoretical study and practical circuit analysis.</p>
+<h2 id="conclusion"><strong><span style="color:#2E86C1">Conclusion</span></strong></h2>
+<p>The Lorentz force simulation reveals the intricate dynamics of charged particles in electromagnetic fields, from circular orbits to complex drift motions. The Python implementation using RK4 provides accurate trajectories, with visualizations highlighting key phenomena like the Larmor radius and <span class="arithmatex">\( \mathbf{E} \times \mathbf{B} \)</span> drift. These results directly relate to applications in cyclotrons, magnetic traps, and magnetrons, demonstrating the Lorentz force’s role in technology and nature. Extending the simulation to non-uniform fields and relativistic effects would further enhance its applicability, offering deeper insights into complex systems.</p>
 <hr/>
 </div>
 </div><footer>

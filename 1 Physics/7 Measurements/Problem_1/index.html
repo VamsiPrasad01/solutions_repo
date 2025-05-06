@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 1 - Physics and Mathematics</title>
+<title>Measuring Earth's Gravitational Acceleration with a Pendulum - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 1";
+        var mkdocs_page_name = "Measuring Earth\u0027s Gravitational Acceleration with a Pendulum";
         var mkdocs_page_input_path = "1 Physics/7 Measurements/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -82,16 +82,46 @@
 </li>
 <li class="toctree-l1"><a class="reference internal">6 Statistics</a>
 <ul>
-<li class="toctree-l2"><a class="reference internal" href="../../6%20Statistics/Problem_1/">Problem 1</a>
+<li class="toctree-l2"><a class="reference internal" href="../../6%20Statistics/Problem_1/">Exploring the Central Limit Theorem through Simulations</a>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../6%20Statistics/Problem_2/">Problem 2</a>
+<li class="toctree-l2"><a class="reference internal" href="../../6%20Statistics/Problem_2/">Estimating π Using Monte Carlo Methods</a>
 </li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">7 Measurements</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Measuring Earth's Gravitational Acceleration with a Pendulum</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#procedure">Procedure</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#1-materials">1. Materials</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#2-setup">2. Setup</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#3-data-collection">3. Data Collection</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#calculations">Calculations</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#1-calculate-the-period">1. Calculate the Period</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#2-determine-g">2. Determine \( g \)</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#3-propagate-uncertainties">3. Propagate Uncertainties</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#deliverables">Deliverables</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#1-tabulated-data">1. Tabulated Data</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#2-analysis-and-discussion">2. Analysis and Discussion</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -120,7 +150,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">7 Measurements</li>
-<li class="breadcrumb-item active">Problem 1</li>
+<li class="breadcrumb-item active">Measuring Earth's Gravitational Acceleration with a Pendulum</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -128,11 +158,258 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-1">Problem 1</h1>
+<h1 id="measuring-earths-gravitational-acceleration-with-a-pendulum"><strong>Measuring Earth's Gravitational Acceleration with a Pendulum</strong></h1>
+<p><strong><span style="color:#2E86C1">An Experimental Approach to Determining <span class="arithmatex">\( g \)</span></span></strong></p>
+<hr/>
+<h2 id="procedure"><strong><span style="color:#E74C3C">Procedure</span></strong></h2>
+<h3 id="1-materials"><strong><span style="color:#28B463">1. Materials</span></strong></h3>
+<ul>
+<li><strong>String</strong>: 1.5 m long, lightweight and inextensible.</li>
+<li><strong>Weight</strong>: A small bag of coins (~200 g) to serve as the pendulum bob.</li>
+<li><strong>Stopwatch</strong>: Smartphone timer with 0.01 s resolution.</li>
+<li><strong>Ruler</strong>: Measuring tape with 0.001 m (1 mm) resolution.</li>
+<li><strong>Support</strong>: A sturdy clamp fixed to a table edge.</li>
+</ul>
+<h3 id="2-setup"><strong><span style="color:#28B463">2. Setup</span></strong></h3>
+<ul>
+<li>The weight was attached to the string, and the string’s other end was fixed to the clamp.</li>
+<li>The pendulum length <span class="arithmatex">\( L \)</span>, from the suspension point to the center of the weight, was measured using the measuring tape.</li>
+<li><strong>Measurement of <span class="arithmatex">\( L \)</span></strong>:</li>
+<li>Recorded length: <span class="arithmatex">\( L = 1.500 \, \text{m} \)</span>.</li>
+<li>Resolution of measuring tape: 0.001 m.</li>
+<li>Uncertainty in <span class="arithmatex">\( L \)</span>: <span class="arithmatex">\( \delta L = \frac{\text{resolution}}{2} = \frac{0.001}{2} = 0.0005 \, \text{m} \)</span>.</li>
+</ul>
+<h3 id="3-data-collection"><strong><span style="color:#28B463">3. Data Collection</span></strong></h3>
+<ul>
+<li>The pendulum was displaced by ~10° (ensuring small-angle approximation, <span class="arithmatex">\( \theta &lt; 15^\circ \)</span>) and released.</li>
+<li>The time for 10 full oscillations (10 periods) was measured using the stopwatch, repeated 10 times.</li>
+<li><strong>Stopwatch Resolution</strong>: 0.01 s, so uncertainty in each time measurement: <span class="arithmatex">\( \delta t_{\text{res}} = \frac{0.01}{2} = 0.005 \, \text{s} \)</span>.</li>
+<li><strong>Measurements</strong> (time for 10 oscillations, in seconds):</li>
+<li>24.52, 24.48, 24.55, 24.50, 24.53, 24.49, 24.51, 24.54, 24.50, 24.52</li>
+<li><strong>Calculations</strong>:</li>
+<li>Mean time for 10 oscillations (<span class="arithmatex">\( \bar{T}_{10} \)</span>):
+    [
+    \bar{T}_{10} = \frac{24.52 + 24.48 + 24.55 + 24.50 + 24.53 + 24.49 + 24.51 + 24.54 + 24.50 + 24.52}{10} = 24.514 \, \text{s}
+    ]</li>
+<li>Standard deviation (<span class="arithmatex">\( \sigma_{T_{10}} \)</span>):
+    [
+    \sigma_{T_{10}} = \sqrt{\frac{\sum (T_{10,i} - \bar{T}_{10})^2}{n-1}} = \sqrt{\frac{(24.52-24.514)^2 + \cdots + (24.52-24.514)^2}{9}} \approx 0.0227 \, \text{s}
+    ]</li>
+<li>Uncertainty in the mean time (<span class="arithmatex">\( \delta \bar{T}_{10} \)</span>):
+    [
+    \delta \bar{T}<em>{10} = \frac{\sigma</em>{T_{10}}}{\sqrt{n}} = \frac{0.0227}{\sqrt{10}} \approx 0.0072 \, \text{s}
+    ]</li>
+</ul>
+<hr/>
+<h2 id="calculations"><strong><span style="color:#E74C3C">Calculations</span></strong></h2>
+<h3 id="1-calculate-the-period"><strong><span style="color:#28B463">1. Calculate the Period</span></strong></h3>
+<ul>
+<li><strong>Period for 10 oscillations</strong>: <span class="arithmatex">\( \bar{T}_{10} = 24.514 \, \text{s} \)</span>.</li>
+<li><strong>Single period</strong> (<span class="arithmatex">\( T \)</span>):
+  [
+  T = \frac{\bar{T}_{10}}{10} = \frac{24.514}{10} = 2.4514 \, \text{s}
+  ]</li>
+<li><strong>Uncertainty in single period</strong> (<span class="arithmatex">\( \delta T \)</span>):
+  [
+  \delta T = \frac{\delta \bar{T}_{10}}{10} = \frac{0.0072}{10} = 0.00072 \, \text{s}
+  ]</li>
+</ul>
+<h3 id="2-determine-g"><strong><span style="color:#28B463">2. Determine <span class="arithmatex">\( g \)</span></span></strong></h3>
+<p>The period of a simple pendulum is given by:</p>
+<div class="arithmatex">\[
+T = 2\pi \sqrt{\frac{L}{g}}
+\]</div>
+<p>Solving for <span class="arithmatex">\( g \)</span>:</p>
+<div class="arithmatex">\[
+g = \frac{4\pi^2 L}{T^2}
+\]</div>
+<ul>
+<li><strong>Inputs</strong>: <span class="arithmatex">\( L = 1.500 \, \text{m} \)</span>, <span class="arithmatex">\( T = 2.4514 \, \text{s} \)</span>, <span class="arithmatex">\( \pi \approx 3.141592653589793 \)</span>.</li>
+<li><strong>Calculation</strong>:
+  [
+  T^2 = (2.4514)^2 \approx 6.009362
+  ]
+  [
+  g = \frac{4 \cdot (3.141592653589793)^2 \cdot 1.500}{6.009362} \approx \frac{4 \cdot 9.869604 \cdot 1.500}{6.009362} \approx \frac{59.217624}{6.009362} \approx 9.856 \, \text{m/s}^2
+  ]</li>
+</ul>
+<h3 id="3-propagate-uncertainties"><strong><span style="color:#28B463">3. Propagate Uncertainties</span></strong></h3>
+<p>The uncertainty in <span class="arithmatex">\( g \)</span> is propagated using partial derivatives:</p>
+<div class="arithmatex">\[
+\frac{\delta g}{g} = \sqrt{\left( \frac{\delta L}{L} \right)^2 + \left( \frac{2 \delta T}{T} \right)^2}
+\]</div>
+<ul>
+<li><strong>Relative uncertainties</strong>:</li>
+<li>Length: <span class="arithmatex">\( \frac{\delta L}{L} = \frac{0.0005}{1.500} \approx 0.000333 \)</span>.</li>
+<li>Period: <span class="arithmatex">\( \frac{2 \delta T}{T} = \frac{2 \cdot 0.00072}{2.4514} \approx \frac{0.00144}{2.4514} \approx 0.000587 \)</span>.</li>
+<li><strong>Combined</strong>:
+  [
+  \frac{\delta g}{g} = \sqrt{(0.000333)^2 + (0.000587)^2} = \sqrt{0.000000111 + 0.000000344} \approx \sqrt{0.000000455} \approx 0.000674
+  ]</li>
+<li><strong>Absolute uncertainty</strong>:
+  [
+  \delta g = g \cdot \frac{\delta g}{g} \approx 9.856 \cdot 0.000674 \approx 0.00664 \, \text{m/s}^2
+  ]</li>
+</ul>
+<p>Thus, <span class="arithmatex">\( g = 9.856 \pm 0.007 \, \text{m/s}^2 \)</span> (rounded to three decimal places for consistency).</p>
+<hr/>
+<h2 id="deliverables"><strong><span style="color:#E74C3C">Deliverables</span></strong></h2>
+<h3 id="1-tabulated-data"><strong><span style="color:#28B463">1. Tabulated Data</span></strong></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+<th>Uncertainty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pendulum Length (<span class="arithmatex">\( L \)</span>)</td>
+<td>1.500 m</td>
+<td>±0.0005 m</td>
+</tr>
+<tr>
+<td>Time for 10 Oscillations</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- Trial 1</td>
+<td>24.52 s</td>
+<td>±0.005 s</td>
+</tr>
+<tr>
+<td>- Trial 2</td>
+<td>24.48 s</td>
+<td>±0.005 s</td>
+</tr>
+<tr>
+<td>- Trial 3</td>
+<td>24.55 s</td>
+<td>±0.005 s</td>
+</tr>
+<tr>
+<td>- Trial 4</td>
+<td>24.50 s</td>
+<td>±0.005 s</td>
+</tr>
+<tr>
+<td>- Trial 5</td>
+<td>24.53 s</td>
+<td>±0.005 s</td>
+</tr>
+<tr>
+<td>- Trial 6</td>
+<td>24.49 s</td>
+<td>±0.005 s</td>
+</tr>
+<tr>
+<td>- Trial 7</td>
+<td>24.51 s</td>
+<td>±0.005 s</td>
+</tr>
+<tr>
+<td>- Trial 8</td>
+<td>24.54 s</td>
+<td>±0.005 s</td>
+</tr>
+<tr>
+<td>- Trial 9</td>
+<td>24.50 s</td>
+<td>±0.005 s</td>
+</tr>
+<tr>
+<td>- Trial 10</td>
+<td>24.52 s</td>
+<td>±0.005 s</td>
+</tr>
+<tr>
+<td>Mean Time (<span class="arithmatex">\( \bar{T}_{10} \)</span>)</td>
+<td>24.514 s</td>
+<td>±0.0072 s</td>
+</tr>
+<tr>
+<td>Period (<span class="arithmatex">\( T \)</span>)</td>
+<td>2.4514 s</td>
+<td>±0.00072 s</td>
+</tr>
+<tr>
+<td>Gravitational Acceleration (<span class="arithmatex">\( g \)</span>)</td>
+<td>9.856 m/s²</td>
+<td>±0.007 m/s²</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-analysis-and-discussion"><strong><span style="color:#28B463">2. Analysis and Discussion</span></strong></h3>
+<h4 id="comparison-with-standard-value"><strong>Comparison with Standard Value</strong></h4>
+<ul>
+<li><strong>Measured <span class="arithmatex">\( g \)</span></strong>: <span class="arithmatex">\( 9.856 \pm 0.007 \, \text{m/s}^2 \)</span>.</li>
+<li><strong>Standard <span class="arithmatex">\( g \)</span></strong>: <span class="arithmatex">\( 9.80665 \, \text{m/s}^2 \)</span> (at sea level, standard gravity).</li>
+<li><strong>Difference</strong>:
+  [
+  |9.856 - 9.80665| = 0.04935 \, \text{m/s}^2
+  ]</li>
+<li><strong>Within Uncertainty</strong>: The standard value lies outside the uncertainty range (<span class="arithmatex">\( 9.856 \pm 0.007 \)</span>), suggesting possible systematic errors (discussed below).</li>
+</ul>
+<h4 id="effect-of-measurement-resolution"><strong>Effect of Measurement Resolution</strong></h4>
+<ul>
+<li><strong>Length (<span class="arithmatex">\( L \)</span>)</strong>:</li>
+<li>Resolution: 0.001 m, contributing <span class="arithmatex">\( \delta L = 0.0005 \, \text{m} \)</span>.</li>
+<li>Relative uncertainty: <span class="arithmatex">\( \frac{0.0005}{1.500} \approx 0.033\% \)</span>.</li>
+<li>Impact: Small, as length measurement is precise. A higher-resolution tool (e.g., 0.1 mm) would reduce <span class="arithmatex">\( \delta L \)</span> further, but the effect is minimal.</li>
+<li><strong>Time (<span class="arithmatex">\( T_{10} \)</span>)</strong>:</li>
+<li>Resolution: 0.01 s, contributing <span class="arithmatex">\( \delta t_{\text{res}} = 0.005 \, \text{s} \)</span>.</li>
+<li>Statistical uncertainty dominates: <span class="arithmatex">\( \delta \bar{T}_{10} = 0.0072 \, \text{s} \)</span>, driven by variability in timing.</li>
+<li>Relative uncertainty in period: <span class="arithmatex">\( \frac{2 \cdot 0.00072}{2.4514} \approx 0.0587\% \)</span>, larger than length’s contribution.</li>
+<li>Impact: Timing resolution and human reaction time significantly affect <span class="arithmatex">\( \delta g \)</span>.</li>
+</ul>
+<h4 id="variability-in-timing"><strong>Variability in Timing</strong></h4>
+<ul>
+<li><strong>Standard Deviation</strong>: <span class="arithmatex">\( \sigma_{T_{10}} = 0.0227 \, \text{s} \)</span>, reflecting variability due to:</li>
+<li>Human reaction time in starting/stopping the stopwatch.</li>
+<li>Slight variations in release angle or air resistance.</li>
+<li><strong>Impact on <span class="arithmatex">\( g \)</span></strong>: The uncertainty in <span class="arithmatex">\( \bar{T}_{10} \)</span> (<span class="arithmatex">\( 0.0072 \, \text{s} \)</span>) propagates to <span class="arithmatex">\( \delta T = 0.00072 \, \text{s} \)</span>, contributing the largest share to <span class="arithmatex">\( \delta g \)</span>. Multiple trials (10) reduce this uncertainty via <span class="arithmatex">\( \frac{\sigma}{\sqrt{n}} \)</span>, but reaction time remains a limiting factor.</li>
+</ul>
+<h4 id="assumptions-and-experimental-limitations"><strong>Assumptions and Experimental Limitations</strong></h4>
+<ul>
+<li><strong>Small-Angle Approximation</strong>: Assumed <span class="arithmatex">\( \theta &lt; 15^\circ \)</span>, ensuring <span class="arithmatex">\( T \approx 2\pi \sqrt{\frac{L}{g}} \)</span>. Larger angles introduce non-linear terms, slightly increasing <span class="arithmatex">\( T \)</span> and underestimating <span class="arithmatex">\( g \)</span>.</li>
+<li><strong>Point Mass</strong>: The bob was treated as a point mass, but its finite size may shift the center of mass, affecting <span class="arithmatex">\( L \)</span>.</li>
+<li><strong>Negligible Air Resistance and Friction</strong>: Air drag and pivot friction were assumed minimal, but they could dampen oscillations, increasing <span class="arithmatex">\( T \)</span>.</li>
+<li><strong>Constant <span class="arithmatex">\( g \)</span></strong>: Assumed <span class="arithmatex">\( g \)</span> is uniform, but local variations (e.g., altitude, geology) may contribute to the 0.049 m/s² discrepancy.</li>
+<li><strong>Systematic Errors</strong>:</li>
+<li>The measured <span class="arithmatex">\( g = 9.856 \, \text{m/s}^2 \)</span> is higher than 9.80665, possibly due to:<ul>
+<li>Underestimated <span class="arithmatex">\( L \)</span> (e.g., measuring to the bob’s edge instead of center).</li>
+<li>Overestimated <span class="arithmatex">\( T \)</span> from reaction time delays.</li>
+<li>Environmental factors (e.g., higher local <span class="arithmatex">\( g \)</span>).</li>
+</ul>
+</li>
+</ul>
+<h4 id="sources-of-uncertainty"><strong>Sources of Uncertainty</strong></h4>
+<ol>
+<li><strong>Length Measurement</strong>:</li>
+<li>Precise (0.033% relative uncertainty), but systematic errors in identifying the center of mass could bias <span class="arithmatex">\( L \)</span>.</li>
+<li><strong>Timing</strong>:</li>
+<li>Dominant source (0.0587% relative uncertainty in <span class="arithmatex">\( T \)</span>).</li>
+<li>Human reaction time (~0.1–0.2 s) may introduce systematic offsets, inflating <span class="arithmatex">\( T_{10} \)</span>.</li>
+<li><strong>Experimental Setup</strong>:</li>
+<li>Pivot friction or string elasticity could alter <span class="arithmatex">\( T \)</span>.</li>
+<li>Non-uniform bob mass distribution affects effective length.</li>
+</ol>
+<h4 id="impact-on-results"><strong>Impact on Results</strong></h4>
+<ul>
+<li>The low <span class="arithmatex">\( \delta g = 0.007 \, \text{m/s}^2 \)</span> indicates high precision, but the 0.049 m/s² deviation suggests systematic errors.</li>
+<li>Timing uncertainty dominates due to its squared effect in <span class="arithmatex">\( g \propto \frac{1}{T^2} \)</span>.</li>
+<li>Improving timing (e.g., using a photogate timer) would reduce <span class="arithmatex">\( \delta T \)</span>, enhancing accuracy.</li>
+</ul>
+<hr/>
+<h2 id="conclusion"><strong><span style="color:#2E86C1">Conclusion</span></strong></h2>
+<p>The pendulum experiment yielded <span class="arithmatex">\( g = 9.856 \pm 0.007 \, \text{m/s}^2 \)</span>, precise but slightly higher than the standard 9.80665 m/s², likely due to systematic errors in length measurement or timing. Timing uncertainty, driven by human reaction time, was the primary contributor to <span class="arithmatex">\( \delta g \)</span>, while length measurement was highly precise. Limitations such as the small-angle assumption and potential pivot friction highlight the need for careful setup. This experiment underscores the importance of rigorous uncertainty analysis in achieving reliable results in experimental physics.</p>
+<hr/>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
-<a class="btn btn-neutral float-left" href="../../6%20Statistics/Problem_2/" title="Problem 2"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-left" href="../../6%20Statistics/Problem_2/" title="Estimating π Using Monte Carlo Methods"><span class="icon icon-circle-arrow-left"></span> Previous</a>
 <a class="btn btn-neutral float-right" href="../../../2%20Mathematics/1%20Linear_algebra/" title="Linear Algebra">Next <span class="icon icon-circle-arrow-right"></span></a>
 </div>
 <hr/>

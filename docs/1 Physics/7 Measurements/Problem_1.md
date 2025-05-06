@@ -32,17 +32,17 @@
   - 24.52, 24.48, 24.55, 24.50, 24.53, 24.49, 24.51, 24.54, 24.50, 24.52
 - **Calculations**:
   - Mean time for 10 oscillations (\( \bar{T}_{10} \)):
-    \[
+    \(
     \bar{T}_{10} = \frac{24.52 + 24.48 + 24.55 + 24.50 + 24.53 + 24.49 + 24.51 + 24.54 + 24.50 + 24.52}{10} = 24.514 \, \text{s}
-    \]
+    \)
   - Standard deviation (\( \sigma_{T_{10}} \)):
-    \[
+    \(
     \sigma_{T_{10}} = \sqrt{\frac{\sum (T_{10,i} - \bar{T}_{10})^2}{n-1}} = \sqrt{\frac{(24.52-24.514)^2 + \cdots + (24.52-24.514)^2}{9}} \approx 0.0227 \, \text{s}
-    \]
+    \)
   - Uncertainty in the mean time (\( \delta \bar{T}_{10} \)):
-    \[
+    \(
     \delta \bar{T}_{10} = \frac{\sigma_{T_{10}}}{\sqrt{n}} = \frac{0.0227}{\sqrt{10}} \approx 0.0072 \, \text{s}
-    \]
+    \)
 
 ---
 
@@ -52,13 +52,13 @@
 
 - **Period for 10 oscillations**: \( \bar{T}_{10} = 24.514 \, \text{s} \).
 - **Single period** (\( T \)):
-  \[
+  \(
   T = \frac{\bar{T}_{10}}{10} = \frac{24.514}{10} = 2.4514 \, \text{s}
-  \]
+  \)
 - **Uncertainty in single period** (\( \delta T \)):
-  \[
+  \(
   \delta T = \frac{\delta \bar{T}_{10}}{10} = \frac{0.0072}{10} = 0.00072 \, \text{s}
-  \]
+  \)
 
 ### **<span style="color:#28B463">2. Determine \( g \)</span>**
 
@@ -76,12 +76,12 @@ g = \frac{4\pi^2 L}{T^2}
 
 - **Inputs**: \( L = 1.500 \, \text{m} \), \( T = 2.4514 \, \text{s} \), \( \pi \approx 3.141592653589793 \).
 - **Calculation**:
-  \[
+  \(
   T^2 = (2.4514)^2 \approx 6.009362
-  \]
-  \[
+  \)
+  \(
   g = \frac{4 \cdot (3.141592653589793)^2 \cdot 1.500}{6.009362} \approx \frac{4 \cdot 9.869604 \cdot 1.500}{6.009362} \approx \frac{59.217624}{6.009362} \approx 9.856 \, \text{m/s}^2
-  \]
+  \)
 
 ### **<span style="color:#28B463">3. Propagate Uncertainties</span>**
 
@@ -95,13 +95,13 @@ The uncertainty in \( g \) is propagated using partial derivatives:
   - Length: \( \frac{\delta L}{L} = \frac{0.0005}{1.500} \approx 0.000333 \).
   - Period: \( \frac{2 \delta T}{T} = \frac{2 \cdot 0.00072}{2.4514} \approx \frac{0.00144}{2.4514} \approx 0.000587 \).
 - **Combined**:
-  \[
+  \(
   \frac{\delta g}{g} = \sqrt{(0.000333)^2 + (0.000587)^2} = \sqrt{0.000000111 + 0.000000344} \approx \sqrt{0.000000455} \approx 0.000674
-  \]
+  \)
 - **Absolute uncertainty**:
-  \[
+  \(
   \delta g = g \cdot \frac{\delta g}{g} \approx 9.856 \cdot 0.000674 \approx 0.00664 \, \text{m/s}^2
-  \]
+  \)
 
 Thus, \( g = 9.856 \pm 0.007 \, \text{m/s}^2 \) (rounded to three decimal places for consistency).
 

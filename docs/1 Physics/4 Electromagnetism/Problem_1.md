@@ -183,11 +183,16 @@ r4, v4 = simulate_trajectory(E1, B4, v0, r0, 'stronger_magnetic')
   4. Stronger \( \mathbf{B} = [0, 0, 2 \times 10^{-3}] \, \text{T} \): Tighter circular motion.
 
 - **Outputs**: 2D and 3D plots saved as `uniform_magnetic_2d.png`, `uniform_magnetic_3d.png`, etc.
-
 **Visual Placeholders**:
-- Uniform Magnetic Field: [![alt text](<Uniform Magnetic Image.png>)]
-- Combined Fields: [![alt text](<Combined Magnetic feild.png>)]
-- Stronger Magnetic Field: [![alt text](Stronger.jpg)]
+
+- **Uniform Magnetic Field**  
+  ![Uniform Magnetic Field](<Uniform Magnetic Image.png>)
+
+- **Combined Fields**  
+  ![Combined Fields](<Combined Magnetic feild.png>)
+
+- **Stronger Magnetic Field**  
+  ![Stronger Magnetic Field](<Stronger.jpg>)
 
 ---
 

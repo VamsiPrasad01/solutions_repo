@@ -299,7 +299,10 @@ equivalent_resistance(G, 'A', 'C')  # Output: 6
 <ol>
 <li>
 <p><strong>Original Circuit Graph</strong>
-   A complex multi-node graph with redundant paths.</p>
+Complicated resistor networks can be simplified by combining series and parallel resistors. Consider this example circuit:
+<img alt="alt text" src="../image.png"/>
+The diagram shows a voltage source connected to a resistor network. The two small circles at the left end represent the ports of the resistor network.
+Imagine we want to calculate how much current flows from the voltage source. The answer is not immediately obvious, since there are many resistors and branches. However, by following a systematic process, we can combine the resistors until the resistor network is reduced to one equivalent resistor.</p>
 </li>
 <li>
 <p><strong>Simplified Graph</strong>

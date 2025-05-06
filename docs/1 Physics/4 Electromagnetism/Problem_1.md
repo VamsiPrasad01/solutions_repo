@@ -14,20 +14,20 @@ The Lorentz force, given by:
 \mathbf{F} = q \mathbf{E} + q (\mathbf{v} \times \mathbf{B})
 \]
 
-where \( q \) is the particle’s charge, \( \mathbf{E} \) is the electric field, \( \mathbf{v} \) is the particle’s velocity, and \( \mathbf{B} \) is the magnetic field, governs the motion of charged particles in electromagnetic fields. This force is critical in several systems:
+where \( q \) is the particle’s charge, \( \mathbf{E} \) is the electric field, \( \mathbf{v} \) is the particle’s velocity, and \( \mathbf{B} \) is the magnetic field, governs the motion of charged particles in electromagnetic fields. Key systems include:
 
-- **Particle Accelerators**: In cyclotrons and synchrotrons, magnetic fields cause charged particles (e.g., protons, electrons) to follow circular or helical paths, while electric fields accelerate them. The Lorentz force ensures precise control of particle trajectories.
-- **Mass Spectrometers**: Magnetic fields deflect charged particles based on their mass-to-charge ratio, enabling separation and identification of ions.
-- **Plasma Confinement**: In fusion devices like tokamaks, magnetic fields confine charged particles in plasma, preventing wall collisions. The Lorentz force dictates particle orbits.
-- **Astrophysical Phenomena**: The Lorentz force influences charged particles in cosmic rays, auroras, and magnetospheres, shaping their trajectories in planetary magnetic fields.
+- **Particle Accelerators**: Cyclotrons and synchrotrons use magnetic fields for circular paths and electric fields for acceleration.
+- **Mass Spectrometers**: Magnetic fields deflect ions based on mass-to-charge ratio for identification.
+- **Plasma Confinement**: Tokamaks and stellarators use magnetic fields to confine plasma particles.
+- **Astrophysical Phenomena**: Cosmic rays and auroras are shaped by planetary magnetic fields.
 
 ### **<span style="color:#28B463">1.2 Role of Electric and Magnetic Fields</span>**
 
-- **Electric Field (\( \mathbf{E} \))**: Provides a force \( q \mathbf{E} \), accelerating particles along the field direction. It’s used to inject energy (e.g., in accelerators) or drive currents (e.g., in plasmas).
-- **Magnetic Field (\( \mathbf{B} \))**: Produces a force \( q (\mathbf{v} \times \mathbf{B}) \), perpendicular to both velocity and field, causing circular or helical motion. It’s ideal for confinement and path control without energy input.
-- **Combined Fields**: In crossed fields (\( \mathbf{E} \perp \mathbf{B} \)), particles exhibit drift motion (e.g., \( \mathbf{E} \times \mathbf{B} \) drift), critical in devices like magnetrons.
+- **Electric Field (\( \mathbf{E} \))**: Accelerates particles along the field, injecting energy or driving currents.
+- **Magnetic Field (\( \mathbf{B} \))**: Causes circular or helical motion, ideal for confinement.
+- **Crossed Fields**: Produce drift motion (e.g., \( \mathbf{E} \times \mathbf{B} \) drift) in devices like magnetrons.
 
-These fields enable precise manipulation of particle trajectories, underpinning technologies and natural phenomena.
+These fields enable precise control of particle trajectories in technology and nature.
 
 ---
 
@@ -35,12 +35,12 @@ These fields enable precise manipulation of particle trajectories, underpinning 
 
 ### **<span style="color:#28B463">2.1 Simulation Setup</span>**
 
-We simulate the motion of a charged particle under three field configurations:
-1. **Uniform Magnetic Field**: Produces circular or helical motion.
-2. **Combined Uniform Electric and Magnetic Fields**: Adds linear acceleration to helical motion.
-3. **Crossed Electric and Magnetic Fields**: Introduces drift motion.
+We simulate a charged particle’s motion under:
+1. **Uniform Magnetic Field**: Circular or helical motion.
+2. **Combined Electric and Magnetic Fields**: Helical motion with linear acceleration.
+3. **Crossed Electric and Magnetic Fields**: Cycloidal motion with drift.
 
-The equation of motion is:
+The equations of motion are:
 
 \[
 m \frac{d \mathbf{v}}{dt} = q \mathbf{E} + q (\mathbf{v} \times \mathbf{B})
@@ -50,17 +50,17 @@ m \frac{d \mathbf{v}}{dt} = q \mathbf{E} + q (\mathbf{v} \times \mathbf{B})
 \frac{d \mathbf{r}}{dt} = \mathbf{v}
 \]
 
-where \( m \) is the particle’s mass, \( \mathbf{r} \) is its position, and \( \mathbf{v} \) is its velocity. We solve these using the 4th-order Runge-Kutta (RK4) method for accuracy.
+We use the 4th-order Runge-Kutta (RK4) method to solve these numerically.
 
 ### **<span style="color:#28B463">2.2 Numerical Method</span>**
 
-The RK4 method approximates the solution to the differential equations:
+RK4 integrates the state vector \( \mathbf{u} = [\mathbf{r}, \mathbf{v}] \):
 
 \[
-\frac{d \mathbf{u}}{dt} = \mathbf{f}(\mathbf{u}, t), \quad \mathbf{u} = [\mathbf{r}, \mathbf{v}]
+\frac{d \mathbf{u}}{dt} = \mathbf{f}(\mathbf{u}, t)
 \]
 
-where \( \mathbf{f} \) includes the Lorentz force acceleration. The state vector \( \mathbf{u} = [x, y, z, v_x, v_y, v_z] \) is updated at each time step.
+where \( \mathbf{f} \) includes the Lorentz force acceleration, updating position and velocity.
 
 ---
 
@@ -68,7 +68,8 @@ where \( \mathbf{f} \) includes the Lorentz force acceleration. The state vector
 
 ### **<span style="color:#28B463">3.1 Python Implementation</span>**
 
-The following Python code simulates the particle’s trajectory using NumPy for calculations and Matplotlib for 2D/3D visualizations. It supports parameter exploration (field strengths, velocity, charge, mass) and saves plots as PNG files.
+<details>
+<summary>Click to view the Python code</summary>
 
 ```python
 import numpy as np
@@ -158,7 +159,7 @@ E2 = np.array([1e3, 0, 0])   # E along x-axis (V/m)
 B2 = np.array([0, 0, 1e-3])  # B along z-axis
 r2, v2 = simulate_trajectory(E2, B2, v0, r0, 'combined_fields')
 
-# Case 3: Crossed Fields
+# Case 3: Crossed Electric and Magnetic Fields
 E3 = np.array([0, 1e3, 0])   # E along y-axis
 B3 = np.array([0, 0, 1e-3])  # B along z-axis
 r3, v3 = simulate_trajectory(E3, B3, v0, r0, 'crossed_fields')
@@ -167,17 +168,22 @@ r3, v3 = simulate_trajectory(E3, B3, v0, r0, 'crossed_fields')
 B4 = np.array([0, 0, 2e-3])  # Stronger B-field
 r4, v4 = simulate_trajectory(E1, B4, v0, r0, 'stronger_magnetic')
 ```
+</details>
 
 **Explanation**:
-- **Parameters**: Electron-like particle (\( q = 1.6 \times 10^{-19} \, \text{C}, m = 9.1 \times 10^{-31} \, \text{kg} \)), small time step (\( dt = 10^{-12} \, \text{s} \)) for accuracy.
-- **Lorentz Force**: Computes acceleration from electric and magnetic forces.
-- **RK4**: Integrates position and velocity with high precision.
+- **Parameters**: Electron-like particle (\( q = 1.6 \times 10^{-19} \, \text{C}, m = 9.1 \times 10^{-31} \, \text{kg} \)), time step \( dt = 10^{-12} \, \text{s} \).
 - **Cases**:
-  1. Uniform \( \mathbf{B} = [0, 0, 10^{-3}] \, \text{T} \): Circular motion in the xy-plane.
-  2. Combined \( \mathbf{E} = [10^3, 0, 0] \, \text{V/m}, \mathbf{B} = [0, 0, 10^{-3}] \, \text{T} \): Helical motion with acceleration.
-  3. Crossed \( \mathbf{E} = [0, 10^3, 0], \mathbf{B} = [0, 0, 10^{-3}] \): Cycloidal motion with \( \mathbf{E} \times \mathbf{B} \) drift.
-  4. Stronger \( \mathbf{B} = [0, 0, 2 \times 10^{-3}] \): Tighter circular motion (smaller Larmor radius).
-- **Outputs**: Saves 2D and 3D plots as `uniform_magnetic_2d.png`, `uniform_magnetic_3d.png`, etc.
+  1. Uniform \( \mathbf{B} = [0, 0, 10^{-3}] \, \text{T} \): Circular motion.
+  2. Combined \( \mathbf{E} = [10^3, 0, 0] \, \text{V/m}, \mathbf{B} = [0, 0, 10^{-3}] \, \text{T} \): Helical motion.
+  3. Crossed \( \mathbf{E} = [0, 10^3, 0], \mathbf{B} = [0, 0, 10^{-3}] \): Cycloidal motion.
+  4. Stronger \( \mathbf{B} = [0, 0, 2 \times 10^{-3}] \): Tighter circular motion.
+- **Outputs**: 2D and 3D plots saved as `uniform_magnetic_2d.png`, `uniform_magnetic_3d.png`, etc.
+
+**Visual Placeholders**:
+- Uniform Magnetic Field: [Generate and upload `uniform_magnetic_2d.png`, `uniform_magnetic_3d.png`]
+- Combined Fields: [Generate and upload `combined_fields_2d.png`, `combined_fields_3d.png`]
+- Crossed Fields: [Generate and upload `crossed_fields_2d.png`, `crossed_fields_3d.png`]
+- Stronger Magnetic Field: [Generate and upload `stronger_magnetic_2d.png`, `stronger_magnetic_3d.png`]
 
 ---
 
@@ -185,20 +191,20 @@ r4, v4 = simulate_trajectory(E1, B4, v0, r0, 'stronger_magnetic')
 
 ### **<span style="color:#28B463">4.1 Effects of Parameters</span>**
 
-- **Field Strengths (\( \mathbf{E}, \mathbf{B} \))**:
-  - Increasing \( |\mathbf{B}| \) reduces the **Larmor radius** (\( r_L = \frac{m v_\perp}{|q| B} \)), tightening circular/helical paths (see Case 4 vs. Case 1).
-  - Non-zero \( \mathbf{E} \) adds linear acceleration (Case 2) or drift (Case 3, \( \mathbf{v}_d = \frac{\mathbf{E} \times \mathbf{B}}{B^2} \)).
-- **Initial Velocity (\( \mathbf{v}_0 \))**:
-  - Higher \( v_\perp \) (perpendicular to \( \mathbf{B} \)) increases \( r_L \).
-  - Non-zero \( v_\parallel \) (parallel to \( \mathbf{B} \)) produces helical motion.
-- **Charge and Mass (\( q, m \))**:
-  - Larger \( |q| \) or smaller \( m \) increases force magnitude, reducing \( r_L \) and increasing cyclotron frequency (\( \omega_c = \frac{|q| B}{m} \)).
+- **Field Strengths**:
+  - Higher \( |\mathbf{B}| \) reduces **Larmor radius** (\( r_L = \frac{m v_\perp}{|q| B} \)).
+  - \( \mathbf{E} \) adds acceleration or drift (\( \mathbf{v}_d = \frac{\mathbf{E} \times \mathbf{B}}{B^2} \)).
+- **Initial Velocity**:
+  - Larger \( v_\perp \) increases \( r_L \).
+  - \( v_\parallel \) produces helical motion.
+- **Charge and Mass**:
+  - Higher \( |q| \) or lower \( m \) tightens orbits, increasing cyclotron frequency (\( \omega_c = \frac{|q| B}{m} \)).
 
 **Observations**:
-- **Case 1**: Circular motion with \( r_L \approx 5.5 \times 10^{-4} \, \text{m} \) (calculated as \( \frac{m v_0}{|q| B} \)).
-- **Case 2**: Helical motion with linear drift along \( \mathbf{E} \).
-- **Case 3**: Cycloidal motion with drift velocity \( v_d = \frac{E_y}{B_z} = 10^6 \, \text{m/s} \) in the x-direction.
-- **Case 4**: Smaller \( r_L \approx 2.75 \times 10^{-4} \, \text{m} \) due to doubled \( B \).
+- **Case 1**: Circular motion, \( r_L \approx 5.5 \times 10^{-4} \, \text{m} \).
+- **Case 2**: Helical motion with x-axis drift.
+- **Case 3**: Cycloidal motion, drift velocity \( v_d = 10^6 \, \text{m/s} \).
+- **Case 4**: Tighter circle, \( r_L \approx 2.75 \times 10^{-4} \, \text{m} \).
 
 ---
 
@@ -206,22 +212,22 @@ r4, v4 = simulate_trajectory(E1, B4, v0, r0, 'stronger_magnetic')
 
 ### **<span style="color:#28B463">5.1 Trajectory Plots</span>**
 
-The plots highlight:
-- **Larmor Radius**: Visible in circular (Case 1) and helical (Case 2) paths, proportional to \( v_\perp / B \).
-- **Drift Velocity**: Evident in Case 3, where \( \mathbf{E} \times \mathbf{B} \) causes lateral motion.
-- **Helical Motion**: Seen in Case 2, combining circular motion with linear acceleration.
+Plots highlight:
+- **Larmor Radius**: Visible in circular (Case 1) and helical (Case 2) paths.
+- **Drift Velocity**: Seen in Case 3’s cycloidal motion.
+- **Helical Motion**: Evident in Case 2.
 
-- **Uniform Magnetic Field**: 2D plot shows a circle in the xy-plane; 3D plot confirms no z-motion.
-- **Combined Fields**: 3D plot shows a helix stretched along the x-axis (E-field direction).
-- **Crossed Fields**: 2D plot shows cycloidal motion; 3D plot shows drift in the x-direction.
-- **Stronger B**: 2D plot shows a tighter circle compared to Case 1.
+- **Uniform Magnetic Field**: 2D circle in xy-plane; 3D confirms no z-motion.
+- **Combined Fields**: 3D helix along x-axis.
+- **Crossed Fields**: 2D cycloid; 3D shows x-drift.
+- **Stronger B**: 2D tighter circle.
 
 ### **<span style="color:#28B463">5.2 Practical Relevance</span>**
 
-- **Cyclotrons**: Case 1 mimics cyclotron motion, where particles spiral in a uniform magnetic field, with \( r_L \) determining orbit size and \( \omega_c \) setting the resonance frequency for acceleration.
-- **Magnetic Traps**: Case 1 and Case 2 relate to magnetic confinement, where helical paths keep particles trapped (e.g., in tokamaks or stellarators).
-- **Magnetrons**: Case 3’s drift motion is used in magnetrons, where crossed fields produce controlled electron paths for microwave generation.
-- **Mass Spectrometers**: The dependence of \( r_L \) on \( m/q \) (seen in parameter exploration) enables ion separation.
+- **Cyclotrons**: Case 1’s circular motion, with \( r_L \) and \( \omega_c \) defining orbits.
+- **Magnetic Traps**: Cases 1 and 2 show confinement paths.
+- **Magnetrons**: Case 3’s drift motion for microwave generation.
+- **Mass Spectrometers**: \( r_L \propto m/q \) enables ion separation.
 
 ---
 
@@ -229,28 +235,28 @@ The plots highlight:
 
 ### **<span style="color:#28B463">6.1 Non-Uniform Fields</span>**
 
-- **Magnetic Field Gradients**: Simulate \( \mathbf{B}(x, y, z) \), e.g., \( B_z = B_0 + k z \), causing mirror forces in traps.
-- **Time-Varying Fields**: Include \( \mathbf{E}(t) \) or \( \mathbf{B}(t) \), relevant for RF accelerators.
-- **Spatial Variations**: Use \( \mathbf{E}(\mathbf{r}) \) or \( \mathbf{B}(\mathbf{r}) \), e.g., quadrupole fields in ion traps.
+- **Gradients**: \( B_z = B_0 + k z \) for mirror traps.
+- **Time-Varying Fields**: \( \mathbf{E}(t) \) for RF accelerators.
+- **Spatial Variations**: Quadrupole fields for ion traps.
 
 ### **<span style="color:#28B463">6.2 Additional Features</span>**
 
 | Extension                     | Benefit                                         |
 |-------------------------------|-------------------------------------------------|
-| **Relativistic Effects**      | Model high-speed particles in accelerators      |
+| **Relativistic Effects**      | Model high-speed particles                      |
 | **Collisions**                | Simulate plasma interactions                    |
-| **Multiple Particles**        | Study collective behavior in plasmas            |
-| **Interactive Interface**     | Allow real-time parameter adjustment            |
+| **Multiple Particles**        | Study collective behavior                       |
+| **Interactive Interface**     | Real-time parameter adjustment                  |
 
 **Implementation**:
-- For non-uniform fields, modify `lorentz_force` to accept \( \mathbf{r} \)-dependent \( \mathbf{E}, \mathbf{B} \).
-- Use adaptive time steps in RK4 for varying field strengths.
-- Employ VPython or Plotly for interactive 3D visualizations.
+- Modify `lorentz_force` for \( \mathbf{r} \)-dependent fields.
+- Use adaptive RK4 time steps.
+- Employ VPython for interactive visuals.
 
 ---
 
 ## **<span style="color:#2E86C1">Conclusion</span>**
 
-The Lorentz force simulation reveals the intricate dynamics of charged particles in electromagnetic fields, from circular orbits to complex drift motions. The Python implementation using RK4 provides accurate trajectories, with visualizations highlighting key phenomena like the Larmor radius and \( \mathbf{E} \times \mathbf{B} \) drift. These results directly relate to applications in cyclotrons, magnetic traps, and magnetrons, demonstrating the Lorentz force’s role in technology and nature. Extending the simulation to non-uniform fields and relativistic effects would further enhance its applicability, offering deeper insights into complex systems.
+The Lorentz force simulation illustrates complex particle dynamics, from circular orbits to drift motions. Visualizations highlight Larmor radius and \( \mathbf{E} \times \mathbf{B} \) drift, linking to applications in cyclotrons, traps, and magnetrons. Extensions to non-uniform fields would enhance its scope, offering insights into advanced systems.
 
 ---

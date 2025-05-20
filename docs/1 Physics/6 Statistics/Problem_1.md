@@ -1,196 +1,234 @@
-# **Exploring the Central Limit Theorem through Simulations**
+# Exploring the Central Limit Theorem through simulations
 
-**<span style="color:#2E86C1">A Computational Approach to Statistical Convergence</span>**
+## Theoretical Background
 
----
+The Central Limit Theorem (CLT) is one of the most important theorems in statistics. It states that when independent random variables are added, their properly normalized sum tends toward a normal distribution even if the original variables themselves are not normally distributed.
 
-## **<span style="color:#E74C3C">1. Simulating Sampling Distributions</span>**
+More formally, if $X_1, X_2, \ldots, X_n$ are independent and identically distributed random variables with mean $\mu$ and variance $\sigma^2 < \infty$, then as $n$ approaches infinity, the random variable $\sqrt{n}(\bar{X}_n - \mu)$ converges in distribution to a normal $N(0, \sigma^2)$:
 
-### **<span style="color:#28B463">1.1 Overview of the Central Limit Theorem</span>**
+$$\sqrt{n}(\bar{X}_n - \mu) \xrightarrow{d} N(0, \sigma^2)$$
 
-The Central Limit Theorem (CLT) states that the distribution of the sample mean approximates a normal distribution as the sample size \( n \) increases, regardless of the population’s distribution, provided the population has a finite mean and variance. This is expressed as:
+Where $\bar{X}_n = \frac{1}{n}\sum_{i=1}^{n} X_i$ is the sample mean.
 
-\[
-\bar{X} \sim N\left(\mu, \frac{\sigma^2}{n}\right)
-\]
+This can be equivalently expressed as:
 
-where \( \bar{X} \) is the sample mean, \( \mu \) is the population mean, \( \sigma^2 \) is the population variance, and \( n \) is the sample size. Simulations allow us to observe this convergence empirically.
+$$\bar{X}_n \xrightarrow{d} N\left(\mu, \frac{\sigma^2}{n}\right)$$
 
-### **<span style="color:#28B463">1.2 Population Distributions</span>**
+The theorem has several important implications:
 
-We select three distinct population distributions to demonstrate the CLT’s universality:
-- **Uniform Distribution**: Flat distribution over \([0, 1]\), mean \( \mu = 0.5 \), variance \( \sigma^2 = \frac{1}{12} \approx 0.0833 \).
-- **Exponential Distribution**: Skewed distribution with rate \( \lambda = 1 \), mean \( \mu = 1 \), variance \( \sigma^2 = 1 \).
-- **Binomial Distribution**: Discrete distribution with \( n_{\text{trials}} = 10 \), probability \( p = 0.5 \), mean \( \mu = np = 5 \), variance \( \sigma^2 = np(1-p) = 2.5 \).
+1. The sampling distribution of the mean approaches a normal distribution as sample size increases, regardless of the shape of the population distribution.
+2. The mean of the sampling distribution equals the population mean $\mu$.
+3. The standard deviation of the sampling distribution (standard error) equals $\frac{\sigma}{\sqrt{n}}$.
 
-For each, we generate a large population dataset (\( N = 100,000 \)) to ensure representative sampling.
+## Simulation Approach
 
----
+To demonstrate the Central Limit Theorem, we'll:
 
-## **<span style="color:#E74C3C">2. Sampling and Visualization</span>**
+1. Generate large populations from different probability distributions
+2. Take repeated samples of different sizes from each population
+3. Calculate the mean of each sample
+4. Plot the distribution of these sample means
+5. Compare the results with theoretical predictions
 
-### **<span style="color:#28B463">2.1 Sampling Process</span>**
+## Population Distributions
 
-For each population:
-- Draw random samples of sizes \( n = 5, 10, 30, 50 \).
-- Compute the sample mean for each sample.
-- Repeat 10,000 times to form the sampling distribution of the sample mean.
-- Plot histograms of the sample means, comparing them to the theoretical normal distribution \( N(\mu, \sigma^2/n) \).
+We'll examine three fundamentally different distributions:
 
-### **<span style="color:#28B463">2.2 Expected Outcomes</span>**
+### 1. Uniform Distribution
 
-- Small \( n \): Sampling distribution reflects the population’s shape (e.g., skewed for exponential).
-- Large \( n \): Sampling distribution approaches normality, with variance decreasing as \( \sigma^2/n \).
-- The histograms visually confirm the CLT’s prediction of convergence.
+The continuous uniform distribution has equal probability density across its range $[a, b]$:
 
----
+$$f(x) = \begin{cases} 
+\frac{1}{b-a} & \text{for } a \leq x \leq b \\
+0 & \text{for } x < a \text{ or } x > b
+\end{cases}$$
 
-## **<span style="color:#E74C3C">3. Computational Implementation</span>**
+With mean $\mu = \frac{a+b}{2}$ and variance $\sigma^2 = \frac{(b-a)^2}{12}$
 
-### **<span style="color:#28B463">3.1 Python Implementation</span>**
+### 2. Exponential Distribution
 
-<details>
-<summary>Click to view the Python code</summary>
+The exponential distribution models the time between events in a Poisson process:
 
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-from scipy.stats import norm
+$$f(x) = \begin{cases} 
+\lambda e^{-\lambda x} & \text{for } x \geq 0 \\
+0 & \text{for } x < 0
+\end{cases}$$
 
-# Simulation parameters
-N = 100000  # Population size
-num_samples = 10000  # Number of samples
-sample_sizes = [5, 10, 30, 50]  # Sample sizes to test
-np.random.seed(42)  # For reproducibility
+With mean $\mu = \frac{1}{\lambda}$ and variance $\sigma^2 = \frac{1}{\lambda^2}$
 
-# Population distributions
-uniform_pop = np.random.uniform(0, 1, N)  # Uniform [0, 1]
-exponential_pop = np.random.exponential(1, N)  # Exponential, lambda=1
-binomial_pop = np.random.binomial(10, 0.5, N)  # Binomial, n=10, p=0.5
+### 3. Binomial Distribution
 
-# Population parameters
-distributions = [
-    ('Uniform', uniform_pop, 0.5, np.sqrt(1/12)),
-    ('Exponential', exponential_pop, 1.0, 1.0),
-    ('Binomial', binomial_pop, 5.0, np.sqrt(2.5))
-]
+The binomial distribution models the number of successes in $n$ independent trials:
 
-# Simulate and plot sampling distributions
-for dist_name, population, mu, sigma in distributions:
-    for n in sample_sizes:
-        # Generate sample means
-        sample_means = []
-        for _ in range(num_samples):
-            sample = np.random.choice(population, size=n)
-            sample_means.append(np.mean(sample))
-        
-        # Plot histogram
-        plt.figure(figsize=(8, 6))
-        plt.hist(sample_means, bins=50, density=True, alpha=0.7, color='blue', label='Sample Means')
-        
-        # Overlay theoretical normal distribution
-        x = np.linspace(min(sample_means), max(sample_means), 100)
-        plt.plot(x, norm.pdf(x, mu, sigma/np.sqrt(n)), 'r-', label=f'Normal(μ={mu}, σ²={sigma**2/n:.4f})')
-        
-        plt.xlabel('Sample Mean')
-        plt.ylabel('Density')
-        plt.title(f'{dist_name} Distribution, n={n}')
-        plt.legend()
-        plt.grid(True)
-        plt.savefig(f'{dist_name.lower()}_n{n}.png')
-        plt.close()
-```
-</details>
+$$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$$
 
-**Explanation**:
-- **Populations**: Generates 100,000 points for uniform, exponential, and binomial distributions.
-- **Sampling**: Draws 10,000 samples of sizes \( n = 5, 10, 30, 50 \), computing sample means.
-- **Visualization**: Histograms of sample means with overlaid normal curves \( N(\mu, \sigma^2/n) \).
-- **Outputs**: Saves plots as `uniform_n5.png`, `exponential_n30.png`, etc.
+With mean $\mu = np$ and variance $\sigma^2 = np(1-p)$
 
-**Visual Placeholders**:
-- Uniform: [Generate and upload `uniform_n5.png`, `uniform_n10.png`, `uniform_n30.png`, `uniform_n50.png`]
-- Exponential: [Generate and upload `exponential_n5.png`, `exponential_n10.png`, `exponential_n30.png`, `exponential_n50.png`]
-- Binomial: [Generate and upload `binomial_n5.png`, `binomial_n10.png`, `binomial_n30.png`, `binomial_n50.png`]
+## Simulation Results
 
----
+### Uniform Distribution
 
-## **<span style="color:#E74C3C">4. Parameter Exploration</span>**
+![Uniform Population](./images/uniform_population.png)
 
-### **<span style="color:#28B463">4.1 Influence of Population Shape and Sample Size</span>**
+*Figure 1: Population distribution - Uniform distribution on [0, 10]*
 
-- **Uniform Distribution**:
-  - Small \( n = 5 \): Sampling distribution is roughly uniform, slightly bell-shaped.
-  - Large \( n = 50 \): Nearly normal, tightly centered around \( \mu = 0.5 \).
-  - Convergence is rapid due to symmetry and low variance (\( \sigma^2 = 0.0833 \)).
-- **Exponential Distribution**:
-  - Small \( n = 5 \): Strongly skewed, reflecting the population’s asymmetry.
-  - Large \( n = 50 \): Approaches normality, though slight skew remains.
-  - Slower convergence due to high variance (\( \sigma^2 = 1 \)) and skewness.
-- **Binomial Distribution**:
-  - Small \( n = 5 \): Discrete steps visible, somewhat normal due to binomial’s symmetry.
-  - Large \( n = 50 \): Closely normal, centered at \( \mu = 5 \).
-  - Moderate convergence speed, influenced by variance (\( \sigma^2 = 2.5 \)).
+**Formula used:** $f(x) = \frac{1}{10-0} = 0.1$ for $0 \leq x \leq 10$
 
-### **<span style="color:#28B463">4.2 Impact of Population Variance</span>**
+**Parameters:** $a = 0$, $b = 10$
 
-- The sampling distribution’s variance is \( \sigma^2/n \).
-- **Uniform**: Low \( \sigma^2 = 0.0833 \), so variance shrinks quickly (e.g., \( 0.0833/50 = 0.00167 \)).
-- **Exponential**: High \( \sigma^2 = 1 \), larger spread (e.g., \( 1/50 = 0.02 \)).
-- **Binomial**: Moderate \( \sigma^2 = 2.5 \), widest spread (e.g., \( 2.5/50 = 0.05 \)).
-- Higher variance results in broader sampling distributions, requiring larger \( n \) for tight normality.
+**Population mean:** $\mu = \frac{0+10}{2} = 5$
 
-**Observations**:
-- Symmetric distributions (uniform, binomial) converge faster than skewed ones (exponential).
-- Larger \( n \) reduces variance, tightening the distribution around \( \mu \).
-- Variance dominates spread, with binomial showing the widest histograms.
+**Population variance:** $\sigma^2 = \frac{(10-0)^2}{12} = \frac{100}{12} \approx 8.33$
 
----
+![Uniform Sampling n=5](./images/uniform_sampling_n5.png)
 
-## **<span style="color:#E74C3C">5. Practical Applications</span>**
+*Figure 2: Sampling distribution of the mean for sample size n=5 from uniform distribution*
 
-### **<span style="color:#28B463">5.1 Real-World Relevance</span>**
+**Formula for standard error:** $SE = \frac{\sigma}{\sqrt{n}} = \frac{\sqrt{8.33}}{\sqrt{5}} \approx 1.29$
 
-The CLT underpins statistical inference and decision-making:
-- **Estimating Population Parameters**: Sample means estimate \( \mu \) (e.g., polling, medical studies), with confidence intervals based on \( N(\mu, \sigma^2/n) \).
-- **Quality Control**: In manufacturing, sample means monitor process stability (e.g., product weights), assuming normality for large \( n \).
-- **Financial Models**: Portfolio returns, often non-normal, are modeled using sample means, leveraging CLT for risk analysis.
+![Uniform Sampling n=10](./images/uniform_sampling_n10.png)
 
-The CLT justifies using normal-based methods (e.g., z-tests, t-tests) even for non-normal populations, provided \( n \) is sufficiently large.
+*Figure 3: Sampling distribution of the mean for sample size n=10 from uniform distribution*
 
-### **<span style="color:#28B463">5.2 Connection to Results</span>**
+**Formula for standard error:** $SE = \frac{\sigma}{\sqrt{n}} = \frac{\sqrt{8.33}}{\sqrt{10}} \approx 0.91$
 
-- **Uniform**: Rapid convergence suits applications with bounded data (e.g., sensor readings).
-- **Exponential**: Slower convergence reflects challenges in modeling skewed data (e.g., failure times), requiring larger samples.
-- **Binomial**: Moderate convergence applies to discrete outcomes (e.g., defect rates), with normality improving quality control accuracy.
-- The histograms confirm theoretical expectations: normality emerges by \( n = 30 \) for most distributions, validating CLT’s practical utility.
+![Uniform Sampling n=30](./images/uniform_sampling_n30.png)
 
----
+*Figure 4: Sampling distribution of the mean for sample size n=30 from uniform distribution*
 
-## **<span style="color:#E74C3C">6. Discussion and Implications</span>**
+**Formula for standard error:** $SE = \frac{\sigma}{\sqrt{n}} = \frac{\sqrt{8.33}}{\sqrt{30}} \approx 0.53$
 
-### **<span style="color:#28B463">6.1 Theoretical Alignment</span>**
+![Uniform Sampling n=100](./images/uniform_sampling_n100.png)
 
-The simulations align with CLT:
-- All distributions approach normality as \( n \) increases.
-- Variance scales as \( \sigma^2/n \), visible in histogram spreads.
-- Skewed populations (exponential) require larger \( n \), consistent with theory.
+*Figure 5: Sampling distribution of the mean for sample size n=100 from uniform distribution*
 
-### **<span style="color:#28B463">6.2 Limitations and Extensions</span>**
+**Formula for standard error:** $SE = \frac{\sigma}{\sqrt{n}} = \frac{\sqrt{8.33}}{\sqrt{100}} \approx 0.29$
 
-- **Limitations**:
-  - Finite population size (\( N = 100,000 \)) may introduce sampling bias.
-  - Extreme distributions (e.g., Cauchy, with undefined variance) violate CLT assumptions.
-- **Extensions**:
-  - Simulate heavy-tailed distributions (e.g., Pareto) to test CLT boundaries.
-  - Include non-i.i.d. samples to explore robustness.
-  - Use interactive visualizations (e.g., Plotly) for dynamic parameter adjustment.
-  - Test sums of random variables beyond means (e.g., medians).
+![Uniform Comparison](./images/uniform_comparison.png)
 
----
+*Figure 6: Comparison of sampling distributions for different sample sizes from uniform distribution*
 
-## **<span style="color:#2E86C1">Conclusion</span>**
+**Observation:** As sample size increases, the sampling distribution becomes more normal and the standard error decreases proportionally to $\frac{1}{\sqrt{n}}$.
 
-The CLT simulations vividly demonstrate the convergence of sample means to a normal distribution, regardless of population shape. Uniform, exponential, and binomial distributions transition from their native forms to normality as sample size increases, with variance and skewness influencing the rate. These results underscore the CLT’s power in enabling statistical inference across diverse applications, from quality control to finance. Extending the simulation to extreme distributions or interactive tools could further enrich understanding.
+![Uniform QQ Plots](./images/uniform_qq_plots.png)
 
----
+*Figure 7: QQ plots showing convergence to normality for uniform distribution*
+
+**Interpretation:** Points following the diagonal line indicate normality. As sample size increases, the points adhere more closely to the line, confirming convergence to normality.
+
+### Exponential Distribution
+
+![Exponential Population](./images/exponential_population.png)
+
+*Figure 8: Population distribution - Exponential distribution with scale=2.0*
+
+**Formula used:** $f(x) = \frac{1}{2}e^{-x/2}$ for $x \geq 0$
+
+**Parameters:** $\lambda = \frac{1}{2}$ (rate parameter)
+
+**Population mean:** $\mu = \frac{1}{\lambda} = 2$
+
+**Population variance:** $\sigma^2 = \frac{1}{\lambda^2} = 4$
+
+![Exponential Sampling n=5](./images/exponential_sampling_n5.png)
+
+*Figure 9: Sampling distribution of the mean for sample size n=5 from exponential distribution*
+
+**Formula for standard error:** $SE = \frac{\sigma}{\sqrt{n}} = \frac{2}{\sqrt{5}} \approx 0.89$
+
+![Exponential Sampling n=10](./images/exponential_sampling_n10.png)
+
+*Figure 10: Sampling distribution of the mean for sample size n=10 from exponential distribution*
+
+**Formula for standard error:** $SE = \frac{\sigma}{\sqrt{n}} = \frac{2}{\sqrt{10}} \approx 0.63$
+
+![Exponential Sampling n=30](./images/exponential_sampling_n30.png)
+
+*Figure 11: Sampling distribution of the mean for sample size n=30 from exponential distribution*
+
+**Formula for standard error:** $SE = \frac{\sigma}{\sqrt{n}} = \frac{2}{\sqrt{30}} \approx 0.37$
+
+![Exponential Sampling n=100](./images/exponential_sampling_n100.png)
+
+*Figure 12: Sampling distribution of the mean for sample size n=100 from exponential distribution*
+
+**Formula for standard error:** $SE = \frac{\sigma}{\sqrt{n}} = \frac{2}{\sqrt{100}} = 0.2$
+
+![Exponential Comparison](./images/exponential_comparison.png)
+
+*Figure 13: Comparison of sampling distributions for different sample sizes from exponential distribution*
+
+**Observation:** Despite the strong right-skew of the exponential distribution, the sampling distribution approaches normality as sample size increases.
+
+![Exponential QQ Plots](./images/exponential_qq_plots.png)
+
+*Figure 14: QQ plots showing convergence to normality for exponential distribution*
+
+**Interpretation:** The exponential distribution requires larger sample sizes to achieve normality compared to the uniform distribution, particularly in the tails.
+
+### Binomial Distribution
+
+![Binomial Population](./images/binomial_population.png)
+
+*Figure 15: Population distribution - Binomial distribution with n=10, p=0.3*
+
+**Formula used:** $P(X = k) = \binom{10}{k} (0.3)^k (0.7)^{10-k}$ for $k = 0, 1, ..., 10$
+
+**Parameters:** $n = 10$ (number of trials), $p = 0.3$ (success probability)
+
+**Population mean:** $\mu = np = 10 \times 0.3 = 3$
+
+**Population variance:** $\sigma^2 = np(1-p) = 10 \times 0.3 \times 0.7 = 2.1$
+
+![Binomial Sampling n=5](./images/binomial_sampling_n5.png)
+
+*Figure 16: Sampling distribution of the mean for sample size n=5 from binomial distribution*
+
+**Formula for standard error:** $SE = \frac{\sigma}{\sqrt{n}} = \frac{\sqrt{2.1}}{\sqrt{5}} \approx 0.65$
+
+![Binomial Sampling n=10](./images/binomial_sampling_n10.png)
+
+*Figure 17: Sampling distribution of the mean for sample size n=10 from binomial distribution*
+
+**Formula for standard error:** $SE = \frac{\sigma}{\sqrt{n}} = \frac{\sqrt{2.1}}{\sqrt{10}} \approx 0.46$
+
+![Binomial Sampling n=30](./images/binomial_sampling_n30.png)
+
+*Figure 18: Sampling distribution of the mean for sample size n=30 from binomial distribution*
+
+**Formula for standard error:** $SE = \frac{\sigma}{\sqrt{n}} = \frac{\sqrt{2.1}}{\sqrt{30}} \approx 0.26$
+
+![Binomial Sampling n=100](./images/binomial_sampling_n100.png)
+
+*Figure 19: Sampling distribution of the mean for sample size n=100 from binomial distribution*
+
+**Formula for standard error:** $SE = \frac{\sigma}{\sqrt{n}} = \frac{\sqrt{2.1}}{\sqrt{100}} \approx 0.14$
+
+![Binomial Comparison](./images/binomial_comparison.png)
+
+*Figure 20: Comparison of sampling distributions for different sample sizes from binomial distribution*
+
+**Observation:** The binomial distribution is discrete, but its sampling distribution still approaches a continuous normal distribution as sample size increases.
+
+![Binomial QQ Plots](./images/binomial_qq_plots.png)
+
+*Figure 21: QQ plots showing convergence to normality for binomial distribution*
+
+**Interpretation:** The discreteness of the binomial distribution creates step patterns in the QQ plots for small sample sizes, but these diminish as sample size increases.
+
+## Conclusions
+
+Our simulations clearly demonstrate the Central Limit Theorem in action:
+
+1. **Convergence to Normality**: All three distributions (uniform, exponential, and binomial) show sampling distributions that become increasingly normal as sample size increases.
+
+2. **Standard Error Reduction**: The standard error of the sampling distribution decreases proportionally to $\frac{1}{\sqrt{n}}$ as predicted by theory.
+
+3. **Distribution Shape Effects**: The original shape of the population distribution affects how quickly the sampling distribution converges to normality:
+   - The uniform distribution converges relatively quickly
+   - The exponential distribution (highly skewed) requires larger sample sizes
+   - The binomial distribution shows discreteness effects at small sample sizes
+
+4. **Practical Implications**: The CLT allows us to make probability statements about sample means even when we don't know the exact shape of the population distribution, provided the sample size is sufficiently large.
+
+These results validate the theoretical predictions of the Central Limit Theorem and demonstrate its robustness across different types of probability distributions.

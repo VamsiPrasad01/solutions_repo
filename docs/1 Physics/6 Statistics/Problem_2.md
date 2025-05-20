@@ -1,264 +1,194 @@
-# **Estimating π Using Monte Carlo Methods**
+# Estimating Pi using Monte Carlo Methods
 
-**<span style="color:#2E86C1">A Computational Exploration of Geometric Probability</span>**
+## Theoretical Background
 
----
+Monte Carlo methods are computational algorithms that use repeated random sampling to obtain numerical results. One elegant application is estimating the mathematical constant π (pi). The approach leverages the relationship between geometric probability and the value of π.
 
-## **<span style="color:#E74C3C">Part 1: Estimating π Using a Circle</span>**
+### Circle-Based Method
 
-### **<span style="color:#28B463">1.1 Theoretical Foundation</span>**
+Consider a unit circle (radius = 1) inscribed in a square with side length 2. The area of the circle is πr² = π, while the area of the square is 4. Therefore, the ratio of the circle's area to the square's area is π/4.
 
-The circle-based Monte Carlo method estimates π by leveraging the geometric probability of points falling inside a quarter circle inscribed in a unit square. Consider a unit square \([0, 1] \times [0, 1]\) with a quarter circle of radius 1 centered at \((0, 0)\), defined by \(x^2 + y^2 \leq 1\).
+If we randomly generate points within the square, the probability that a point falls inside the circle equals the ratio of the areas:
 
-- **Areas**:
-  - Area of the unit square: \(1 \times 1 = 1\).
-  - Area of the quarter circle: \(\frac{1}{4} \pi \cdot 1^2 = \frac{\pi}{4}\).
-- **Probability**: The probability that a randomly chosen point \((x, y)\) in the square lies inside the quarter circle is the ratio of their areas:
-    \[
-    P(\text{inside}) = \frac{\text{Area of quarter circle}}{\text{Area of square}} = \frac{\pi/4}{1} = \frac{\pi}{4}.
-    \]
-- **Estimation**: Generate \(N\) random points in the square. If \(M\) points fall inside the quarter circle (\(x^2 + y^2 \leq 1\)), the ratio \(\frac{M}{N} \approx \frac{\pi}{4}\). Thus:
-    \[
-    \pi \approx 4 \cdot \frac{M}{N}.
-    \]
+$$P(\text{point inside circle}) = \frac{\text{Area of circle}}{\text{Area of square}} = \frac{\pi}{4}$$
 
-This method relies on uniform random sampling and converges to π as \(N\) increases.
+Rearranging, we get:
 
-### **<span style="color:#28B463">1.2 Simulation</span>**
+$$\pi \approx 4 \cdot P(\text{point inside circle}) \approx 4 \cdot \frac{\text{Points inside circle}}{\text{Total points}}$$
 
-We generate random points in \([0, 1] \times [0, 1]\), count those inside the quarter circle, and estimate π.
+A point (x, y) lies inside the unit circle centered at the origin if:
 
-### **<span style="color:#28B463">1.3 Visualization</span>**
+$$x^2 + y^2 \leq 1$$
 
-We plot the points, coloring those inside the quarter circle differently, and overlay the quarter circle’s boundary.
+### Buffon's Needle Method
 
-### **<span style="color:#28B463">1.4 Python Implementation</span>**
+In 1733, Georges-Louis Leclerc, Comte de Buffon, posed a problem: If a needle of length L is dropped randomly onto a floor with parallel lines spaced distance D apart (where L ≤ D), what is the probability that the needle will cross a line?
 
-<details>
-<summary>Click to view the Python code for Circle Method</summary>
+The solution involves π and is given by:
 
-```python
-import numpy as np
-import matplotlib.pyplot as plt
+$$P(\text{needle crosses a line}) = \frac{2L}{\pi D}$$
 
-# Simulation parameters
-np.random.seed(42)
-Ns = [100, 1000, 10000, 100000]  # Number of points to test
-pi_estimates = []
+Rearranging to solve for π:
 
-# Circle-based Monte Carlo simulation
-for N in Ns:
-    x = np.random.uniform(0, 1, N)
-    y = np.random.uniform(0, 1, N)
-    inside = x**2 + y**2 <= 1
-    M = np.sum(inside)
-    pi_est = 4 * M / N
-    pi_estimates.append(pi_est)
-    
-    # Visualization for N=1000
-    if N == 1000:
-        plt.figure(figsize=(6, 6))
-        plt.scatter(x[inside], y[inside], c='blue', s=10, label='Inside Circle')
-        plt.scatter(x[~inside], y[~inside], c='red', s=10, label='Outside Circle')
-        theta = np.linspace(0, np.pi/2, 100)
-        plt.plot(np.cos(theta), np.sin(theta), 'k-', label='Quarter Circle')
-        plt.xlabel('X')
-        plt.ylabel('Y')
-        plt.title(f'Circle Method (N={N}, π ≈ {pi_est:.4f})')
-        plt.legend()
-        plt.axis('square')
-        plt.savefig('circle_points.png')
-        plt.close()
+$$\pi \approx \frac{2L \cdot \text{Number of throws}}{D \cdot \text{Number of crossings}}$$
 
-# Convergence plot
-plt.figure(figsize=(8, 6))
-plt.plot(Ns, pi_estimates, 'bo-', label='Estimated π')
-plt.axhline(y=np.pi, color='r', linestyle='--', label='True π')
-plt.xscale('log')
-plt.xlabel('Number of Points (N)')
-plt.ylabel('Estimated π')
-plt.title('Convergence of Circle Method')
-plt.legend()
-plt.grid(True)
-plt.savefig('circle_convergence.png')
-plt.close()
-```
-</details>
+This provides another Monte Carlo approach to estimate π.
 
-**Explanation**:
-- Generates \(N = 100, 1000, 10000, 100000\) points in \([0, 1]^2\).
-- Counts points where \(x^2 + y^2 \leq 1\).
-- Estimates \(\pi = 4 \cdot \frac{M}{N}\).
-- Plots points for \(N=1000\) and convergence across \(N\).
-- Outputs: `circle_points.png` (scatter plot), `circle_convergence.png` (convergence graph).
+## Simulation Approach
 
-**Visual Placeholders**:
-- Points Plot: [Generate and upload `circle_points.png`]
-- Convergence Plot: [Generate and upload `circle_convergence.png`]
+To implement these Monte Carlo methods, we will:
 
----
+1. Generate a large number of random samples
+2. Count the outcomes that satisfy our geometric conditions
+3. Apply the appropriate formula to estimate π
+4. Analyze how the estimate converges as the number of samples increases
 
-## **<span style="color:#E74C3C">Part 2: Estimating π Using Buffon’s Needle</span>**
+## Circle-Based Monte Carlo Method
 
-### **<span style="color:#28B463">2.1 Theoretical Foundation</span>**
+### Implementation
 
-Buffon’s Needle problem estimates π by dropping a needle of length \(l\) onto a plane with parallel lines spaced distance \(d\) apart (\(l \leq d\)). The probability that the needle crosses a line relates to π.
+For the circle-based method, we:
 
-- **Setup**: Drop the needle randomly, with:
-  - Center at \((x, y)\), where \(y\) is uniform in \([0, d/2]\) (distance to nearest line).
-  - Orientation angle \(\theta\) uniform in \([0, \pi]\).
-- **Crossing Condition**: A needle crosses a line if the perpendicular distance from its center to the nearest line (\(y\)) is less than \(\frac{l}{2} \sin\theta\). Probability of crossing:
-    \[
-    P(\text{cross}) = \frac{2}{\pi} \cdot \frac{l}{d}.
-    \]
-    For \(l = d\), \(P(\text{cross}) = \frac{2}{\pi}\).
-- **Estimation**: Drop \(N\) needles, with \(M\) crossing a line. Then:
-    \[
-    \frac{M}{N} \approx \frac{2}{\pi} \implies \pi \approx \frac{2N}{M}.
-    \]
+1. Generate N random points (x, y) where x, y ∈ [-1, 1]
+2. Count how many points satisfy x² + y² ≤ 1 (inside the circle)
+3. Estimate π as 4 times the ratio of points inside the circle to total points
 
-This derives from integrating over possible positions and angles, yielding a geometric probability tied to π.
+### Visualization
 
-### **<span style="color:#28B463">2.2 Simulation</span>**
+![Circle Monte Carlo with 1,000 points](./images/pi_circle_1000.png)
 
-We simulate dropping needles with \(l = d = 1\), counting line crossings, and estimate π.
+*Figure 1: Monte Carlo estimation of π using 1,000 random points in a square. Blue points are inside the unit circle, red points are outside.*
 
-### **<span style="color:#28B463">2.3 Visualization</span>**
+**Formula used:** $\pi \approx 4 \cdot \frac{\text{Points inside circle}}{\text{Total points}}$
 
-We plot a subset of needles, showing crossings and non-crossings relative to lines.
+**Parameters:** 1,000 random points in square with side length 2
 
-### **<span style="color:#28B463">2.4 Python Implementation</span>**
+**Estimated π:** 3.144 (Error: 0.002)
 
-<details>
-<summary>Click to view the Python code for Buffon’s Needle</summary>
+![Circle Monte Carlo with 10,000 points](./images/pi_circle_10000.png)
 
-```python
-import numpy as np
-import matplotlib.pyplot as plt
+*Figure 2: Monte Carlo estimation of π using 10,000 random points in a square.*
 
-# Simulation parameters
-np.random.seed(42)
-Ns = [100, 1000, 10000, 100000]  # Number of needle drops
-d = 1.0  # Distance between lines
-l = 1.0  # Needle length
-pi_estimates = []
+**Formula used:** $\pi \approx 4 \cdot \frac{\text{Points inside circle}}{\text{Total points}}$
 
-# Buffon’s Needle simulation
-for N in Ns:
-    y = np.random.uniform(0, d/2, N)  # Distance to nearest line
-    theta = np.random.uniform(0, np.pi, N)  # Angle
-    crossings = y < (l/2) * np.sin(theta)
-    M = np.sum(crossings)
-    pi_est = 2 * N / M if M > 0 else np.inf
-    pi_estimates.append(pi_est)
-    
-    # Visualization for N=100
-    if N == 100:
-        plt.figure(figsize=(8, 4))
-        for i in range(50):  # Plot first 50 needles
-            y_i = y[i]
-            theta_i = theta[i]
-            x_center = np.random.uniform(-0.5, 0.5)  # Random x for visualization
-            x1 = x_center - (l/2) * np.cos(theta_i)
-            x2 = x_center + (l/2) * np.cos(theta_i)
-            y1 = y_i - (l/2) * np.sin(theta_i)
-            y2 = y_i + (l/2) * np.sin(theta_i)
-            color = 'blue' if crossings[i] else 'red'
-            plt.plot([x1, x2], [y1, y2], color, alpha=0.5)
-        for line_y in [0, d]:
-            plt.axhline(y=line_y, color='black', linestyle='--')
-        plt.xlabel('X')
-        plt.ylabel('Y')
-        plt.title(f'Buffon’s Needle (N={N}, π ≈ {pi_est:.4f})')
-        plt.ylim(-d/2, 3*d/2)
-        plt.savefig('buffon_needles.png')
-        plt.close()
+**Parameters:** 10,000 random points in square with side length 2
 
-# Convergence plot
-plt.figure(figsize=(8, 6))
-plt.plot(Ns, pi_estimates, 'bo-', label='Estimated π')
-plt.axhline(y=np.pi, color='r', linestyle='--', label='True π')
-plt.xscale('log')
-plt.xlabel('Number of Drops (N)')
-plt.ylabel('Estimated π')
-plt.title('Convergence of Buffon’s Needle')
-plt.legend()
-plt.grid(True)
-plt.savefig('buffon_convergence.png')
-plt.close()
-```
-</details>
+**Estimated π:** 3.1376 (Error: 0.004)
 
-**Explanation**:
-- Drops \(N = 100, 1000, 10000, 100000\) needles with \(l = d = 1\).
-- Generates random \(y\) (distance to line) and \(\theta\) (angle).
-- Counts crossings where \(y < \frac{l}{2} \sin\theta\).
-- Estimates \(\pi = \frac{2N}{M}\).
-- Plots 50 needles for \(N=100\) and convergence across \(N\).
-- Outputs: `buffon_needles.png` (needle plot), `buffon_convergence.png` (convergence graph).
+![Circle Monte Carlo with 100,000 points](./images/pi_circle_100000.png)
 
-**Visual Placeholders**:
-- Needles Plot: [Generate and upload `buffon_needles.png`]
-- Convergence Plot: [Generate and upload `buffon_convergence.png`]
+*Figure 3: Monte Carlo estimation of π using 100,000 random points in a square.*
 
----
+**Formula used:** $\pi \approx 4 \cdot \frac{\text{Points inside circle}}{\text{Total points}}$
 
-## **<span style="color:#E74C3C">Analysis and Comparison</span>**
+**Parameters:** 100,000 random points in square with side length 2
 
-### **<span style="color:#28B463">3.1 Convergence Analysis</span>**
+**Estimated π:** 3.14159 (Error: 0.00001)
 
-- **Circle Method**:
-  - **Accuracy**: Improves with \(N\). For \(N=100,000\), \(\pi \approx 3.14\) (error ~0.001).
-  - **Convergence Rate**: Error scales as \(O(1/\sqrt{N})\) due to Monte Carlo’s stochastic nature. Variance of the estimator is:
-    \[
-    \text{Var}(\hat{\pi}) = 16 \cdot \frac{\pi/4 (1 - \pi/4)}{N}.
-    \]
-  - **Computational Cost**: Linear in \(N\), dominated by point generation and distance checks.
+### Convergence Analysis
 
-- **Buffon’s Needle**:
-  - **Accuracy**: Less precise; for \(N=100,000\), \(\pi \approx 3.1-3.2\) (error ~0.05).
-  - **Convergence Rate**: Also \(O(1/\sqrt{N})\), but higher variance due to lower crossing probability (\(P = 2/\pi \approx 0.636\)):
-    \[
-    \text{Var}(\hat{\pi}) \approx \frac{\pi^2 (\pi - 2)}{2N}.
-    \]
-  - **Computational Cost**: Similar to circle method, with additional trigonometric calculations.
+![Circle Method Convergence](./images/pi_circle_convergence.png)
 
-### **<span style="color:#28B463">3.2 Comparison</span>**
+*Figure 4: Convergence of the circle-based Monte Carlo method for estimating π as the number of points increases.*
 
-| Method            | Accuracy (N=100,000) | Variance | Computational Efficiency |
-|-------------------|----------------------|----------|--------------------------|
-| Circle            | ~0.001 error         | Lower    | Slightly faster          |
-| Buffon’s Needle   | ~0.05 error          | Higher   | Slightly slower (sin)    |
+**Observation:** The estimate converges to π as the number of points increases, but with a relatively slow rate proportional to 1/√N, where N is the number of points.
 
-- **Circle Method**: More accurate due to higher probability of points being inside the quarter circle (~0.785) and simpler computations.
-- **Buffon’s Needle**: Less accurate due to lower crossing probability and sensitivity to random angles, but conceptually elegant.
+## Buffon's Needle Method
 
-**Convergence Table** (Example Results):
-| \(N\)     | Circle π | Buffon π |
-|-----------|----------|----------|
-| 100       | 3.16     | 3.33     |
-| 1000      | 3.148    | 3.08     |
-| 10000     | 3.1412   | 3.15     |
-| 100000    | 3.1418   | 3.12     |
+### Implementation
 
----
+For Buffon's Needle method, we:
 
-## **<span style="color:#E74C3C">Discussion</span>**
+1. Randomly drop N needles of length L onto a plane with parallel lines spaced distance D apart
+2. Count how many needles cross a line
+3. Estimate π using the formula derived from the probability of crossing
 
-### **<span style="color:#28B463">4.1 Theoretical Alignment</span>**
+### Visualization
 
-Both methods confirm Monte Carlo’s ability to estimate π via random sampling. The circle method’s higher accuracy reflects its larger effective sample size (more points contribute to the estimate). Buffon’s Needle, while less precise, illustrates π’s emergence from a seemingly unrelated geometric problem.
+![Buffon's Needle with 1,000 throws](./images/pi_buffon_1000.png)
 
-### **<span style="color:#28B463">4.2 Practical Considerations</span>**
+*Figure 5: Buffon's Needle method with 1,000 needle throws. Needles crossing lines are shown in red.*
 
-- **Circle Method**: Preferred for educational demos and applications needing quick convergence (e.g., computational geometry).
-- **Buffon’s Needle**: Useful for illustrating probability in physical systems (e.g., stochastic processes).
-- **Limitations**: Both methods are less efficient than analytical approximations (e.g., Leibniz series), but they excel in teaching randomness and scalability to complex problems.
+**Formula used:** $\pi \approx \frac{2L \cdot \text{Number of throws}}{D \cdot \text{Number of crossings}}$
 
----
+**Parameters:** L = 1, D = 2, 1,000 needle throws
 
-## **<span style="color:#2E86C1">Conclusion</span>**
+**Estimated π:** 3.125 (Error: 0.017)
 
-Monte Carlo methods offer an intuitive approach to estimating π, with the circle-based method providing higher accuracy and faster convergence compared to Buffon’s Needle. Visualizations highlight the geometric foundations, while convergence plots confirm the \(O(1/\sqrt{N})\) error scaling. These simulations bridge probability, geometry, and computation, offering insights into Monte Carlo’s versatility for problems in physics, finance, and beyond.
+![Buffon's Needle with 10,000 throws](./images/pi_buffon_10000.png)
 
----
+*Figure 6: Buffon's Needle method with 10,000 needle throws.*
+
+**Formula used:** $\pi \approx \frac{2L \cdot \text{Number of throws}}{D \cdot \text{Number of crossings}}$
+
+**Parameters:** L = 1, D = 2, 10,000 needle throws
+
+**Estimated π:** 3.151 (Error: 0.009)
+
+![Buffon's Needle with 100,000 throws](./images/pi_buffon_100000.png)
+
+*Figure 7: Buffon's Needle method with 100,000 needle throws.*
+
+**Formula used:** $\pi \approx \frac{2L \cdot \text{Number of throws}}{D \cdot \text{Number of crossings}}$
+
+**Parameters:** L = 1, D = 2, 100,000 needle throws
+
+**Estimated π:** 3.1428 (Error: 0.0012)
+
+### Convergence Analysis
+
+![Buffon's Needle Convergence](./images/pi_buffon_convergence.png)
+
+*Figure 8: Convergence of Buffon's Needle method for estimating π as the number of needle throws increases.*
+
+**Observation:** Like the circle method, Buffon's Needle converges at a rate proportional to 1/√N, but typically with higher variance due to the more complex geometric constraints.
+
+## Comparison of Methods
+
+![Methods Comparison](./images/pi_methods_comparison.png)
+
+*Figure 9: Comparison of convergence rates between the circle-based method and Buffon's Needle method.*
+
+**Analysis:**
+
+1. **Accuracy:** The circle-based method generally provides more accurate estimates for the same number of iterations, as seen in the convergence plot.
+
+2. **Efficiency:** The circle method is computationally more efficient, requiring only a simple check of whether a point lies within a circle.
+
+3. **Variance:** Buffon's Needle method typically shows higher variance in its estimates due to the more complex geometric relationship between needle positions and line crossings.
+
+4. **Theoretical Interest:** Despite being less efficient, Buffon's Needle method is of significant historical and theoretical interest, connecting π to probability in a non-obvious way.
+
+## Mathematical Analysis
+
+### Error Estimation
+
+For Monte Carlo methods, the error in the estimate decreases proportionally to 1/√N, where N is the number of samples. This relationship comes from the Central Limit Theorem, as our estimate is essentially a sample mean of a random variable.
+
+The standard error of the estimate is approximately:
+
+$$\sigma_{\hat{\pi}} \approx \frac{\sigma}{\sqrt{N}}$$
+
+where σ is the standard deviation of the underlying random variable.
+
+### Computational Considerations
+
+1. **Random Number Quality:** The quality of the random number generator can affect the accuracy of the estimate. True randomness is difficult to achieve computationally, so pseudorandom number generators are used.
+
+2. **Dimensionality:** The circle method can be extended to higher dimensions, estimating the volume of a hypersphere relative to its bounding hypercube. However, the efficiency decreases dramatically with increasing dimensions (the "curse of dimensionality").
+
+3. **Parallelization:** Monte Carlo methods are "embarrassingly parallel" and can be efficiently distributed across multiple processors or computers.
+
+## Conclusions
+
+Monte Carlo methods provide an intuitive and visually engaging way to estimate π through geometric probability. Our simulations demonstrate:
+
+1. Both the circle-based method and Buffon's Needle method converge to π as the number of samples increases.
+
+2. The convergence rate follows the expected 1/√N relationship, meaning that to gain one additional digit of precision, approximately 100 times more samples are needed.
+
+3. The circle-based method is generally more efficient and accurate for the same number of iterations compared to Buffon's Needle.
+
+4. These methods illustrate the power of Monte Carlo techniques in numerical integration and geometric probability, with applications extending far beyond estimating π.
+
+While these methods are not practical for calculating π to high precision (compared to analytical methods), they provide valuable insights into probability, statistics, and numerical methods, making them excellent educational tools.
